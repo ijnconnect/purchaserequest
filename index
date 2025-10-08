@@ -10,7 +10,6 @@
     <style>
         /* --- CORE STYLES --- */
         body {
-            margin: 0; padding: 0;
             font-family: 'Poppins', sans-serif;
             color: #1a1a1a;
             background-color: #f7f7f7; 
@@ -163,7 +162,7 @@
             position: absolute;
             color: black;
             font-weight: 600; 
-            line-height: 0.8; 
+            line-height: 1.0; /* MODIFIED: Increased line-height for safer vertical rendering */
             font-size: 8pt; 
             text-align: left;
             overflow: hidden;
@@ -174,21 +173,21 @@
             z-index: 10; 
         }
         
-        /* Top Left Block - Reverted to provided coordinates */
-        #data-requestor { top: 4.3cm; left: 4.0cm; max-width: 7.6cm; } 
-        #data-designation { top: 4.9cm; left: 4.0cm; max-width: 7.6cm; } 
-        #data-dept { top: 5.5cm; left: 4.0cm; max-width: 7.6cm; } 
-        #data-req-date { top: 6.1cm; left: 4.0cm; max-width: 2.5cm; } 
-        #data-extension { top: 6.7cm; left: 4.0cm; max-width: 2.5cm; } 
+        /* Top Left Block - ADDED 0.05CM to Top */
+        #data-requestor { top: 4.35cm; left: 4.0cm; max-width: 7.6cm; } 
+        #data-designation { top: 4.95cm; left: 4.0cm; max-width: 7.6cm; } 
+        #data-dept { top: 5.55cm; left: 4.0cm; max-width: 7.6cm; } 
+        #data-req-date { top: 6.15cm; left: 4.0cm; max-width: 2.5cm; } 
+        #data-extension { top: 6.75cm; left: 4.0cm; max-width: 2.5cm; } 
 
-        /* Top Right Block - Reverted to provided coordinates */
-        #data-vendor { top: 4.0cm; left: 12.5cm; max-width: 8.9cm; } 
-        #data-address { top: 4.5cm; left: 12.5cm; max-width: 8.9cm; } 
-        #data-tel-no { top: 5.65cm; left: 12.5cm; max-width: 5.0cm; } 
-        #data-email { top: 6.15cm; left: 12.5cm; max-width: 8.9cm; } 
-        #data-contact { top: 6.55cm; left: 12.5cm; max-width: 8.9cm; } 
+        /* Top Right Block - ADDED 0.05CM to Top */
+        #data-vendor { top: 4.05cm; left: 12.5cm; max-width: 8.9cm; } 
+        #data-address { top: 4.55cm; left: 12.5cm; max-width: 8.9cm; } 
+        #data-tel-no { top: 5.70cm; left: 12.5cm; max-width: 5.0cm; } 
+        #data-email { top: 6.20cm; left: 12.5cm; max-width: 8.9cm; } 
+        #data-contact { top: 6.60cm; left: 12.5cm; max-width: 8.9cm; } 
         
-        /* Item Row Class Styling - Reverted to provided coordinates */
+        /* Item Row Class Styling - No change to classes, positioning handled by JS baseItemTop */
         .data-item-no { left: 1.85cm; max-width: 1.3cm; text-align: center; }
         .data-item-description { 
              left: 3.7cm; 
@@ -200,17 +199,17 @@
         .data-item-total-price { left: 25.8cm; max-width: 3.3cm; text-align: right; }
 
 
-        /* Total and Remarks Positioning - Reverted to provided coordinates */
-        #data-grand-total { top: 14.0cm; left: 25.8cm; font-size: 9pt; text-align: right; max-width: 3.3cm; } 
+        /* Total and Remarks Positioning - ADDED 0.05CM to Top and line-height adjusted */
+        #data-grand-total { top: 14.05cm; left: 25.8cm; font-size: 9pt; text-align: right; max-width: 3.3cm; } 
         
         #data-remarks { 
-            top: 16.0cm; 
+            top: 16.05cm; /* MODIFIED: Added 0.05cm */
             left: 2.2cm; 
             max-width: 19.0cm; 
             height: 4.7cm; 
             font-weight: 400; 
             font-size: 8pt; 
-            line-height: 0.8; 
+            line-height: 1.0; /* MODIFIED: Increased line-height for safer vertical rendering */
         }
 
         /* --- PRINT STYLES --- */
@@ -237,7 +236,7 @@
                 font-size: 8pt;
                 color: black;
                 position: absolute !important;
-                line-height: 0.8 !important; 
+                line-height: 1.0 !important; /* MODIFIED: Ensured 1.0 line-height for printing */
             }
         }
     </style>
@@ -337,8 +336,8 @@
         // Item box row gap: 0.7cm
         const itemRowHeight = 0.7; // cm
         // Top start position for the first item 
-        const baseItemTop = 9.1; // cm 
-
+        const baseItemTop = 9.15; // cm MODIFIED: Adjusted from 9.1 to 9.15 for better vertical alignment
+        
         function formatCurrency(amount) {
             // Returns formatted currency string or empty string if amount is null/0
             if (!amount || parseFloat(amount) === 0) return '';
@@ -518,7 +517,7 @@
             addItemRow();
             addItemRow();
             
-          // Pre-fill item data with generic placeholders and sample data
+            // Pre-fill item data with generic placeholders and sample data
             // Item 1 (Normal data)
             document.getElementById('item-description-1').value = `ITEM 1`;
             document.getElementById('item-account-1').value = ``;
