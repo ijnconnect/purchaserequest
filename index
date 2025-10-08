@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IJN Purchase Requisition (PR) Payment Request Template - FINAL V14.0 (TABLE INPUT)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE STYLES --- */
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #1a1a1a;
+            background-color: #f7f7f7; 
+            font-size: 10pt;
+        }
+
+        /* --- INTERACTIVE INPUT FORM STYLES (Screen Only) --- */
+        .input-form-area {
+            background-color: #e6f7ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0E4C8C;
+            display: flex;
+            flex-direction: column; 
+            gap: 15px;
+        }
+        
+        /* New container for the 2-column header layout */
+        .header-input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns for Requestor and Vendor details */
+            gap: 20px;
+            padding: 15px;
+            border: 1px solid #0E4C8C;
+            border-radius: 5px;
+        }
+        .header-column {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-sections {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+        .input-group label {
+            width: 150px; /* Fixed width for alignment */
+            font-weight: 500;
+        }
+        .input-group input[type="text"], 
+        .input-group input[type="number"], 
+        .input-group textarea {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 9pt;
+        }
+
+        /* --- ITEM INPUT TABLE STYLES --- */
+        #item-input-table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+        #item-input-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            min-width: 800px; /* Ensure table is wide enough for all columns */
+        }
+        #item-input-table th, #item-input-table td {
+            border: 1px solid #ddd;
+            padding: 5px;
+            text-align: left;
+            font-size: 9pt;
+        }
+        #item-input-table th {
+            background-color: #f0f8ff;
+            color: #0E4C8C;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        #item-input-table input, #item-input-table textarea {
+            width: 100%;
+            padding: 3px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            font-size: 9pt;
+            resize: vertical; /* Allow description textarea resize vertically */
+            min-height: 30px;
+        }
+        #item-input-table .item-num-cell { width: 30px; text-align: center; }
+        #item-input-table .item-desc-cell { width: 45%; }
+        #item-input-table .item-account-cell { width: 15%; }
+        #item-input-table .item-qty-cell { width: 8%; }
+        #item-input-table .item-price-cell { width: 15%; }
+
+        /* New style for the checkbox control section */
+        #control-panel {
+            background-color: #fff3cd;
+            padding: 10px 15px;
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        #control-panel label {
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .action-buttons button {
+            padding: 10px 25px;
+            background-color: #0E4C8C; 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .action-buttons button:nth-child(3) { background-color: #28a745; }
+        .action-buttons button.add-item { background-color: #ffc107; color: #333; }
+        .action-buttons button.remove-item { background-color: #dc3545; }
+
+        /* --- A4 PRINTABLE TEMPLATE STYLES --- */
+        .a4-page-template {
+            width: 11.69in; 
+            height: 8.27in; 
+            margin: 0 auto; 
+            padding: 0; 
+            position: relative;
+            font-size: 10pt;
+            margin-top: 20px;
+        }
+        
+        /* IMAGE PLACEMENT (CRITICAL FOR VISUAL ALIGNMENT) */
+        #printable-form-image {
+            width: 11.69in;
+            height: 8.27in;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; 
+            display: block; 
+            opacity: 0.25; 
+        }
+
+        /* --- STYLES FOR DATA PLACEMENT (ABSOLUTE CM) --- */
+        .data-field {
+            position: absolute;
+            color: black;
+            font-weight: 600; 
+            line-height: 0.8; 
+            font-size: 8pt; 
+            text-align: left;
+            overflow: hidden;
+            white-space: pre-wrap;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            z-index: 10; 
+        }
+        
+        /* Top Left Block - Reverted to provided coordinates */
+        #data-requestor { top: 4.3cm; left: 4.0cm; max-width: 7.6cm; } 
+        #data-designation { top: 4.9cm; left: 4.0cm; max-width: 7.6cm; } 
+        #data-dept { top: 5.5cm; left: 4.0cm; max-width: 7.6cm; } 
+        #data-req-date { top: 6.1cm; left: 4.0cm; max-width: 2.5cm; } 
+        #data-extension { top: 6.7cm; left: 4.0cm; max-width: 2.5cm; } 
+
+        /* Top Right Block - Reverted to provided coordinates */
+        #data-vendor { top: 4.0cm; left: 12.5cm; max-width: 8.9cm; } 
+        #data-address { top: 4.5cm; left: 12.5cm; max-width: 8.9cm; } 
+        #data-tel-no { top: 5.65cm; left: 12.5cm; max-width: 5.0cm; } 
+        #data-email { top: 6.15cm; left: 12.5cm; max-width: 8.9cm; } 
+        #data-contact { top: 6.55cm; left: 12.5cm; max-width: 8.9cm; } 
+        
+        /* Item Row Class Styling - Reverted to provided coordinates */
+        .data-item-no { left: 1.85cm; max-width: 1.3cm; text-align: center; }
+        .data-item-description { 
+             left: 3.7cm; 
+             max-width: 12.5cm; 
+        }
+        .data-item-account { left: 18.3cm; max-width: 3.8cm; text-align: center; }
+        .data-item-quantity { left: 20.3cm; max-width: 2.0cm; text-align: center; } 
+        .data-item-unit-price { left: 22.4cm; max-width: 3.0cm; text-align: right; }
+        .data-item-total-price { left: 25.8cm; max-width: 3.3cm; text-align: right; }
+
+
+        /* Total and Remarks Positioning - Reverted to provided coordinates */
+        #data-grand-total { top: 14.0cm; left: 25.8cm; font-size: 9pt; text-align: right; max-width: 3.3cm; } 
+        
+        #data-remarks { 
+            top: 16.0cm; 
+            left: 2.2cm; 
+            max-width: 19.0cm; 
+            height: 4.7cm; 
+            font-weight: 400; 
+            font-size: 8pt; 
+            line-height: 0.8; 
+        }
+
+        /* --- PRINT STYLES --- */
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+            body { 
+                background-color: white; 
+                margin: 0;
+            }
+            .input-form-area {
+                display: none; 
+            }
+            .a4-page-template {
+                border: none;
+                margin: 0;
+            }
+            #printable-form-image {
+                display: none; 
+            }
+            .data-field { 
+                font-size: 8pt;
+                color: black;
+                position: absolute !important;
+                line-height: 0.8 !important; 
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="input-form-area">
+        <h2 style="color: #0E4C8C;">IJN Payment Request Data Entry (FINAL V14.0 - TABLE INPUT)</h2>
+        <p style="font-weight: bold; color: #d9534f;">🚨 CRITICAL: Ensure you save the blank PR image as `PR Template to Edit (2).jpg` in the same folder as this HTML file! 🚨</p>
+        <p>Enter details below. Use the preview to check alignment, then click "Print Form" to print only values onto your physical PR form.</p>
+        
+        <div class="header-input-grid">
+            
+            <div class="header-column">
+                <h3 style="margin-top: 0; color: #0E4C8C;">Requestor Details (Left Column)</h3>
+                <div class="input-group"><label for="requestor">Requestor Name:</label><input type="text" id="requestor" value=""></div>
+                <div class="input-group"><label for="designation">Designation:</label><input type="text" id="designation" value=""></div>
+                <div class="input-group"><label for="dept">Dept/Centre:</label><input type="text" id="dept" value=""></div>
+                <div class="input-group"><label for="req-date">Date (DD/MM/YYYY):</label><input type="text" id="req-date" value="8/10/2025"></div>
+                <div class="input-group"><label for="extension">Extension:</label><input type="text" id="extension" value="6218"></div>
+            </div>
+
+            <div class="header-column">
+                <h3 style="margin-top: 0; color: #0E4C8C;">Vendor Details (Right Column)</h3>
+                <div class="input-group"><label for="vendor">Vendor Name:</label><input type="text" id="vendor" value="INFINITY CREATIVE SOLUTIONS SDN BHD"></div>
+                <div class="input-group"><label for="address">Address:</label><input type="text" id="address" value=""></div>
+                <div class="input-group"><label for="tel-no">Tel No:</label><input type="text" id="tel-no" value=""></div>
+                <div class="input-group"><label for="email">E-mail Address:</label><input type="text" id="email" value=""></div>
+                <div class="input-group"><label for="contact">Contact Person:</label><input type="text" id="contact" value=""></div>
+            </div>
+            
+        </div>
+
+        <div class="input-sections">
+            <h3 style="color: #0E4C8C; width: 100%; margin-bottom: 0;">Item Details (Enter in Table Below)</h3>
+            <div id="item-input-table-container">
+                <table id="item-input-table">
+                    <thead>
+                        <tr>
+                            <th class="item-num-cell">No.</th>
+                            <th class="item-desc-cell">Description of Goods/Services</th>
+                            <th class="item-account-cell">Account No.</th>
+                            <th class="item-qty-cell">Quantity</th>
+                            <th class="item-price-cell">Unit Price (RM)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="item-input-container">
+                        </tbody>
+                </table>
+            </div>
+            
+            <div class="card-input-group" style="flex-basis: 100%;">
+                <div id="control-panel">
+                    <input type="checkbox" id="show-item-numbers" checked>
+                    <label for="show-item-numbers">Show Item Numbers (1., 2., 3., etc.) on Form</label>
+                </div>
+                <h3 style="margin-top: 15px;">Reason for Request & Other Remarks</h3>
+                <div class="input-group">
+                    <label for="remarks" style="width: 100%; margin-bottom: 5px;">Remarks (This text appears near the bottom right of the form):</label>
+                    <textarea id="remarks" style="width: 100%; height: 80px;"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button type="button" class="add-item" id="add-item-btn">Add Item Row</button>
+            <button type="button" class="remove-item" id="remove-item-btn">Remove Last Row</button>
+            <button type="button" id="update-btn">Update Text Placement</button>
+            <button type="button" id="print-btn">Print Form</button>
+        </div>
+    </div>
+
+    <div class="a4-page-template" id="a4-printable-area">
+        
+        <img id="printable-form-image" src="PR Template to Edit (2).jpg" alt="Blank Purchase Requisition Form">
+
+        <div class="data-field" id="data-requestor"></div>
+        <div class="data-field" id="data-designation"></div>
+        <div class="data-field" id="data-dept"></div>
+        <div class="data-field" id="data-req-date"></div>
+        <div class="data-field" id="data-extension"></div>
+        <div class="data-field" id="data-vendor"></div>
+        <div class="data-field" id="data-address"></div>
+        <div class="data-field" id="data-tel-no"></div>
+        <div class="data-field" id="data-email"></div>
+        <div class="data-field" id="data-contact"></div>
+        <div class="data-field" id="data-grand-total"></div>
+        <div class="data-field" id="data-remarks"></div>
+        
+        <div id="dynamic-item-data-fields"></div>
+        
+    </div>
+    
+    <script>
+        let itemCount = 0; 
+        const inputContainer = document.getElementById('item-input-container');
+        // Item box row gap: 0.7cm
+        const itemRowHeight = 0.7; // cm
+        // Top start position for the first item 
+        const baseItemTop = 9.1; // cm 
+
+        function formatCurrency(amount) {
+            // Returns formatted currency string or empty string if amount is null/0
+            if (!amount || parseFloat(amount) === 0) return '';
+            return parseFloat(amount).toFixed(2);
+        }
+        
+        function formatNumber(value) {
+            // Returns the number or empty string if the value is null/0
+            if (!value || parseFloat(value) === 0) return '';
+            return parseFloat(value);
+        }
+
+        function setupInputListeners() {
+            const inputs = document.querySelectorAll('.input-form-area input, .input-form-area textarea');
+            inputs.forEach(input => {
+                if (!input.dataset.listenerAttached) {
+                    input.addEventListener('input', updateForm);
+                    input.dataset.listenerAttached = 'true';
+                }
+            });
+            document.getElementById('show-item-numbers').addEventListener('change', updateForm);
+        }
+
+        function createItemInputRow(index) {
+            const row = document.createElement('tr');
+            row.id = `item-group-${index}`;
+            row.innerHTML = `
+                <td class="item-num-cell">${index}.</td>
+                <td class="item-desc-cell"><textarea class="item-description" id="item-description-${index}" rows="1"></textarea></td>
+                <td class="item-account-cell"><input type="text" id="item-account-${index}"></td>
+                <td class="item-qty-cell"><input type="number" id="item-quantity-${index}" value="" min="0"></td>
+                <td class="item-price-cell"><input type="number" id="item-unit-price-${index}" value="" step="0.01" min="0"></td>
+            `;
+            return row;
+        }
+
+        function addItemRow() {
+            itemCount++;
+            inputContainer.appendChild(createItemInputRow(itemCount));
+            setupInputListeners(); 
+            // Auto-resize textarea when adding a new row
+            autoGrowTextarea(document.getElementById(`item-description-${itemCount}`));
+            updateForm(); 
+        }
+
+        function removeItemRow() {
+            if (itemCount > 1) { 
+                const lastItem = document.getElementById(`item-group-${itemCount}`);
+                if (lastItem) {
+                    inputContainer.removeChild(lastItem);
+                    itemCount--;
+                    updateForm(); 
+                }
+            } else if (itemCount === 1) {
+                alert("Cannot remove the last item row. Must have at least one.");
+            }
+        }
+
+        function autoGrowTextarea(textarea) {
+            if (textarea) {
+                textarea.style.height = 'auto'; // Reset height
+                textarea.style.height = textarea.scrollHeight + 'px'; // Set to scroll height
+            }
+        }
+        
+        function setupAutoGrow() {
+            const textareas = document.querySelectorAll('#item-input-container textarea');
+            textareas.forEach(textarea => {
+                if (!textarea.dataset.autogrowSetup) {
+                    textarea.addEventListener('input', () => autoGrowTextarea(textarea));
+                    textarea.dataset.autogrowSetup = 'true';
+                    // Initial sizing
+                    autoGrowTextarea(textarea);
+                }
+            });
+        }
+
+
+        function updateForm() {
+            // Update Textarea Heights
+            setupAutoGrow();
+            
+            // --- Update General Details ---
+            document.getElementById('data-requestor').innerText = document.getElementById('requestor').value;
+            document.getElementById('data-designation').innerText = document.getElementById('designation').value;
+            document.getElementById('data-dept').innerText = document.getElementById('dept').value;
+            document.getElementById('data-req-date').innerText = document.getElementById('req-date').value;
+            document.getElementById('data-extension').innerText = document.getElementById('extension').value;
+
+            document.getElementById('data-vendor').innerText = document.getElementById('vendor').value;
+            document.getElementById('data-address').innerText = document.getElementById('address').value;
+            document.getElementById('data-tel-no').innerText = document.getElementById('tel-no').value;
+            document.getElementById('data-email').innerText = document.getElementById('email').value;
+            document.getElementById('data-contact').innerText = document.getElementById('contact').value;
+            
+            // --- DYNAMIC ITEM DATA ---
+            const dynamicItemDataFields = document.getElementById('dynamic-item-data-fields');
+            dynamicItemDataFields.innerHTML = ''; 
+            let grandTotal = 0;
+            const showNumbers = document.getElementById('show-item-numbers').checked;
+
+            for (let i = 1; i <= itemCount; i++) {
+                const descriptionElem = document.getElementById(`item-description-${i}`);
+                const accountElem = document.getElementById(`item-account-${i}`);
+                const quantityElem = document.getElementById(`item-quantity-${i}`);
+                const unitPriceElem = document.getElementById(`item-unit-price-${i}`);
+
+                if (!descriptionElem || !accountElem || !quantityElem || !unitPriceElem) continue;
+
+                const description = descriptionElem.value.trim();
+                const account = accountElem.value.trim();
+                const quantity = parseFloat(quantityElem.value) || 0;
+                const unitPrice = parseFloat(unitPriceElem.value) || 0;
+                
+                let totalPrice;
+
+                // Logic: Handle quantity = 0 or empty
+                if (quantity === 0 && unitPrice !== 0) {
+                    totalPrice = unitPrice; // Copy Unit Price to Total Price if quantity is zero/empty
+                } else {
+                    totalPrice = quantity * unitPrice;
+                }
+
+                // If all fields for the row are empty/zero, skip drawing the row
+                if (!description && !account && quantity === 0 && unitPrice === 0 && totalPrice === 0) continue;
+
+                grandTotal += totalPrice;
+
+                // Calculate vertical position in CM
+                const currentTop = `${baseItemTop + (i - 1) * itemRowHeight}cm`;
+                
+                const itemNoContent = showNumbers ? `${i}.` : '';
+
+                // Draw fields only if they have content or if it's the item number
+                if (itemNoContent) {
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-no" style="top: ${currentTop};">${itemNoContent}</div>`);
+                }
+                if (description) {
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-description" style="top: ${currentTop};">${description}</div>`);
+                }
+                if (account) {
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-account" style="top: ${currentTop};">${account}</div>`);
+                }
+                if (formatNumber(quantity) !== '') {
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-quantity" style="top: ${currentTop};">${formatNumber(quantity)}</div>`);
+                }
+                if (formatCurrency(unitPrice) !== '') {
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-unit-price" style="top: ${currentTop};">${formatCurrency(unitPrice)}</div>`);
+                }
+                if (formatCurrency(totalPrice) !== '') {
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-total-price" style="top: ${currentTop};">${formatCurrency(totalPrice)}</div>`);
+                }
+            }
+            
+            // Grand Total (only show if > 0)
+            document.getElementById('data-grand-total').innerText = formatCurrency(grandTotal) || '';
+            
+            // Remarks (only show if not empty)
+            document.getElementById('data-remarks').innerText = document.getElementById('remarks').value.trim();
+        }
+        
+        function printForm() {
+            updateForm(); 
+            window.print();
+        }
+
+        // Initialization function
+        function initializeForm() {
+            document.getElementById('add-item-btn').addEventListener('click', addItemRow);
+            document.getElementById('remove-item-btn').addEventListener('click', removeItemRow);
+            document.getElementById('update-btn').addEventListener('click', updateForm);
+            document.getElementById('print-btn').addEventListener('click', printForm);
+            
+            // Add initial 4 rows for easy entry
+            addItemRow(); 
+            addItemRow(); 
+            addItemRow();
+            addItemRow();
+            
+          // Pre-fill item data with generic placeholders and sample data
+            // Item 1 (Normal data)
+            document.getElementById('item-description-1').value = `ITEM 1`;
+            document.getElementById('item-account-1').value = ``;
+            document.getElementById('item-quantity-1').value = ``;
+            document.getElementById('item-unit-price-1').value = ``; // Total: 2200.00
+
+            // Item 2 (Quantity empty/0, Unit Price copied to Total Price)
+            document.getElementById('item-description-2').value = `ITEM 2`;
+            document.getElementById('item-account-2').value = ``;
+            document.getElementById('item-quantity-2').value = ``; // Empty quantity
+            document.getElementById('item-unit-price-2').value = ``; // Total: 1700.00 (Copied)
+
+            document.getElementById('remarks').value = `A/C6011031 - 035 CSI`;
+            // Initial render
+            updateForm();
+        }
+        
+        document.addEventListener('DOMContentLoaded', initializeForm);
+    </script>
+</body>
+</html>
