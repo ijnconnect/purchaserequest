@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IJN Purchase Requisition (PR) Payment Request Template - FINAL V14.0 (TABLE INPUT)</title>
+    <title>IJN Purchase Requisition (PR) Payment Request Template - FINAL V14.6 (Description Shifted Up 0.2cm)</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
         /* --- CORE STYLES --- */
@@ -76,7 +76,7 @@
             width: 100%;
             border-collapse: collapse;
             background-color: white;
-            min-width: 800px; /* Ensure table is wide enough for all columns */
+            min-width: 950px; 
         }
         #item-input-table th, #item-input-table td {
             border: 1px solid #ddd;
@@ -92,21 +92,33 @@
             top: 0;
             z-index: 20;
         }
-        #item-input-table input, #item-input-table textarea {
+        /* Style for inputs in the table cells */
+        #item-input-table input.item-input-field, #item-input-table textarea {
             width: 100%;
             padding: 3px;
             border: 1px solid #ccc;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
             font-size: 9pt;
-            resize: vertical; /* Allow description textarea resize vertically */
+            resize: vertical; 
             min-height: 30px;
         }
+        /* Specific styling for the auto/editable Total Price input */
+        #item-input-table input.item-total-price-input {
+            font-weight: bold; 
+            text-align: right; 
+            background-color: #e8f8e8; 
+            border: 1px solid #28a745;
+        }
+        
+        /* Column Widths */
         #item-input-table .item-num-cell { width: 30px; text-align: center; }
-        #item-input-table .item-desc-cell { width: 45%; }
-        #item-input-table .item-account-cell { width: 15%; }
-        #item-input-table .item-qty-cell { width: 8%; }
-        #item-input-table .item-price-cell { width: 15%; }
+        #item-input-table .item-desc-cell { width: 40%; } 
+        #item-input-table .item-account-cell { width: 12%; } 
+        #item-input-table .item-qty-cell { width: 8%; } 
+        #item-input-table .item-price-cell { width: 12%; } 
+        #item-input-table .item-total-cell { width: 13%; } 
+
 
         /* New style for the checkbox control section */
         #control-panel {
@@ -162,7 +174,7 @@
             position: absolute;
             color: black;
             font-weight: 600; 
-            line-height: 1.0; /* MODIFIED: Increased line-height for safer vertical rendering */
+            line-height: 1.0; 
             font-size: 8pt; 
             text-align: left;
             overflow: hidden;
@@ -173,25 +185,29 @@
             z-index: 10; 
         }
         
-        /* Top Left Block - ADDED 0.05CM to Top */
+        /* Top Left Block */
         #data-requestor { top: 4.35cm; left: 4.0cm; max-width: 7.6cm; } 
         #data-designation { top: 4.95cm; left: 4.0cm; max-width: 7.6cm; } 
         #data-dept { top: 5.55cm; left: 4.0cm; max-width: 7.6cm; } 
-        #data-req-date { top: 6.15cm; left: 4.0cm; max-width: 2.5cm; } 
-        #data-extension { top: 6.75cm; left: 4.0cm; max-width: 2.5cm; } 
+        #data-req-date { top: 6.10cm; left: 4.0cm; max-width: 2.5cm; } 
+        #data-extension { top: 6.70cm; left: 4.0cm; max-width: 2.5cm; } 
 
-        /* Top Right Block - ADDED 0.05CM to Top */
+        /* Top Right Block */
         #data-vendor { top: 4.05cm; left: 12.5cm; max-width: 8.9cm; } 
         #data-address { top: 4.55cm; left: 12.5cm; max-width: 8.9cm; } 
         #data-tel-no { top: 5.70cm; left: 12.5cm; max-width: 5.0cm; } 
         #data-email { top: 6.20cm; left: 12.5cm; max-width: 8.9cm; } 
         #data-contact { top: 6.60cm; left: 12.5cm; max-width: 8.9cm; } 
         
-        /* Item Row Class Styling - No change to classes, positioning handled by JS baseItemTop */
+        /* Item Row Class Styling (Print Coordinates remain UNCHANGED) */
         .data-item-no { left: 1.85cm; max-width: 1.3cm; text-align: center; }
         .data-item-description { 
              left: 3.7cm; 
              max-width: 12.5cm; 
+             height: 0.65cm; 
+             font-size: 7.5pt; 
+             line-height: 0.9; 
+             margin-top: -0.2cm; /* <--- ADJUSTMENT APPLIED HERE */
         }
         .data-item-account { left: 18.3cm; max-width: 3.8cm; text-align: center; }
         .data-item-quantity { left: 20.3cm; max-width: 2.0cm; text-align: center; } 
@@ -199,17 +215,17 @@
         .data-item-total-price { left: 25.8cm; max-width: 3.3cm; text-align: right; }
 
 
-        /* Total and Remarks Positioning - ADDED 0.05CM to Top and line-height adjusted */
+        /* Total and Remarks Positioning */
         #data-grand-total { top: 14.05cm; left: 25.8cm; font-size: 9pt; text-align: right; max-width: 3.3cm; } 
         
         #data-remarks { 
-            top: 16.05cm; /* MODIFIED: Added 0.05cm */
+            top: 16.05cm; 
             left: 2.2cm; 
             max-width: 19.0cm; 
             height: 4.7cm; 
             font-weight: 400; 
             font-size: 8pt; 
-            line-height: 1.0; /* MODIFIED: Increased line-height for safer vertical rendering */
+            line-height: 1.0; 
         }
 
         /* --- PRINT STYLES --- */
@@ -236,7 +252,13 @@
                 font-size: 8pt;
                 color: black;
                 position: absolute !important;
-                line-height: 1.0 !important; /* MODIFIED: Ensured 1.0 line-height for printing */
+                line-height: 1.0 !important; 
+            }
+            /* Override for description to use smaller font/tighter line-height AND margin adjustment */
+            .data-item-description { 
+                 font-size: 7.5pt !important; 
+                 line-height: 0.9 !important; 
+                 margin-top: -0.2cm !important; /* <--- ADJUSTMENT APPLIED HERE */
             }
         }
     </style>
@@ -244,9 +266,9 @@
 <body>
     
     <div class="input-form-area">
-        <h2 style="color: #0E4C8C;">IJN Payment Request Data Entry (FINAL V14.0 - TABLE INPUT)</h2>
+        <h2 style="color: #0E4C8C;">IJN Payment Request Data Entry (FINAL V14.6 - Description Shifted Up 0.2cm)</h2>
         <p style="font-weight: bold; color: #d9534f;">🚨 CRITICAL: Ensure you save the blank PR image as `PR Template to Edit (2).jpg` in the same folder as this HTML file! 🚨</p>
-        <p>Enter details below. Use the preview to check alignment, then click "Print Form" to print only values onto your physical PR form.</p>
+        <p>Enter details below. The **Item Description** field has been shifted up by **0.2cm** on the printed form for better alignment.</p>
         
         <div class="header-input-grid">
             
@@ -281,6 +303,7 @@
                             <th class="item-account-cell">Account No.</th>
                             <th class="item-qty-cell">Quantity</th>
                             <th class="item-price-cell">Unit Price (RM)</th>
+                            <th class="item-total-cell">Total Price (RM)</th> 
                         </tr>
                     </thead>
                     <tbody id="item-input-container">
@@ -336,24 +359,77 @@
         // Item box row gap: 0.7cm
         const itemRowHeight = 0.7; // cm
         // Top start position for the first item 
-        const baseItemTop = 9.15; // cm MODIFIED: Adjusted from 9.1 to 9.15 for better vertical alignment
+        // This is now relative to the image coordinates, and description will be adjusted with margin-top
+        const baseItemTop = 9.15; // cm 
         
         function formatCurrency(amount) {
-            // Returns formatted currency string or empty string if amount is null/0
-            if (!amount || parseFloat(amount) === 0) return '';
-            return parseFloat(amount).toFixed(2);
+            // Returns formatted currency string (e.g., 1,000.00) or empty string if amount is null/0
+            if (!amount || isNaN(parseFloat(amount))) return ''; 
+            const num = parseFloat(amount);
+            if (num === 0) return '';
+            
+            // Use toLocaleString for thousands separator and 2 decimal places
+            return num.toLocaleString('en-MY', { 
+                minimumFractionDigits: 2, 
+                maximumFractionDigits: 2 
+            });
         }
         
         function formatNumber(value) {
             // Returns the number or empty string if the value is null/0
-            if (!value || parseFloat(value) === 0) return '';
-            return parseFloat(value);
+            if (!value || isNaN(parseFloat(value))) return ''; 
+            const num = parseFloat(value);
+            if (num === 0) return '';
+            return num;
         }
+        
+        /**
+         * Calculates the total price for a row.
+         * The result is placed directly into the editable input field.
+         */
+        function calculateRowTotal(index) {
+            const quantityElem = document.getElementById(`item-quantity-${index}`);
+            const unitPriceElem = document.getElementById(`item-unit-price-${index}`);
+            const totalInput = document.getElementById(`item-total-price-input-${index}`);
 
+            const quantity = parseFloat(quantityElem.value) || 0;
+            const unitPrice = parseFloat(unitPriceElem.value) || 0;
+            
+            let calculatedTotal;
+
+            // Calculation Logic: 
+            if (quantity === 0 && unitPrice !== 0) {
+                // If quantity is 0 or empty, total is the unit price (common for one-off fees)
+                calculatedTotal = unitPrice; 
+            } else {
+                calculatedTotal = quantity * unitPrice;
+            }
+
+            if (totalInput) {
+                // Set the value of the editable input field to the calculated total (2 decimal places)
+                totalInput.value = calculatedTotal.toFixed(2); 
+            }
+            
+            // Re-run the main update function to refresh the grand total and print preview
+            updateForm();
+        }
+        
+        /**
+         * Attaches listeners for *all* input fields. 
+         */
         function setupInputListeners() {
             const inputs = document.querySelectorAll('.input-form-area input, .input-form-area textarea');
             inputs.forEach(input => {
                 if (!input.dataset.listenerAttached) {
+                    const index = input.id.split('-').pop();
+                    
+                    if (input.id.startsWith('item-quantity-') || input.id.startsWith('item-unit-price-')) {
+                        // CRITICAL: If qty or price changes, recalculate the total
+                        input.addEventListener('input', () => calculateRowTotal(index));
+                    }
+                    
+                    // All inputs, including the *editable total input*, trigger the main form update 
+                    // on change/input to refresh the Grand Total and print preview.
                     input.addEventListener('input', updateForm);
                     input.dataset.listenerAttached = 'true';
                 }
@@ -364,12 +440,20 @@
         function createItemInputRow(index) {
             const row = document.createElement('tr');
             row.id = `item-group-${index}`;
+            // Item input fields
             row.innerHTML = `
                 <td class="item-num-cell">${index}.</td>
                 <td class="item-desc-cell"><textarea class="item-description" id="item-description-${index}" rows="1"></textarea></td>
-                <td class="item-account-cell"><input type="text" id="item-account-${index}"></td>
-                <td class="item-qty-cell"><input type="number" id="item-quantity-${index}" value="" min="0"></td>
-                <td class="item-price-cell"><input type="number" id="item-unit-price-${index}" value="" step="0.01" min="0"></td>
+                <td class="item-account-cell"><input type="text" class="item-input-field" id="item-account-${index}"></td>
+                <td class="item-qty-cell"><input type="number" class="item-input-field" id="item-quantity-${index}" value="" min="0"></td>
+                <td class="item-price-cell"><input type="number" class="item-input-field" id="item-unit-price-${index}" value="" step="0.01" min="0"></td>
+                <td class="item-total-cell">
+                    <input type="number" class="item-input-field item-total-price-input" 
+                        id="item-total-price-input-${index}" 
+                        value="0.00" 
+                        step="0.01" 
+                        min="0">
+                </td> 
             `;
             return row;
         }
@@ -380,6 +464,8 @@
             setupInputListeners(); 
             // Auto-resize textarea when adding a new row
             autoGrowTextarea(document.getElementById(`item-description-${itemCount}`));
+            // Ensure the initial total is calculated (0.00)
+            calculateRowTotal(itemCount); 
             updateForm(); 
         }
 
@@ -398,6 +484,7 @@
 
         function autoGrowTextarea(textarea) {
             if (textarea) {
+                // IMPORTANT: Keep the input textarea growing to accommodate the text 
                 textarea.style.height = 'auto'; // Reset height
                 textarea.style.height = textarea.scrollHeight + 'px'; // Set to scroll height
             }
@@ -433,7 +520,7 @@
             document.getElementById('data-email').innerText = document.getElementById('email').value;
             document.getElementById('data-contact').innerText = document.getElementById('contact').value;
             
-            // --- DYNAMIC ITEM DATA ---
+            // --- DYNAMIC ITEM DATA (Print Preview) ---
             const dynamicItemDataFields = document.getElementById('dynamic-item-data-fields');
             dynamicItemDataFields.innerHTML = ''; 
             let grandTotal = 0;
@@ -444,24 +531,19 @@
                 const accountElem = document.getElementById(`item-account-${i}`);
                 const quantityElem = document.getElementById(`item-quantity-${i}`);
                 const unitPriceElem = document.getElementById(`item-unit-price-${i}`);
+                const totalInput = document.getElementById(`item-total-price-input-${i}`); 
 
-                if (!descriptionElem || !accountElem || !quantityElem || !unitPriceElem) continue;
+                if (!descriptionElem || !accountElem || !quantityElem || !unitPriceElem || !totalInput) continue;
 
                 const description = descriptionElem.value.trim();
                 const account = accountElem.value.trim();
                 const quantity = parseFloat(quantityElem.value) || 0;
                 const unitPrice = parseFloat(unitPriceElem.value) || 0;
                 
-                let totalPrice;
+                // CRITICAL: Use the value from the *editable total input field* for the grand total calculation and printing
+                const totalPrice = parseFloat(totalInput.value) || 0;
 
-                // Logic: Handle quantity = 0 or empty
-                if (quantity === 0 && unitPrice !== 0) {
-                    totalPrice = unitPrice; // Copy Unit Price to Total Price if quantity is zero/empty
-                } else {
-                    totalPrice = quantity * unitPrice;
-                }
-
-                // If all fields for the row are empty/zero, skip drawing the row
+                // If all print fields for the row are empty/zero, skip drawing the row
                 if (!description && !account && quantity === 0 && unitPrice === 0 && totalPrice === 0) continue;
 
                 grandTotal += totalPrice;
@@ -475,24 +557,28 @@
                 if (itemNoContent) {
                     dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-no" style="top: ${currentTop};">${itemNoContent}</div>`);
                 }
+                // NOTE: data-item-description already has the margin-top: -0.2cm adjustment in CSS
                 if (description) {
                     dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-description" style="top: ${currentTop};">${description}</div>`);
                 }
                 if (account) {
                     dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-account" style="top: ${currentTop};">${account}</div>`);
                 }
+                // Print Quantity (formatNumber is used here as it's not a currency field)
                 if (formatNumber(quantity) !== '') {
                     dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-quantity" style="top: ${currentTop};">${formatNumber(quantity)}</div>`);
                 }
+                // Print Unit Price (now with comma separator)
                 if (formatCurrency(unitPrice) !== '') {
                     dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-unit-price" style="top: ${currentTop};">${formatCurrency(unitPrice)}</div>`);
                 }
+                // Print Total Price (now with comma separator)
                 if (formatCurrency(totalPrice) !== '') {
                     dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-total-price" style="top: ${currentTop};">${formatCurrency(totalPrice)}</div>`);
                 }
             }
             
-            // Grand Total (only show if > 0)
+            // Grand Total (now with comma separator)
             document.getElementById('data-grand-total').innerText = formatCurrency(grandTotal) || '';
             
             // Remarks (only show if not empty)
@@ -518,21 +604,24 @@
             addItemRow();
             
             // Pre-fill item data with generic placeholders and sample data
-            // Item 1 (Normal data)
-            document.getElementById('item-description-1').value = `ITEM 1`;
-            document.getElementById('item-account-1').value = ``;
-            document.getElementById('item-quantity-1').value = ``;
-            document.getElementById('item-unit-price-1').value = ``; // Total: 2200.00
+            // Item 1 (Multi-line text for testing the fix)
+            document.getElementById('item-description-1').value = `Annual maintenance subscription for software license ABC.\nProfessional fees for design and website development.`;
+            document.getElementById('item-account-1').value = `38700`;
+            document.getElementById('item-quantity-1').value = `1`;
+            document.getElementById('item-unit-price-1').value = `3900.00`; 
 
-            // Item 2 (Quantity empty/0, Unit Price copied to Total Price)
-            document.getElementById('item-description-2').value = `ITEM 2`;
-            document.getElementById('item-account-2').value = ``;
-            document.getElementById('item-quantity-2').value = ``; // Empty quantity
-            document.getElementById('item-unit-price-2').value = ``; // Total: 1700.00 (Copied)
+            // Item 2 (Standard data)
+            document.getElementById('item-description-2').value = `Purchase of 50 boxes of A4 paper.`;
+            document.getElementById('item-account-2').value = `45100`;
+            document.getElementById('item-quantity-2').value = `50`; 
+            document.getElementById('item-unit-price-2').value = `17.00`; 
 
-            document.getElementById('remarks').value = `A/C6011031 - 035 CSI`;
-            // Initial render
+            document.getElementById('remarks').value = `Payment for Q4 project milestone. Please refer to attached invoice #00123.`;
+            
+            // Initial render and calculation
             updateForm();
+            calculateRowTotal(1);
+            calculateRowTotal(2);
         }
         
         document.addEventListener('DOMContentLoaded', initializeForm);
