@@ -3,39 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IJN Purchase Requisition (PR) Payment Request Template - FINAL V14.6 (Description Shifted Up 0.2cm)</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;700;900&display=swap" rel="stylesheet">
-    
+    <title>IJN Purchase Requisition (PR) Payment Request Template - Full Version with History</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* --- CORE STYLES --- */
         body {
             font-family: 'Poppins', sans-serif;
             color: #1a1a1a;
-            background-color: #f7f7f7; 
+            background-color: #f7f7f7;
             font-size: 10pt;
         }
 
-        /* --- INTERACTIVE INPUT FORM STYLES (Screen Only) --- */
         .input-form-area {
             background-color: #e6f7ff;
             padding: 20px;
             margin-bottom: 20px;
             border-bottom: 2px solid #0E4C8C;
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             gap: 15px;
         }
-        
-        /* New container for the 2-column header layout */
+
         .header-input-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Two columns for Requestor and Vendor details */
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
             padding: 15px;
             border: 1px solid #0E4C8C;
             border-radius: 5px;
         }
+
         .header-column {
             display: flex;
             flex-direction: column;
@@ -48,16 +46,19 @@
             gap: 20px;
             align-items: flex-start;
         }
+
         .input-group {
             display: flex;
             align-items: center;
         }
+
         .input-group label {
-            width: 150px; /* Fixed width for alignment */
+            width: 150px;
             font-weight: 500;
         }
-        .input-group input[type="text"], 
-        .input-group input[type="number"], 
+
+        .input-group input[type="text"],
+        .input-group input[type="number"],
         .input-group textarea {
             flex-grow: 1;
             padding: 5px;
@@ -67,23 +68,26 @@
             font-size: 9pt;
         }
 
-        /* --- ITEM INPUT TABLE STYLES --- */
         #item-input-table-container {
             width: 100%;
             overflow-x: auto;
         }
+
         #item-input-table {
             width: 100%;
             border-collapse: collapse;
             background-color: white;
-            min-width: 950px; 
+            min-width: 950px;
         }
-        #item-input-table th, #item-input-table td {
+
+        #item-input-table th,
+        #item-input-table td {
             border: 1px solid #ddd;
             padding: 5px;
             text-align: left;
             font-size: 9pt;
         }
+
         #item-input-table th {
             background-color: #f0f8ff;
             color: #0E4C8C;
@@ -92,35 +96,33 @@
             top: 0;
             z-index: 20;
         }
-        /* Style for inputs in the table cells */
-        #item-input-table input.item-input-field, #item-input-table textarea {
+
+        #item-input-table input.item-input-field,
+        #item-input-table textarea {
             width: 100%;
             padding: 3px;
             border: 1px solid #ccc;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
             font-size: 9pt;
-            resize: vertical; 
+            resize: vertical;
             min-height: 30px;
         }
-        /* Specific styling for the auto/editable Total Price input */
+
         #item-input-table input.item-total-price-input {
-            font-weight: bold; 
-            text-align: right; 
-            background-color: #e8f8e8; 
+            font-weight: bold;
+            text-align: right;
+            background-color: #e8f8e8;
             border: 1px solid #28a745;
         }
-        
-        /* Column Widths */
+
         #item-input-table .item-num-cell { width: 30px; text-align: center; }
-        #item-input-table .item-desc-cell { width: 40%; } 
-        #item-input-table .item-account-cell { width: 12%; } 
-        #item-input-table .item-qty-cell { width: 8%; } 
-        #item-input-table .item-price-cell { width: 12%; } 
-        #item-input-table .item-total-cell { width: 13%; } 
+        #item-input-table .item-desc-cell { width: 40%; }
+        #item-input-table .item-account-cell { width: 12%; }
+        #item-input-table .item-qty-cell { width: 8%; }
+        #item-input-table .item-price-cell { width: 12%; }
+        #item-input-table .item-total-cell { width: 13%; }
 
-
-        /* New style for the checkbox control section */
         #control-panel {
             background-color: #fff3cd;
             padding: 10px 15px;
@@ -128,13 +130,21 @@
             border-radius: 5px;
             font-weight: bold;
         }
+
         #control-panel label {
             font-weight: 500;
             cursor: pointer;
         }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .action-buttons button {
             padding: 10px 25px;
-            background-color: #0E4C8C; 
+            background-color: #0E4C8C;
             color: white;
             border: none;
             border-radius: 4px;
@@ -142,142 +152,305 @@
             font-weight: bold;
             font-size: 10pt;
         }
-        .action-buttons button:nth-child(3) { background-color: #28a745; }
-        .action-buttons button.add-item { background-color: #ffc107; color: #333; }
-        .action-buttons button.remove-item { background-color: #dc3545; }
 
-        /* --- A4 PRINTABLE TEMPLATE STYLES --- */
+        .action-buttons button:nth-child(3) {
+            background-color: #6f42c1;
+        }
+
+        .action-buttons button:nth-child(4) {
+            background-color: #17a2b8;
+        }
+
+        .action-buttons button.add-item {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .action-buttons button.remove-item {
+            background-color: #dc3545;
+        }
+
         .a4-page-template {
-            width: 11.69in; 
-            height: 8.27in; 
-            margin: 0 auto; 
-            padding: 0; 
+            width: 11.69in;
+            height: 8.27in;
+            margin: 0 auto;
+            padding: 0;
             position: relative;
             font-size: 10pt;
             margin-top: 20px;
         }
-        
-        /* IMAGE PLACEMENT (CRITICAL FOR VISUAL ALIGNMENT) */
+
         #printable-form-image {
             width: 11.69in;
             height: 8.27in;
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 1; 
-            display: block; 
-            opacity: 0.25; 
+            z-index: 1;
+            display: block;
+            opacity: 0.25;
         }
 
-        /* --- STYLES FOR DATA PLACEMENT (ABSOLUTE CM) --- */
         .data-field {
             position: absolute;
             color: black;
-            font-weight: 600; 
-            line-height: 1.0; 
-            font-size: 8pt; 
+            font-weight: 600;
+            line-height: 1.0;
+            font-size: 8pt;
             text-align: left;
             overflow: hidden;
             white-space: pre-wrap;
             padding: 0;
             margin: 0;
             box-sizing: border-box;
-            z-index: 10; 
+            z-index: 10;
         }
-        
+
         /* Top Left Block */
-        #data-requestor { top: 4.35cm; left: 4.0cm; max-width: 7.6cm; } 
-        #data-designation { top: 4.95cm; left: 4.0cm; max-width: 7.6cm; } 
-        #data-dept { top: 5.55cm; left: 4.0cm; max-width: 7.6cm; } 
-        #data-req-date { top: 6.10cm; left: 4.0cm; max-width: 2.5cm; } 
-        #data-extension { top: 6.70cm; left: 4.0cm; max-width: 2.5cm; } 
+        #data-requestor { top: 4.35cm; left: 4.0cm; max-width: 7.6cm; }
+        #data-designation { top: 4.95cm; left: 4.0cm; max-width: 7.6cm; }
+        #data-dept { top: 5.55cm; left: 4.0cm; max-width: 7.6cm; }
+        #data-req-date { top: 6.10cm; left: 4.0cm; max-width: 2.5cm; }
+        #data-extension { top: 6.70cm; left: 4.0cm; max-width: 2.5cm; }
 
         /* Top Right Block */
-        #data-vendor { top: 4.05cm; left: 12.5cm; max-width: 8.9cm; } 
-        #data-address { top: 4.55cm; left: 12.5cm; max-width: 8.9cm; } 
-        #data-tel-no { top: 5.70cm; left: 12.5cm; max-width: 5.0cm; } 
-        #data-email { top: 6.20cm; left: 12.5cm; max-width: 8.9cm; } 
-        #data-contact { top: 6.60cm; left: 12.5cm; max-width: 8.9cm; } 
-        
-        /* Item Row Class Styling (Print Coordinates remain UNCHANGED) */
+        #data-vendor { top: 4.05cm; left: 12.5cm; max-width: 8.9cm; }
+        #data-address { top: 4.55cm; left: 12.5cm; max-width: 8.9cm; }
+        #data-tel-no { top: 5.70cm; left: 12.5cm; max-width: 5.0cm; }
+        #data-email { top: 6.20cm; left: 12.5cm; max-width: 8.9cm; }
+        #data-contact { top: 6.60cm; left: 12.5cm; max-width: 8.9cm; }
+
         .data-item-no { left: 1.85cm; max-width: 1.3cm; text-align: center; }
-        .data-item-description { 
-             left: 3.7cm; 
-             max-width: 12.5cm; 
-             height: 0.65cm; 
-             font-size: 7.5pt; 
-             line-height: 0.9; 
-             margin-top: -0.2cm; /* <--- ADJUSTMENT APPLIED HERE */
+
+        .data-item-description {
+            left: 3.7cm;
+            max-width: 12.5cm;
+            height: 0.65cm;
+            font-size: 7.5pt;
+            line-height: 0.9;
+            margin-top: -0.2cm;
         }
-        .data-item-account { left: 17.3cm; max-width: 3.8cm; text-align: center; }
-        .data-item-quantity { left: 21cm; max-width: 2.0cm; text-align: center; } 
+
+        /* FIXED ACCOUNT COLUMN */
+        .data-item-account {
+            left: 16.5cm;
+            max-width: 6.0cm;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .data-item-quantity { left: 20.3cm; max-width: 2.0cm; text-align: center; }
         .data-item-unit-price { left: 22.4cm; max-width: 3.0cm; text-align: right; }
         .data-item-total-price { left: 25.8cm; max-width: 3.3cm; text-align: right; }
 
-
-        /* Total and Remarks Positioning */
-        #data-grand-total { top: 14.05cm; left: 25.8cm; font-size: 9pt; text-align: right; max-width: 3.3cm; } 
-        
-        #data-remarks { 
-            top: 16.05cm; 
-            left: 2.2cm; 
-            max-width: 19.0cm; 
-            height: 4.7cm; 
-            font-weight: 400; 
-            font-size: 8pt; 
-            line-height: 1.0; 
+        #data-grand-total {
+            top: 14.05cm;
+            left: 25.8cm;
+            font-size: 9pt;
+            text-align: right;
+            max-width: 3.3cm;
         }
 
-        /* --- PRINT STYLES --- */
+        #data-remarks {
+            top: 16.05cm;
+            left: 2.2cm;
+            max-width: 19.0cm;
+            height: 4.7cm;
+            font-weight: 400;
+            font-size: 8pt;
+            line-height: 1.0;
+        }
+
+        /* HISTORY PANEL */
+        .history-panel {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .history-panel.show {
+            display: flex;
+        }
+
+        .history-panel-content {
+            width: min(1000px, 92vw);
+            max-height: 85vh;
+            overflow: hidden;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid #ddd;
+            background: #f8fbff;
+        }
+
+        .history-header h3 {
+            margin: 0;
+            color: #0E4C8C;
+        }
+
+        .history-header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .history-header-actions button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #0E4C8C;
+            color: white;
+            font-weight: 600;
+        }
+
+        .history-header-actions .history-danger-btn {
+            background: #dc3545;
+        }
+
+        .history-list {
+            padding: 16px 20px;
+            overflow: auto;
+            display: grid;
+            gap: 12px;
+        }
+
+        .history-card {
+            border: 1px solid #d9e2ec;
+            border-radius: 10px;
+            padding: 14px;
+            background: #fff;
+        }
+
+        .history-card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .history-title {
+            font-weight: 700;
+            color: #0E4C8C;
+            margin-bottom: 4px;
+        }
+
+        .history-meta {
+            font-size: 9pt;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .history-actions button {
+            padding: 7px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 9pt;
+            font-weight: 600;
+        }
+
+        .history-load-btn {
+            background: #0E4C8C;
+            color: #fff;
+        }
+
+        .history-delete-btn {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .history-items-preview {
+            margin-top: 10px;
+            font-size: 9pt;
+            color: #333;
+            background: #f7f9fc;
+            border-radius: 8px;
+            padding: 10px;
+            white-space: pre-wrap;
+        }
+
         @media print {
             @page {
                 size: A4 landscape;
                 margin: 0;
             }
-            body { 
-                background-color: white; 
+
+            body {
+                background-color: white;
                 margin: 0;
             }
+
             .input-form-area {
-                display: none; 
+                display: none;
             }
+
             .a4-page-template {
                 border: none;
                 margin: 0;
             }
+
             #printable-form-image {
-                display: none; 
+                display: none;
             }
-            .data-field { 
+
+            .history-panel {
+                display: none !important;
+            }
+
+            .data-field {
                 font-size: 8pt;
                 color: black;
                 position: absolute !important;
-                line-height: 1.0 !important; 
+                line-height: 1.0 !important;
             }
-            /* Override for description to use smaller font/tighter line-height AND margin adjustment */
-            .data-item-description { 
-                 font-size: 7.5pt !important; 
-                 line-height: 0.9 !important; 
-                 margin-top: -0.2cm !important; /* <--- ADJUSTMENT APPLIED HERE */
+
+            .data-item-description {
+                font-size: 7.5pt !important;
+                line-height: 0.9 !important;
+                margin-top: -0.2cm !important;
+            }
+
+            .data-item-account {
+                white-space: nowrap !important;
             }
         }
     </style>
 </head>
 <body>
-    
+
     <div class="input-form-area">
-        <h2 style="color: #0E4C8C;">IJN Payment Request Data Entry (FINAL V14.6 - Description Shifted Up 0.2cm)</h2>
-        <p style="font-weight: bold; color: #d9534f;">🚨 CRITICAL: Ensure you save the blank PR image as `PR Template to Edit (2).jpg` in the same folder as this HTML file! 🚨</p>
-        <p>Enter details below. The **Item Description** field has been shifted up by **0.2cm** on the printed form for better alignment.</p>
-        
+        <h2 style="color: #0E4C8C;">IJN Payment Request Data Entry - Full Version with History</h2>
+        <p style="font-weight: bold; color: #d9534f;">Ensure you save the blank PR image as <code>PR Template to Edit (2).jpg</code> in the same folder as this HTML file.</p>
+
         <div class="header-input-grid">
-            
             <div class="header-column">
                 <h3 style="margin-top: 0; color: #0E4C8C;">Requestor Details (Left Column)</h3>
                 <div class="input-group"><label for="requestor">Requestor Name:</label><input type="text" id="requestor" value=""></div>
                 <div class="input-group"><label for="designation">Designation:</label><input type="text" id="designation" value=""></div>
                 <div class="input-group"><label for="dept">Dept/Centre:</label><input type="text" id="dept" value=""></div>
-                <div class="input-group"><label for="req-date">Date (DD/MM/YYYY):</label><input type="text" id="req-date" value="8/10/2025"></div>
+                <div class="input-group"><label for="req-date">Date (DD/MM/YYYY):</label><input type="text" id="req-date" value="8/4/2026"></div>
                 <div class="input-group"><label for="extension">Extension:</label><input type="text" id="extension" value="6218"></div>
             </div>
 
@@ -289,7 +462,6 @@
                 <div class="input-group"><label for="email">E-mail Address:</label><input type="text" id="email" value=""></div>
                 <div class="input-group"><label for="contact">Contact Person:</label><input type="text" id="contact" value=""></div>
             </div>
-            
         </div>
 
         <div class="input-sections">
@@ -303,37 +475,38 @@
                             <th class="item-account-cell">Account No.</th>
                             <th class="item-qty-cell">Quantity</th>
                             <th class="item-price-cell">Unit Price (RM)</th>
-                            <th class="item-total-cell">Total Price (RM)</th> 
+                            <th class="item-total-cell">Total Price (RM)</th>
                         </tr>
                     </thead>
-                    <tbody id="item-input-container">
-                        </tbody>
+                    <tbody id="item-input-container"></tbody>
                 </table>
             </div>
-            
+
             <div class="card-input-group" style="flex-basis: 100%;">
                 <div id="control-panel">
                     <input type="checkbox" id="show-item-numbers" checked>
                     <label for="show-item-numbers">Show Item Numbers (1., 2., 3., etc.) on Form</label>
                 </div>
+
                 <h3 style="margin-top: 15px;">Reason for Request & Other Remarks</h3>
                 <div class="input-group">
-                    <label for="remarks" style="width: 100%; margin-bottom: 5px;">Remarks (This text appears near the bottom right of the form):</label>
+                    <label for="remarks" style="width: 100%; margin-bottom: 5px;">Remarks:</label>
                     <textarea id="remarks" style="width: 100%; height: 80px;"></textarea>
                 </div>
             </div>
         </div>
-        
+
         <div class="action-buttons">
             <button type="button" class="add-item" id="add-item-btn">Add Item Row</button>
             <button type="button" class="remove-item" id="remove-item-btn">Remove Last Row</button>
+            <button type="button" id="save-history-btn">Save History</button>
+            <button type="button" id="history-btn">Open History</button>
             <button type="button" id="update-btn">Update Text Placement</button>
             <button type="button" id="print-btn">Print Form</button>
         </div>
     </div>
 
     <div class="a4-page-template" id="a4-printable-area">
-        
         <img id="printable-form-image" src="PR Template to Edit (2).jpg" alt="Blank Purchase Requisition Form">
 
         <div class="data-field" id="data-requestor"></div>
@@ -348,45 +521,51 @@
         <div class="data-field" id="data-contact"></div>
         <div class="data-field" id="data-grand-total"></div>
         <div class="data-field" id="data-remarks"></div>
-        
+
         <div id="dynamic-item-data-fields"></div>
-        
     </div>
-    
+
+    <div id="history-panel" class="history-panel">
+        <div class="history-panel-content">
+            <div class="history-header">
+                <h3>PR History</h3>
+                <div class="history-header-actions">
+                    <button type="button" id="clear-history-btn" class="history-danger-btn">Clear All</button>
+                    <button type="button" id="close-history-btn">Close</button>
+                </div>
+            </div>
+            <div id="history-list" class="history-list">
+                <p style="margin:0; color:#777;">No history yet.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        let itemCount = 0; 
+        let itemCount = 0;
         const inputContainer = document.getElementById('item-input-container');
-        // Item box row gap: 0.7cm
-        const itemRowHeight = 0.7; // cm
-        // Top start position for the first item 
-        // This is now relative to the image coordinates, and description will be adjusted with margin-top
-        const baseItemTop = 9.15; // cm 
-        
+        const itemRowHeight = 0.7;
+        const baseItemTop = 9.15;
+
+        const HISTORY_KEY = 'ijn_pr_form_history_v1';
+        const MAX_HISTORY_ITEMS = 100;
+
         function formatCurrency(amount) {
-            // Returns formatted currency string (e.g., 1,000.00) or empty string if amount is null/0
-            if (!amount || isNaN(parseFloat(amount))) return ''; 
+            if (!amount || isNaN(parseFloat(amount))) return '';
             const num = parseFloat(amount);
             if (num === 0) return '';
-            
-            // Use toLocaleString for thousands separator and 2 decimal places
-            return num.toLocaleString('en-MY', { 
-                minimumFractionDigits: 2, 
-                maximumFractionDigits: 2 
+            return num.toLocaleString('en-MY', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
             });
         }
-        
+
         function formatNumber(value) {
-            // Returns the number or empty string if the value is null/0
-            if (!value || isNaN(parseFloat(value))) return ''; 
+            if (!value || isNaN(parseFloat(value))) return '';
             const num = parseFloat(value);
             if (num === 0) return '';
             return num;
         }
-        
-        /**
-         * Calculates the total price for a row.
-         * The result is placed directly into the editable input field.
-         */
+
         function calculateRowTotal(index) {
             const quantityElem = document.getElementById(`item-quantity-${index}`);
             const unitPriceElem = document.getElementById(`item-unit-price-${index}`);
@@ -394,53 +573,48 @@
 
             const quantity = parseFloat(quantityElem.value) || 0;
             const unitPrice = parseFloat(unitPriceElem.value) || 0;
-            
+
             let calculatedTotal;
 
-            // Calculation Logic: 
             if (quantity === 0 && unitPrice !== 0) {
-                // If quantity is 0 or empty, total is the unit price (common for one-off fees)
-                calculatedTotal = unitPrice; 
+                calculatedTotal = unitPrice;
             } else {
                 calculatedTotal = quantity * unitPrice;
             }
 
             if (totalInput) {
-                // Set the value of the editable input field to the calculated total (2 decimal places)
-                totalInput.value = calculatedTotal.toFixed(2); 
+                totalInput.value = calculatedTotal.toFixed(2);
             }
-            
-            // Re-run the main update function to refresh the grand total and print preview
+
             updateForm();
         }
-        
-        /**
-         * Attaches listeners for *all* input fields. 
-         */
+
         function setupInputListeners() {
             const inputs = document.querySelectorAll('.input-form-area input, .input-form-area textarea');
+
             inputs.forEach(input => {
                 if (!input.dataset.listenerAttached) {
                     const index = input.id.split('-').pop();
-                    
+
                     if (input.id.startsWith('item-quantity-') || input.id.startsWith('item-unit-price-')) {
-                        // CRITICAL: If qty or price changes, recalculate the total
                         input.addEventListener('input', () => calculateRowTotal(index));
                     }
-                    
-                    // All inputs, including the *editable total input*, trigger the main form update 
-                    // on change/input to refresh the Grand Total and print preview.
+
                     input.addEventListener('input', updateForm);
                     input.dataset.listenerAttached = 'true';
                 }
             });
-            document.getElementById('show-item-numbers').addEventListener('change', updateForm);
+
+            const showItemNumbers = document.getElementById('show-item-numbers');
+            if (showItemNumbers && !showItemNumbers.dataset.listenerAttached) {
+                showItemNumbers.addEventListener('change', updateForm);
+                showItemNumbers.dataset.listenerAttached = 'true';
+            }
         }
 
         function createItemInputRow(index) {
             const row = document.createElement('tr');
             row.id = `item-group-${index}`;
-            // Item input fields
             row.innerHTML = `
                 <td class="item-num-cell">${index}.</td>
                 <td class="item-desc-cell"><textarea class="item-description" id="item-description-${index}" rows="1"></textarea></td>
@@ -448,12 +622,12 @@
                 <td class="item-qty-cell"><input type="number" class="item-input-field" id="item-quantity-${index}" value="" min="0"></td>
                 <td class="item-price-cell"><input type="number" class="item-input-field" id="item-unit-price-${index}" value="" step="0.01" min="0"></td>
                 <td class="item-total-cell">
-                    <input type="number" class="item-input-field item-total-price-input" 
-                        id="item-total-price-input-${index}" 
-                        value="0.00" 
-                        step="0.01" 
+                    <input type="number" class="item-input-field item-total-price-input"
+                        id="item-total-price-input-${index}"
+                        value="0.00"
+                        step="0.01"
                         min="0">
-                </td> 
+                </td>
             `;
             return row;
         }
@@ -461,21 +635,19 @@
         function addItemRow() {
             itemCount++;
             inputContainer.appendChild(createItemInputRow(itemCount));
-            setupInputListeners(); 
-            // Auto-resize textarea when adding a new row
+            setupInputListeners();
             autoGrowTextarea(document.getElementById(`item-description-${itemCount}`));
-            // Ensure the initial total is calculated (0.00)
-            calculateRowTotal(itemCount); 
-            updateForm(); 
+            calculateRowTotal(itemCount);
+            updateForm();
         }
 
         function removeItemRow() {
-            if (itemCount > 1) { 
+            if (itemCount > 1) {
                 const lastItem = document.getElementById(`item-group-${itemCount}`);
                 if (lastItem) {
                     inputContainer.removeChild(lastItem);
                     itemCount--;
-                    updateForm(); 
+                    updateForm();
                 }
             } else if (itemCount === 1) {
                 alert("Cannot remove the last item row. Must have at least one.");
@@ -484,30 +656,25 @@
 
         function autoGrowTextarea(textarea) {
             if (textarea) {
-                // IMPORTANT: Keep the input textarea growing to accommodate the text 
-                textarea.style.height = 'auto'; // Reset height
-                textarea.style.height = textarea.scrollHeight + 'px'; // Set to scroll height
+                textarea.style.height = 'auto';
+                textarea.style.height = textarea.scrollHeight + 'px';
             }
         }
-        
+
         function setupAutoGrow() {
             const textareas = document.querySelectorAll('#item-input-container textarea');
             textareas.forEach(textarea => {
                 if (!textarea.dataset.autogrowSetup) {
                     textarea.addEventListener('input', () => autoGrowTextarea(textarea));
                     textarea.dataset.autogrowSetup = 'true';
-                    // Initial sizing
                     autoGrowTextarea(textarea);
                 }
             });
         }
 
-
         function updateForm() {
-            // Update Textarea Heights
             setupAutoGrow();
-            
-            // --- Update General Details ---
+
             document.getElementById('data-requestor').innerText = document.getElementById('requestor').value;
             document.getElementById('data-designation').innerText = document.getElementById('designation').value;
             document.getElementById('data-dept').innerText = document.getElementById('dept').value;
@@ -519,10 +686,9 @@
             document.getElementById('data-tel-no').innerText = document.getElementById('tel-no').value;
             document.getElementById('data-email').innerText = document.getElementById('email').value;
             document.getElementById('data-contact').innerText = document.getElementById('contact').value;
-            
-            // --- DYNAMIC ITEM DATA (Print Preview) ---
+
             const dynamicItemDataFields = document.getElementById('dynamic-item-data-fields');
-            dynamicItemDataFields.innerHTML = ''; 
+            dynamicItemDataFields.innerHTML = '';
             let grandTotal = 0;
             const showNumbers = document.getElementById('show-item-numbers').checked;
 
@@ -531,7 +697,7 @@
                 const accountElem = document.getElementById(`item-account-${i}`);
                 const quantityElem = document.getElementById(`item-quantity-${i}`);
                 const unitPriceElem = document.getElementById(`item-unit-price-${i}`);
-                const totalInput = document.getElementById(`item-total-price-input-${i}`); 
+                const totalInput = document.getElementById(`item-total-price-input-${i}`);
 
                 if (!descriptionElem || !accountElem || !quantityElem || !unitPriceElem || !totalInput) continue;
 
@@ -539,91 +705,303 @@
                 const account = accountElem.value.trim();
                 const quantity = parseFloat(quantityElem.value) || 0;
                 const unitPrice = parseFloat(unitPriceElem.value) || 0;
-                
-                // CRITICAL: Use the value from the *editable total input field* for the grand total calculation and printing
                 const totalPrice = parseFloat(totalInput.value) || 0;
 
-                // If all print fields for the row are empty/zero, skip drawing the row
                 if (!description && !account && quantity === 0 && unitPrice === 0 && totalPrice === 0) continue;
 
                 grandTotal += totalPrice;
 
-                // Calculate vertical position in CM
                 const currentTop = `${baseItemTop + (i - 1) * itemRowHeight}cm`;
-                
                 const itemNoContent = showNumbers ? `${i}.` : '';
 
-                // Draw fields only if they have content or if it's the item number
                 if (itemNoContent) {
-                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-no" style="top: ${currentTop};">${itemNoContent}</div>`);
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend',
+                        `<div class="data-field data-item-no" style="top: ${currentTop};">${itemNoContent}</div>`);
                 }
-                // NOTE: data-item-description already has the margin-top: -0.2cm adjustment in CSS
+
                 if (description) {
-                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-description" style="top: ${currentTop};">${description}</div>`);
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend',
+                        `<div class="data-field data-item-description" style="top: ${currentTop};">${description}</div>`);
                 }
+
                 if (account) {
-                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-account" style="top: ${currentTop};">${account}</div>`);
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend',
+                        `<div class="data-field data-item-account" style="top: ${currentTop};">${account}</div>`);
                 }
-                // Print Quantity (formatNumber is used here as it's not a currency field)
+
                 if (formatNumber(quantity) !== '') {
-                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-quantity" style="top: ${currentTop};">${formatNumber(quantity)}</div>`);
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend',
+                        `<div class="data-field data-item-quantity" style="top: ${currentTop};">${formatNumber(quantity)}</div>`);
                 }
-                // Print Unit Price (now with comma separator)
+
                 if (formatCurrency(unitPrice) !== '') {
-                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-unit-price" style="top: ${currentTop};">${formatCurrency(unitPrice)}</div>`);
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend',
+                        `<div class="data-field data-item-unit-price" style="top: ${currentTop};">${formatCurrency(unitPrice)}</div>`);
                 }
-                // Print Total Price (now with comma separator)
+
                 if (formatCurrency(totalPrice) !== '') {
-                    dynamicItemDataFields.insertAdjacentHTML('beforeend', `<div class="data-field data-item-total-price" style="top: ${currentTop};">${formatCurrency(totalPrice)}</div>`);
+                    dynamicItemDataFields.insertAdjacentHTML('beforeend',
+                        `<div class="data-field data-item-total-price" style="top: ${currentTop};">${formatCurrency(totalPrice)}</div>`);
                 }
             }
-            
-            // Grand Total (now with comma separator)
+
             document.getElementById('data-grand-total').innerText = formatCurrency(grandTotal) || '';
-            
-            // Remarks (only show if not empty)
             document.getElementById('data-remarks').innerText = document.getElementById('remarks').value.trim();
         }
-        
+
+        function getCurrentGrandTotal() {
+            let grandTotal = 0;
+            for (let i = 1; i <= itemCount; i++) {
+                const totalInput = document.getElementById(`item-total-price-input-${i}`);
+                if (totalInput) {
+                    grandTotal += parseFloat(totalInput.value) || 0;
+                }
+            }
+            return grandTotal;
+        }
+
+        function getCurrentFormData() {
+            const items = [];
+
+            for (let i = 1; i <= itemCount; i++) {
+                const descriptionElem = document.getElementById(`item-description-${i}`);
+                const accountElem = document.getElementById(`item-account-${i}`);
+                const quantityElem = document.getElementById(`item-quantity-${i}`);
+                const unitPriceElem = document.getElementById(`item-unit-price-${i}`);
+                const totalInput = document.getElementById(`item-total-price-input-${i}`);
+
+                if (!descriptionElem || !accountElem || !quantityElem || !unitPriceElem || !totalInput) continue;
+
+                items.push({
+                    description: descriptionElem.value || '',
+                    account: accountElem.value || '',
+                    quantity: quantityElem.value || '',
+                    unitPrice: unitPriceElem.value || '',
+                    totalPrice: totalInput.value || ''
+                });
+            }
+
+            return {
+                id: Date.now(),
+                savedAt: new Date().toLocaleString('en-MY'),
+                requestor: document.getElementById('requestor').value || '',
+                designation: document.getElementById('designation').value || '',
+                dept: document.getElementById('dept').value || '',
+                reqDate: document.getElementById('req-date').value || '',
+                extension: document.getElementById('extension').value || '',
+                vendor: document.getElementById('vendor').value || '',
+                address: document.getElementById('address').value || '',
+                telNo: document.getElementById('tel-no').value || '',
+                email: document.getElementById('email').value || '',
+                contact: document.getElementById('contact').value || '',
+                remarks: document.getElementById('remarks').value || '',
+                showItemNumbers: document.getElementById('show-item-numbers').checked,
+                items: items,
+                grandTotal: getCurrentGrandTotal()
+            };
+        }
+
+        function getHistory() {
+            try {
+                return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveHistory(historyArray) {
+            localStorage.setItem(HISTORY_KEY, JSON.stringify(historyArray));
+        }
+
+        function saveCurrentToHistory(source = 'manual') {
+            const formData = getCurrentFormData();
+
+            const hasContent =
+                formData.requestor.trim() ||
+                formData.vendor.trim() ||
+                formData.remarks.trim() ||
+                formData.items.some(item =>
+                    item.description.trim() ||
+                    item.account.trim() ||
+                    item.quantity ||
+                    item.unitPrice ||
+                    parseFloat(item.totalPrice || 0) > 0
+                );
+
+            if (!hasContent) {
+                alert('Nothing to save yet.');
+                return;
+            }
+
+            formData.source = source;
+
+            const history = getHistory();
+            history.unshift(formData);
+
+            const trimmedHistory = history.slice(0, MAX_HISTORY_ITEMS);
+            saveHistory(trimmedHistory);
+            renderHistoryList();
+
+            if (source === 'manual') {
+                alert('Saved to history.');
+            }
+        }
+
+        function ensureRowCount(requiredCount) {
+            while (itemCount < requiredCount) {
+                addItemRow();
+            }
+
+            while (itemCount > requiredCount && itemCount > 1) {
+                const lastItem = document.getElementById(`item-group-${itemCount}`);
+                if (lastItem) {
+                    inputContainer.removeChild(lastItem);
+                    itemCount--;
+                }
+            }
+        }
+
+        function loadHistoryRecord(recordId) {
+            const history = getHistory();
+            const record = history.find(item => String(item.id) === String(recordId));
+
+            if (!record) {
+                alert('History record not found.');
+                return;
+            }
+
+            document.getElementById('requestor').value = record.requestor || '';
+            document.getElementById('designation').value = record.designation || '';
+            document.getElementById('dept').value = record.dept || '';
+            document.getElementById('req-date').value = record.reqDate || '';
+            document.getElementById('extension').value = record.extension || '';
+            document.getElementById('vendor').value = record.vendor || '';
+            document.getElementById('address').value = record.address || '';
+            document.getElementById('tel-no').value = record.telNo || '';
+            document.getElementById('email').value = record.email || '';
+            document.getElementById('contact').value = record.contact || '';
+            document.getElementById('remarks').value = record.remarks || '';
+            document.getElementById('show-item-numbers').checked = !!record.showItemNumbers;
+
+            const items = Array.isArray(record.items) && record.items.length ? record.items : [{}];
+            ensureRowCount(items.length);
+
+            for (let i = 1; i <= itemCount; i++) {
+                const item = items[i - 1] || {};
+                document.getElementById(`item-description-${i}`).value = item.description || '';
+                document.getElementById(`item-account-${i}`).value = item.account || '';
+                document.getElementById(`item-quantity-${i}`).value = item.quantity || '';
+                document.getElementById(`item-unit-price-${i}`).value = item.unitPrice || '';
+                document.getElementById(`item-total-price-input-${i}`).value = item.totalPrice || '0.00';
+            }
+
+            updateForm();
+            closeHistoryPanel();
+        }
+
+        function deleteHistoryRecord(recordId) {
+            const confirmed = confirm('Delete this history record?');
+            if (!confirmed) return;
+
+            const history = getHistory().filter(item => String(item.id) !== String(recordId));
+            saveHistory(history);
+            renderHistoryList();
+        }
+
+        function clearAllHistory() {
+            const confirmed = confirm('Clear all saved history?');
+            if (!confirmed) return;
+
+            localStorage.removeItem(HISTORY_KEY);
+            renderHistoryList();
+        }
+
+        function renderHistoryList() {
+            const historyList = document.getElementById('history-list');
+            const history = getHistory();
+
+            if (!history.length) {
+                historyList.innerHTML = `<p style="margin:0; color:#777;">No history yet.</p>`;
+                return;
+            }
+
+            historyList.innerHTML = history.map(record => {
+                const previewItems = (record.items || [])
+                    .filter(item => item.description || item.account || item.totalPrice)
+                    .slice(0, 3)
+                    .map((item, index) => {
+                        const totalText = parseFloat(item.totalPrice || 0) ? formatCurrency(item.totalPrice) : '0.00';
+                        return `${index + 1}. ${item.description || '-'} | ${item.account || '-'} | RM ${totalText}`;
+                    })
+                    .join('\n');
+
+                const totalText = record.grandTotal ? formatCurrency(record.grandTotal) : '0.00';
+
+                return `
+                    <div class="history-card">
+                        <div class="history-card-top">
+                            <div>
+                                <div class="history-title">${record.vendor || 'No Vendor'} - ${record.reqDate || 'No Date'}</div>
+                                <div class="history-meta">
+                                    <div><strong>Requestor:</strong> ${record.requestor || '-'}</div>
+                                    <div><strong>Saved:</strong> ${record.savedAt || '-'}</div>
+                                    <div><strong>Type:</strong> ${record.source || 'manual'}</div>
+                                    <div><strong>Total:</strong> RM ${totalText}</div>
+                                </div>
+                            </div>
+                            <div class="history-actions">
+                                <button type="button" class="history-load-btn" onclick="loadHistoryRecord('${record.id}')">Load</button>
+                                <button type="button" class="history-delete-btn" onclick="deleteHistoryRecord('${record.id}')">Delete</button>
+                            </div>
+                        </div>
+                        <div class="history-items-preview">${previewItems || 'No items preview.'}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openHistoryPanel() {
+            renderHistoryList();
+            document.getElementById('history-panel').classList.add('show');
+        }
+
+        function closeHistoryPanel() {
+            document.getElementById('history-panel').classList.remove('show');
+        }
+
         function printForm() {
-            updateForm(); 
+            updateForm();
+            saveCurrentToHistory('printed');
             window.print();
         }
 
-        // Initialization function
         function initializeForm() {
             document.getElementById('add-item-btn').addEventListener('click', addItemRow);
             document.getElementById('remove-item-btn').addEventListener('click', removeItemRow);
+            document.getElementById('save-history-btn').addEventListener('click', () => saveCurrentToHistory('manual'));
+            document.getElementById('history-btn').addEventListener('click', openHistoryPanel);
             document.getElementById('update-btn').addEventListener('click', updateForm);
             document.getElementById('print-btn').addEventListener('click', printForm);
-            
-            // Add initial 4 rows for easy entry
-            addItemRow(); 
-            addItemRow(); 
-            addItemRow();
-            addItemRow();
-            
-            // Pre-fill item data with generic placeholders and sample data
-            // Item 1 (Multi-line text for testing the fix)
-            document.getElementById('item-description-1').value = ``;
-            document.getElementById('item-account-1').value = ``;
-            document.getElementById('item-quantity-1').value = ``;
-            document.getElementById('item-unit-price-1').value = ``; 
+            document.getElementById('close-history-btn').addEventListener('click', closeHistoryPanel);
+            document.getElementById('clear-history-btn').addEventListener('click', clearAllHistory);
 
-            // Item 2 (Standard data)
-            document.getElementById('item-description-2').value = ``;
-            document.getElementById('item-account-2').value = ``;
-            document.getElementById('item-quantity-2').value = ``; 
-            document.getElementById('item-unit-price-2').value = ``; 
+            document.getElementById('history-panel').addEventListener('click', function(event) {
+                if (event.target.id === 'history-panel') {
+                    closeHistoryPanel();
+                }
+            });
+
+            addItemRow();
+            addItemRow();
+            addItemRow();
+            addItemRow();
 
             document.getElementById('remarks').value = `A/C 6010010 Agency Fees`;
-            
-            // Initial render and calculation
+
             updateForm();
-            calculateRowTotal(1);
-            calculateRowTotal(2);
+            renderHistoryList();
         }
-        
+
         document.addEventListener('DOMContentLoaded', initializeForm);
     </script>
 </body>
