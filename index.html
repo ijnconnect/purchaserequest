@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IJN Purchase Requisition (PR) Payment Request Template - Full Version with History</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Figtree', sans-serif;
             color: #1a1a1a;
             background-color: #f7f7f7;
             font-size: 10pt;
@@ -54,7 +54,7 @@
 
         .input-group label {
             width: 150px;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .input-group input[type="text"],
@@ -64,7 +64,7 @@
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 3px;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Figtree', sans-serif;
             font-size: 9pt;
         }
 
@@ -91,7 +91,7 @@
         #item-input-table th {
             background-color: #f0f8ff;
             color: #0E4C8C;
-            font-weight: 600;
+            font-weight: 400;
             position: sticky;
             top: 0;
             z-index: 20;
@@ -103,14 +103,14 @@
             padding: 3px;
             border: 1px solid #ccc;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Figtree', sans-serif;
             font-size: 9pt;
             resize: vertical;
             min-height: 30px;
         }
 
         #item-input-table input.item-total-price-input {
-            font-weight: bold;
+            font-weight: 400;
             text-align: right;
             background-color: #e8f8e8;
             border: 1px solid #28a745;
@@ -128,11 +128,11 @@
             padding: 10px 15px;
             border: 1px solid #ffc107;
             border-radius: 5px;
-            font-weight: bold;
+            font-weight: 400;
         }
 
         #control-panel label {
-            font-weight: 500;
+            font-weight: 400;
             cursor: pointer;
         }
 
@@ -149,7 +149,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 400;
             font-size: 10pt;
         }
 
@@ -194,7 +194,7 @@
         .data-field {
             position: absolute;
             color: black;
-            font-weight: 600;
+            font-weight: 400;
             line-height: 1.0;
             font-size: 8pt;
             text-align: left;
@@ -206,6 +206,14 @@
             z-index: 10;
         }
 
+
+        .data-field strong {
+            font-weight: 700;
+        }
+
+        .input-form-area strong {
+            font-weight: 700;
+        }
         /* Top Left Block */
         #data-requestor { top: 4.35cm; left: 4.0cm; max-width: 7.6cm; }
         #data-designation { top: 4.95cm; left: 4.0cm; max-width: 7.6cm; }
@@ -315,7 +323,7 @@
             cursor: pointer;
             background: #0E4C8C;
             color: white;
-            font-weight: 600;
+            font-weight: 400;
         }
 
         .history-header-actions .history-danger-btn {
@@ -345,7 +353,7 @@
         }
 
         .history-title {
-            font-weight: 700;
+            font-weight: 400;
             color: #0E4C8C;
             margin-bottom: 4px;
         }
@@ -368,7 +376,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 9pt;
-            font-weight: 600;
+            font-weight: 400;
         }
 
         .history-load-btn {
@@ -442,7 +450,7 @@
 
     <div class="input-form-area">
         <h2 style="color: #0E4C8C;">IJN Payment Request Data Entry - Full Version with History</h2>
-        <p style="font-weight: bold; color: #d9534f;">Ensure you save the blank PR image as <code>PR Template to Edit (2).jpg</code> in the same folder as this HTML file.</p>
+        <p style="font-weight: 400; color: #d9534f;">Ensure you save the blank PR image as <code>PR Template to Edit (2).jpg</code> in the same folder as this HTML file.</p>
 
         <div class="header-input-grid">
             <div class="header-column">
@@ -672,20 +680,37 @@
             });
         }
 
+        function escapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function renderBoldText(value) {
+            return escapeHtml(value).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        }
+
+        function setFieldHtml(elementId, value) {
+            document.getElementById(elementId).innerHTML = renderBoldText(value);
+        }
+
         function updateForm() {
             setupAutoGrow();
 
-            document.getElementById('data-requestor').innerText = document.getElementById('requestor').value;
-            document.getElementById('data-designation').innerText = document.getElementById('designation').value;
-            document.getElementById('data-dept').innerText = document.getElementById('dept').value;
-            document.getElementById('data-req-date').innerText = document.getElementById('req-date').value;
-            document.getElementById('data-extension').innerText = document.getElementById('extension').value;
+            setFieldHtml('data-requestor', document.getElementById('requestor').value);
+            setFieldHtml('data-designation', document.getElementById('designation').value);
+            setFieldHtml('data-dept', document.getElementById('dept').value);
+            setFieldHtml('data-req-date', document.getElementById('req-date').value);
+            setFieldHtml('data-extension', document.getElementById('extension').value);
 
-            document.getElementById('data-vendor').innerText = document.getElementById('vendor').value;
-            document.getElementById('data-address').innerText = document.getElementById('address').value;
-            document.getElementById('data-tel-no').innerText = document.getElementById('tel-no').value;
-            document.getElementById('data-email').innerText = document.getElementById('email').value;
-            document.getElementById('data-contact').innerText = document.getElementById('contact').value;
+            setFieldHtml('data-vendor', document.getElementById('vendor').value);
+            setFieldHtml('data-address', document.getElementById('address').value);
+            setFieldHtml('data-tel-no', document.getElementById('tel-no').value);
+            setFieldHtml('data-email', document.getElementById('email').value);
+            setFieldHtml('data-contact', document.getElementById('contact').value);
 
             const dynamicItemDataFields = document.getElementById('dynamic-item-data-fields');
             dynamicItemDataFields.innerHTML = '';
@@ -721,12 +746,12 @@
 
                 if (description) {
                     dynamicItemDataFields.insertAdjacentHTML('beforeend',
-                        `<div class="data-field data-item-description" style="top: ${currentTop};">${description}</div>`);
+                        `<div class="data-field data-item-description" style="top: ${currentTop};">${renderBoldText(description)}</div>`);
                 }
 
                 if (account) {
                     dynamicItemDataFields.insertAdjacentHTML('beforeend',
-                        `<div class="data-field data-item-account" style="top: ${currentTop};">${account}</div>`);
+                        `<div class="data-field data-item-account" style="top: ${currentTop};">${renderBoldText(account)}</div>`);
                 }
 
                 if (formatNumber(quantity) !== '') {
@@ -745,8 +770,8 @@
                 }
             }
 
-            document.getElementById('data-grand-total').innerText = formatCurrency(grandTotal) || '';
-            document.getElementById('data-remarks').innerText = document.getElementById('remarks').value.trim();
+            setFieldHtml('data-grand-total', formatCurrency(grandTotal) || '');
+            setFieldHtml('data-remarks', document.getElementById('remarks').value.trim());
         }
 
         function getCurrentGrandTotal() {
