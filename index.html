@@ -187,6 +187,11 @@
             font-size: 10pt;
         }
 
+        .action-buttons button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
         .action-buttons button:nth-child(3) {
             background-color: #6f42c1;
         }
@@ -251,14 +256,12 @@
             font-weight: 700;
         }
 
-        /* Top Left Block */
         #data-requestor { top: 4.35cm; left: 4.0cm; max-width: 7.6cm; }
         #data-designation { top: 4.95cm; left: 4.0cm; max-width: 7.6cm; }
         #data-dept { top: 5.55cm; left: 4.0cm; max-width: 7.6cm; }
         #data-req-date { top: 6.10cm; left: 3.9cm; max-width: 2.5cm; }
         #data-extension { top: 6.70cm; left: 3.9cm; max-width: 2.5cm; }
 
-        /* Top Right Block */
         #data-vendor { top: 4.00cm; left: 12.5cm; max-width: 8.9cm; }
         #data-address { top: 4.55cm; left: 12.5cm; max-width: 8.9cm; }
         #data-tel-no { top: 5.70cm; left: 12.5cm; max-width: 5.0cm; }
@@ -276,7 +279,6 @@
             margin-top: 0cm;
         }
 
-        /* FIXED ACCOUNT COLUMN */
         .data-item-account {
             left: 17.2cm;
             max-width: 5.8cm;
@@ -308,7 +310,6 @@
             line-height: 1.0;
         }
 
-        /* HISTORY PANEL */
         .history-panel {
             position: fixed;
             inset: 0;
@@ -607,11 +608,21 @@
     <script>
         let itemCount = 0;
         const inputContainer = document.getElementById('item-input-container');
+
         const itemRowHeight = 0.7;
         const baseItemTop = 9.15;
+        const MAX_ITEM_ROWS = 8;
 
         const HISTORY_KEY = 'ijn_pr_form_history_v1';
         const MAX_HISTORY_ITEMS = 100;
+
+        function updateAddItemButtonState() {
+            const addButton = document.getElementById('add-item-btn');
+            if (addButton) {
+                addButton.disabled = itemCount >= MAX_ITEM_ROWS;
+                addButton.textContent = itemCount >= MAX_ITEM_ROWS ? 'Maximum 8 Rows Reached' : 'Add Item Row';
+            }
+        }
 
         function formatCurrency(amount) {
             if (!amount || isNaN(parseFloat(amount))) return '';
@@ -697,12 +708,19 @@
         }
 
         function addItemRow() {
+            if (itemCount >= MAX_ITEM_ROWS) {
+                alert('Maximum 8 item rows only. The 9th row is reserved for Grand Total.');
+                updateAddItemButtonState();
+                return;
+            }
+
             itemCount++;
             inputContainer.appendChild(createItemInputRow(itemCount));
             setupInputListeners();
             autoGrowTextarea(document.getElementById(`item-description-${itemCount}`));
             calculateRowTotal(itemCount);
             updateForm();
+            updateAddItemButtonState();
         }
 
         function removeItemRow() {
@@ -712,6 +730,7 @@
                     inputContainer.removeChild(lastItem);
                     itemCount--;
                     updateForm();
+                    updateAddItemButtonState();
                 }
             } else if (itemCount === 1) {
                 alert("Cannot remove the last item row. Must have at least one.");
@@ -828,6 +847,7 @@
 
             setFieldHtml('data-grand-total', formatCurrency(grandTotal) || '');
             setFieldHtml('data-remarks', document.getElementById('remarks').value.trim());
+            updateAddItemButtonState();
         }
 
         function getCurrentGrandTotal() {
@@ -929,17 +949,21 @@
         }
 
         function ensureRowCount(requiredCount) {
-            while (itemCount < requiredCount) {
+            const safeRequiredCount = Math.min(Math.max(requiredCount, 1), MAX_ITEM_ROWS);
+
+            while (itemCount < safeRequiredCount) {
                 addItemRow();
             }
 
-            while (itemCount > requiredCount && itemCount > 1) {
+            while (itemCount > safeRequiredCount && itemCount > 1) {
                 const lastItem = document.getElementById(`item-group-${itemCount}`);
                 if (lastItem) {
                     inputContainer.removeChild(lastItem);
                     itemCount--;
                 }
             }
+
+            updateAddItemButtonState();
         }
 
         function loadHistoryRecord(recordId) {
@@ -964,7 +988,7 @@
             document.getElementById('remarks').value = record.remarks || '';
             document.getElementById('show-item-numbers').checked = !!record.showItemNumbers;
 
-            const items = Array.isArray(record.items) && record.items.length ? record.items : [{}];
+            const items = Array.isArray(record.items) && record.items.length ? record.items.slice(0, MAX_ITEM_ROWS) : [{}];
             ensureRowCount(items.length);
 
             for (let i = 1; i <= itemCount; i++) {
@@ -1081,6 +1105,7 @@
 
             updateForm();
             renderHistoryList();
+            updateAddItemButtonState();
         }
 
         document.addEventListener('DOMContentLoaded', initializeForm);
