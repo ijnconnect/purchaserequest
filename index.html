@@ -8,11 +8,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            font-weight: 400;
+        }
+
         body {
             font-family: 'Figtree', sans-serif;
+            font-weight: 400;
             color: #1a1a1a;
             background-color: #f7f7f7;
             font-size: 10pt;
+        }
+
+        input,
+        textarea,
+        button,
+        select,
+        table,
+        th,
+        td,
+        label,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        div,
+        span {
+            font-family: 'Figtree', sans-serif;
+            font-weight: 400;
+        }
+
+        strong,
+        b {
+            font-weight: 700;
         }
 
         .input-form-area {
@@ -65,6 +96,7 @@
             border: 1px solid #ccc;
             border-radius: 3px;
             font-family: 'Figtree', sans-serif;
+            font-weight: 400;
             font-size: 9pt;
         }
 
@@ -86,6 +118,7 @@
             padding: 5px;
             text-align: left;
             font-size: 9pt;
+            font-weight: 400;
         }
 
         #item-input-table th {
@@ -104,6 +137,7 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
             font-family: 'Figtree', sans-serif;
+            font-weight: 400;
             font-size: 9pt;
             resize: vertical;
             min-height: 30px;
@@ -178,6 +212,8 @@
             position: relative;
             font-size: 10pt;
             margin-top: 20px;
+            font-family: 'Figtree', sans-serif;
+            font-weight: 400;
         }
 
         #printable-form-image {
@@ -194,6 +230,7 @@
         .data-field {
             position: absolute;
             color: black;
+            font-family: 'Figtree', sans-serif;
             font-weight: 400;
             line-height: 1.0;
             font-size: 8pt;
@@ -206,7 +243,6 @@
             z-index: 10;
         }
 
-
         .data-field strong {
             font-weight: 700;
         }
@@ -214,6 +250,7 @@
         .input-form-area strong {
             font-weight: 700;
         }
+
         /* Top Left Block */
         #data-requestor { top: 4.35cm; left: 4.0cm; max-width: 7.6cm; }
         #data-designation { top: 4.95cm; left: 4.0cm; max-width: 7.6cm; }
@@ -236,7 +273,7 @@
             height: 0.65cm;
             font-size: 7.5pt;
             line-height: 0.9;
-            margin-top: 0.05cm;
+            margin-top: 0cm;
         }
 
         /* FIXED ACCOUNT COLUMN */
@@ -254,7 +291,7 @@
         .data-item-total-price { left: 25.8cm; max-width: 3.3cm; text-align: right; }
 
         #data-grand-total {
-            top: 14.05cm;
+            top: 14.75cm;
             left: 25.8cm;
             font-size: 9pt;
             text-align: right;
@@ -309,6 +346,7 @@
         .history-header h3 {
             margin: 0;
             color: #0E4C8C;
+            font-weight: 400;
         }
 
         .history-header-actions {
@@ -405,9 +443,23 @@
                 margin: 0;
             }
 
+            * {
+                font-family: 'Figtree', sans-serif !important;
+                font-weight: 400;
+            }
+
+            strong,
+            b,
+            .data-field strong,
+            .input-form-area strong {
+                font-weight: 700 !important;
+            }
+
             body {
                 background-color: white;
                 margin: 0;
+                font-family: 'Figtree', sans-serif !important;
+                font-weight: 400;
             }
 
             .input-form-area {
@@ -417,6 +469,8 @@
             .a4-page-template {
                 border: none;
                 margin: 0;
+                font-family: 'Figtree', sans-serif !important;
+                font-weight: 400;
             }
 
             #printable-form-image {
@@ -428,16 +482,18 @@
             }
 
             .data-field {
+                font-family: 'Figtree', sans-serif !important;
                 font-size: 8pt;
                 color: black;
                 position: absolute !important;
                 line-height: 1.0 !important;
+                font-weight: 400;
             }
 
             .data-item-description {
                 font-size: 7.5pt !important;
                 line-height: 0.9 !important;
-                margin-top: 0.05cm !important;
+                margin-top: 0cm !important;
             }
 
             .data-item-account {
