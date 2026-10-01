@@ -628,48 +628,139 @@
 @media print { .pr-preview-caption { display:none!important; } }
 
     </style>
+<style>
+/* These rules affect only the entry screen. */
+@media screen {
+ .pr-presets { background:white;border:1px solid #DDEAF2;border-radius:12px;padding:14px 18px; }
+ .pr-presets summary { cursor:pointer;color:#034C80;font-weight:600;font-size:13px; }
+ .pr-presets summary span { font-size:12px;font-weight:400;color:#5B6675;margin-left:10px; }
+ .pr-presets-grid { display:grid;grid-template-columns:1fr 1.6fr;gap:24px;margin-top:18px; }
+ .pr-presets-grid strong { display:block;font-size:12px;margin-bottom:8px; }
+ .pr-presets-grid select { min-width:180px;max-width:350px;flex:1;border:1px solid #DDEAF2;border-radius:8px;padding:9px;font-size:12px;background:#FBFDFE; }
+ .pr-paper { background:white;border:1px solid #C9DFEB;border-radius:16px;overflow:hidden;box-shadow:0 10px 24px rgba(10,25,49,.04); }
+ .pr-paper-heading { display:flex;justify-content:space-between;align-items:center;gap:20px;padding:23px 24px;border-bottom:1px solid #DDEAF2; }
+ .pr-paper-heading>div { display:flex;flex-direction:column;gap:5px; }
+ .pr-paper-heading>div:last-child { text-align:right; }
+ .pr-paper-heading strong { font-size:16px;color:#034C80; }
+ .pr-paper-heading>div:last-child>span { color:#5B6675;font-size:11px; }
+ .pr-paper-subtitle { color:#5B6675;font-size:13px; }
+ .pr-template-header-grid { display:grid;grid-template-columns:1fr 1.15fr 1fr;margin:20px 20px 0;border:1px solid #DDEAF2; }
+ .pr-template-box { min-width:0; }
+ .pr-template-box+.pr-template-box { border-left:1px solid #DDEAF2; }
+ .pr-template-box-title { background:#EAF6FB;color:#034C80;border-bottom:1px solid #DDEAF2;padding:11px 13px;font-size:12px;font-weight:600;line-height:1.5; }
+ .pr-template-fields { display:flex;flex-direction:column;gap:10px;padding:15px 12px; }
+ .pr-template-field { display:grid;grid-template-columns:90px 6px minmax(0,1fr);align-items:center;gap:5px; }
+ .pr-template-field label { color:#5B6675;font-size:11px;line-height:1.4; }
+ .pr-template-field>span { color:#7A8696; }
+ .pr-template-field input { width:100%;min-width:0;padding:9px 8px;border:1px solid #DDEAF2;border-radius:6px;background:#FBFDFE;font-size:12px;color:#0A1931;line-height:1.5; }
+ .pr-office-box { background:#F8FAFC; }
+ .pr-office-box .pr-template-box-title { background:#F0F4F7;color:#667085;font-size:10px; }
+ .pr-office-note { font-size:11px;color:#7A8696;padding:13px 13px 5px;line-height:1.5; }
+ .pr-office-line { display:flex;gap:12px;align-items:center;padding:13px;font-size:11px;color:#7A8696; }
+ .pr-office-line span { min-width:102px; }
+ .pr-office-line i { flex:1;border-bottom:1px solid #DDEAF2;height:15px; }
+ .pr-template-items-heading { display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 20px 12px; }
+ .pr-template-items-heading>strong { color:#034C80;font-size:13px; }
+ .pr-app .pr-paper #item-input-table-container { width:calc(100% - 40px);margin:0 20px;border-radius:0; }
+ .pr-app .pr-paper #item-input-table { min-width:860px; }
+ .pr-app .pr-paper #item-input-table th { background:#EAF6FB;text-align:center;white-space:normal;vertical-align:middle;font-size:11px;padding:12px 8px; }
+ .pr-app .pr-paper #item-input-table th:first-child { text-align:center; }
+ .pr-app .pr-paper #item-input-table th span { font-weight:400; }
+ .pr-app .pr-paper #item-input-table th,.pr-app .pr-paper #item-input-table td { border-right:1px solid #DDEAF2; }
+ .pr-app .pr-paper #item-input-table th:last-child,.pr-app .pr-paper #item-input-table td:last-child { border-right:0; }
+ .pr-app .pr-paper #item-input-table .item-desc-cell { width:49%; }
+ .pr-app .pr-paper #item-input-table .item-account-cell { width:12%; }
+ .pr-app .pr-paper #item-input-table .item-qty-cell { width:8%; }
+ .pr-app .pr-paper #item-input-table .item-price-cell { width:12%; }
+ .pr-app .pr-paper #item-input-table .item-total-cell { width:16%; }
+ .pr-app .pr-paper #item-input-table textarea { min-height:48px; }
+ .pr-row-settings { margin-top:7px; }
+ .pr-row-settings>summary { color:#034C80;font-size:11px;cursor:pointer;list-style-position:inside; }
+ .pr-row-settings-body { display:flex;flex-direction:column;gap:10px;padding:11px;border:1px solid #DDEAF2;border-radius:8px;margin-top:7px;background:#F4FAFD; }
+ .pr-row-settings .pr-row-head { margin:0; }
+ .pr-row-settings .pr-row-actions { width:auto; }
+ .pr-row-settings .pr-discount-options { margin:0; }
+ .pr-row-settings .pr-row-actions button { width:34px; }
+ .pr-row-settings .pr-row-actions .pr-row-delete { width:auto;padding:0 10px; }
+ .pr-row-kind { display:inline-block;color:#034C80;background:#EAF6FB;font-size:10px;padding:3px 7px;border-radius:4px;margin-bottom:6px; }
+ .pr-template-item-tools { display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:14px 20px; }
+ .pr-template-item-tools>.pr-help { max-width:430px; }
+ .pr-template-bottom-grid { display:grid;grid-template-columns:27% 73%;border-top:1px solid #DDEAF2; }
+ .pr-template-remarks { border-right:1px solid #DDEAF2; }
+ .pr-remarks-body { display:flex;flex-direction:column;gap:9px;padding:14px; }
+ .pr-remarks-body textarea { width:100%;min-height:170px;resize:vertical;border:1px solid #DDEAF2;border-radius:7px;background:#FBFDFE;padding:11px;font-size:12px;line-height:1.6;color:#0A1931; }
+ .pr-template-total-label { display:flex;align-items:center;gap:10px;padding:11px 15px;color:#5B6675;font-size:12px;border-bottom:1px solid #DDEAF2; }
+ .pr-template-total-label span { font-size:11px;color:#7A8696; }
+ .pr-template-bottom-right .pr-summary { margin:0;border:0;border-bottom:1px solid #DDEAF2;border-radius:0;background:white;padding:17px 20px; }
+ .pr-template-bottom-right .pr-validation { margin:12px; }
+ .pr-approval-box { background:#F8FAFC; }
+ .pr-approval-box .pr-template-box-title { background:#F0F4F7;color:#7A8696;text-align:center; }
+ .pr-approval-signatures { display:grid;grid-template-columns:repeat(4,1fr);padding:17px 15px 40px;gap:12px;text-align:center;color:#7A8696;font-size:11px; }
+ .pr-approval-signatures span { display:flex;flex-direction:column;gap:33px; }
+ .pr-approval-signatures span::after { content:'';border-bottom:1px solid #DDEAF2; }
+ .pr-approval-box p { margin:0;padding:0 15px 15px;text-align:center;color:#7A8696;font-size:11px; }
+}
+@media screen and (max-width:1100px) {
+ .pr-template-header-grid { grid-template-columns:1fr 1fr; }
+ .pr-template-box.pr-office-box { grid-column:1/-1;border-left:0;border-top:1px solid #DDEAF2; }
+ .pr-office-box .pr-office-line { display:none; }
+ .pr-office-box .pr-office-note { padding:10px 13px; }
+ .pr-presets-grid { grid-template-columns:1fr; }
+ .pr-template-bottom-grid { grid-template-columns:35% 65%; }
+}
+@media screen and (max-width:650px) {
+ .pr-template-header-grid { grid-template-columns:1fr;margin:12px 12px 0; }
+ .pr-template-box+.pr-template-box { border-left:0;border-top:1px solid #DDEAF2; }
+ .pr-template-field { grid-template-columns:96px 6px minmax(0,1fr); }
+ .pr-paper-heading { padding:17px;align-items:flex-start; }
+ .pr-paper-heading strong { font-size:12px; }
+ .pr-paper-subtitle { font-size:11px; }
+ .pr-paper-heading .pr-eyebrow { font-size:9px; }
+ .pr-app .pr-paper #item-input-table-container { width:calc(100% - 24px);margin:0 12px; }
+ .pr-template-items-heading,.pr-template-item-tools { padding:14px 12px; }
+ .pr-template-bottom-grid { grid-template-columns:1fr; }
+ .pr-template-remarks { border-right:0;border-bottom:1px solid #DDEAF2; }
+ .pr-presets summary span { display:block;margin:5px 0 0 14px; }
+}
+
+</style>
 </head>
 <body>
     <div class="input-form-area pr-app" id="pr-app">
-        <header class="pr-masthead">
-            <div><div class="pr-eyebrow">INSTITUT JANTUNG NEGARA · WORKSPACE</div><h1>Purchase Requisition</h1><p>Prepare your request, match the quotation, and keep a clear record.</p></div>
-            <div class="pr-masthead-actions"><span id="draft-status" class="pr-status" role="status">Ready</span><button type="button" id="new-pr-btn" class="pr-btn pr-btn-light">＋ New PR</button></div>
-        </header>
-        <div class="pr-topbar"><span class="pr-note">Drafts save automatically in this browser. Export a backup to keep a separate copy.</span><div class="pr-inline"><button type="button" id="history-btn" class="pr-btn pr-btn-secondary">History</button><button type="button" id="export-history-btn" class="pr-btn pr-btn-secondary">Export Backup</button><button type="button" id="import-history-btn" class="pr-btn pr-btn-secondary">Import Backup</button><input type="file" id="import-history-file" accept=".json,application/json" hidden></div></div>
-        <div class="pr-details-grid">
-            <section class="pr-card"><div class="pr-card-title"><div><span class="pr-section-number">01</span><h2>Requestor details</h2></div><div class="pr-inline"><button type="button" id="apply-requestor-btn" class="pr-text-btn">Use saved details</button><button type="button" id="save-requestor-btn" class="pr-text-btn">Save details</button></div></div>
-                <div class="pr-field-grid">
-                    <div class="pr-field pr-span-2"><label for="requestor">Requestor name</label><input type="text" id="requestor" autocomplete="name"></div>
-                    <div class="pr-field"><label for="designation">Designation</label><input type="text" id="designation"></div>
-                    <div class="pr-field"><label for="dept">Department / centre</label><input type="text" id="dept"></div>
-                    <div class="pr-field"><label for="req-date">Date <span>DD/MM/YYYY</span></label><input type="text" id="req-date" placeholder="DD/MM/YYYY"></div>
-                    <div class="pr-field"><label for="extension">Extension</label><input type="text" id="extension" value="6218"></div>
-                </div>
-            </section>
-            <section class="pr-card"><div class="pr-card-title"><div><span class="pr-section-number">02</span><h2>Vendor details</h2></div><div class="pr-inline"><button type="button" id="save-vendor-btn" class="pr-text-btn">Save vendor</button><button type="button" id="delete-vendor-btn" class="pr-text-btn pr-danger-text">Delete saved vendor</button></div></div>
-                <div class="pr-field pr-vendor-picker"><label for="vendor-select">Choose a saved vendor</label><select id="vendor-select"><option value="">Enter vendor details below</option></select></div>
-                <div class="pr-field-grid">
-                    <div class="pr-field pr-span-2"><label for="vendor">Vendor name</label><input type="text" id="vendor" value="INFINITY CREATIVE SOLUTIONS SDN BHD"></div>
-                    <div class="pr-field pr-span-2"><label for="address">Address</label><input type="text" id="address"></div>
-                    <div class="pr-field"><label for="tel-no">Telephone</label><input type="text" id="tel-no"></div>
-                    <div class="pr-field"><label for="email">Email</label><input type="text" id="email"></div>
-                    <div class="pr-field pr-span-2"><label for="contact">Contact person</label><input type="text" id="contact"></div>
-                </div>
-            </section>
+        <header class="pr-masthead"><div><div class="pr-eyebrow">INSTITUT JANTUNG NEGARA · WORKSPACE</div><h1>Purchase Requisition</h1><p>Fill in the fields in the same order as your printed PR.</p></div><div class="pr-masthead-actions"><span id="draft-status" class="pr-status" role="status">Ready</span><button type="button" id="new-pr-btn" class="pr-btn pr-btn-light">＋ New PR</button></div></header>
+        <div class="pr-topbar"><span class="pr-note">Your draft saves automatically in this browser.</span><div class="pr-inline"><button type="button" id="history-btn" class="pr-btn pr-btn-secondary">History</button><button type="button" id="export-history-btn" class="pr-btn pr-btn-secondary">Export Backup</button><button type="button" id="import-history-btn" class="pr-btn pr-btn-secondary">Import Backup</button><input type="file" id="import-history-file" accept=".json,application/json" hidden></div></div>
+        <details class="pr-presets"><summary>Saved details <span>Autofill requestor and vendor information</span></summary><div class="pr-presets-grid"><div><strong>Requestor shortcuts</strong><div class="pr-inline"><button type="button" id="apply-requestor-btn" class="pr-btn pr-btn-secondary">Use saved details</button><button type="button" id="save-requestor-btn" class="pr-text-btn">Save current details</button></div></div><div><label for="vendor-select"><strong>Saved vendors</strong></label><div class="pr-inline"><select id="vendor-select" aria-label="Choose a saved vendor"><option value="">Choose a saved vendor</option></select><button type="button" id="save-vendor-btn" class="pr-text-btn">Save vendor</button><button type="button" id="delete-vendor-btn" class="pr-text-btn pr-danger-text">Delete saved vendor</button></div></div></div></details>
+        <div class="pr-paper">
+            <div class="pr-paper-heading"><div><span class="pr-eyebrow">INSTITUT JANTUNG NEGARA</span><span class="pr-paper-subtitle">National Heart Institute</span></div><div><strong>PURCHASE REQUISITION</strong><span>Data entry · follows the printed form</span></div></div>
+            <div class="pr-template-header-grid">
+                <section class="pr-template-box"><div class="pr-template-box-title">Requestor details</div><div class="pr-template-fields">
+                    <div class="pr-template-field"><label for="requestor">Requestor</label><span>:</span><input type="text" id="requestor" autocomplete="name"></div>
+                    <div class="pr-template-field"><label for="designation">Designation</label><span>:</span><input type="text" id="designation"></div>
+                    <div class="pr-template-field"><label for="dept">Dept/Centre</label><span>:</span><input type="text" id="dept"></div>
+                    <div class="pr-template-field"><label for="req-date">Date</label><span>:</span><input type="text" id="req-date" placeholder="DD/MM/YYYY" aria-label="Date in DD/MM/YYYY format"></div>
+                    <div class="pr-template-field"><label for="extension">Extension</label><span>:</span><input type="text" id="extension" value="6218"></div>
+                </div></section>
+                <section class="pr-template-box"><div class="pr-template-box-title">Vendor details</div><div class="pr-template-fields">
+                    <div class="pr-template-field"><label for="vendor">Vendor</label><span>:</span><input type="text" id="vendor" value="INFINITY CREATIVE SOLUTIONS SDN BHD"></div>
+                    <div class="pr-template-field"><label for="address">Address</label><span>:</span><input type="text" id="address"></div>
+                    <div class="pr-template-field"><label for="tel-no">Tel No.</label><span>:</span><input type="text" id="tel-no"></div>
+                    <div class="pr-template-field"><label for="email">E-mail Address</label><span>:</span><input type="text" id="email"></div>
+                    <div class="pr-template-field"><label for="contact">Contact Person</label><span>:</span><input type="text" id="contact"></div>
+                </div></section>
+                <section class="pr-template-box pr-office-box" aria-label="Procurement section, not editable"><div class="pr-template-box-title">For Procurement Management Dept use only</div><div class="pr-office-note">Completed by Procurement on the printed form.</div><div class="pr-office-line"><span>Received by</span><i></i></div><div class="pr-office-line"><span>PO No.</span><i></i></div><div class="pr-office-line"><span>PO Date Issued</span><i></i></div><div class="pr-office-line"><span>Checked by & Date</span><i></i></div></section>
+            </div>
+            <div class="pr-template-items-heading"><strong>Goods / services</strong><div class="pr-inline"><label class="pr-check"><input type="checkbox" id="show-item-numbers" checked> Show item numbers</label><span id="row-count" class="pr-pill">0 / 8 rows</span></div></div>
+            <div id="item-input-table-container"><table id="item-input-table"><thead><tr><th class="item-num-cell">No.</th><th class="item-desc-cell">Description</th><th class="item-account-cell">Item Code<br><span>(if any)</span></th><th class="item-qty-cell">Requested<br>Quantity</th><th class="item-price-cell">Unit Price<br><span>(RM)</span></th><th class="item-total-cell">Total Price<br><span>(RM)</span></th></tr></thead><tbody id="item-input-container"></tbody></table></div>
+            <div class="pr-template-item-tools"><div class="pr-inline"><button type="button" id="add-item-btn" class="pr-btn pr-btn-secondary">＋ Add item</button><button type="button" id="add-discount-btn" class="pr-btn pr-btn-secondary">− Add discount</button><button type="button" id="remove-item-btn" class="pr-text-btn pr-danger-text">Remove last row</button></div><span class="pr-help">Discounts deduct automatically. Use Row options to arrange or remove a row.</span></div>
+            <div class="pr-template-bottom-grid">
+                <section class="pr-template-remarks"><div class="pr-template-box-title">Reason for Request & Other Remarks</div><div class="pr-remarks-body"><label for="remarks" class="pr-help">Include the request reason and GL account details here.</label><textarea id="remarks" rows="7" aria-label="Reason for Request and Other Remarks"></textarea><span class="pr-help">Use **double asterisks** to print text in bold.</span></div></section>
+                <div class="pr-template-bottom-right"><div class="pr-template-total-label">GL Account No. <span>Include in remarks on the left</span></div><div class="pr-summary" aria-live="polite"><div><span>Subtotal</span><strong id="summary-subtotal">RM 0.00</strong></div><div><span>Total discount</span><strong id="summary-discount">RM 0.00</strong></div><div class="pr-net"><span>Grand Total</span><strong id="summary-net">RM 0.00</strong></div></div><div id="pr-validation" class="pr-validation" role="status" hidden></div><section class="pr-approval-box" aria-label="Approval section, not editable"><div class="pr-template-box-title">Approval</div><div class="pr-approval-signatures"><span>HOD</span><span>GM</span><span>DCEO / COO</span><span>CEO</span></div><p>For authorised sign-off on the printed form.</p></section></div>
+            </div>
         </div>
-        <section class="pr-card pr-items-card">
-            <div class="pr-card-title"><div><span class="pr-section-number">03</span><h2>Items & quotation discounts</h2></div><span id="row-count" class="pr-pill">0 / 8 rows</span></div>
-            <p class="pr-help">Enter positive amounts. Discount rows deduct automatically. Use <strong>Manual</strong> when the quotation gives a total you need to enter directly.</p>
-            <div id="item-input-table-container"><table id="item-input-table"><thead><tr><th class="item-num-cell">No.</th><th class="item-desc-cell">Description / row type</th><th class="item-account-cell">Account no.</th><th class="item-qty-cell">Quantity</th><th class="item-price-cell">Unit price (RM)</th><th class="item-total-cell">Total (RM)</th><th class="pr-row-actions-cell">Arrange</th></tr></thead><tbody id="item-input-container"></tbody></table></div>
-            <div class="pr-item-footer"><div class="pr-inline"><button type="button" id="add-item-btn" class="pr-btn pr-btn-secondary">＋ Add item</button><button type="button" id="add-discount-btn" class="pr-btn pr-btn-secondary">− Add discount</button><button type="button" id="remove-item-btn" class="pr-text-btn pr-danger-text">Remove last row</button></div><label class="pr-check"><input type="checkbox" id="show-item-numbers" checked> Show item numbers on PR</label></div>
-            <div class="pr-summary" aria-live="polite"><div><span>Subtotal</span><strong id="summary-subtotal">RM 0.00</strong></div><div><span>Total discount</span><strong id="summary-discount">RM 0.00</strong></div><div class="pr-net"><span>Net total</span><strong id="summary-net">RM 0.00</strong></div></div>
-            <div id="pr-validation" class="pr-validation" role="status" hidden></div>
-        </section>
-        <section class="pr-card"><div class="pr-card-title"><div><span class="pr-section-number">04</span><h2>Reason for request & remarks</h2></div></div><div class="pr-field"><label for="remarks">Remarks</label><textarea id="remarks" rows="3"></textarea><span class="pr-help">Use **double asterisks** around text to print it in bold.</span></div></section>
-        <div class="pr-bottom-bar"><div><strong>Ready for review?</strong><p>Check the net total against your quotation.</p></div><div class="pr-inline"><button type="button" id="update-btn" class="pr-btn pr-btn-secondary">Refresh preview</button><button type="button" id="save-history-btn" class="pr-btn pr-btn-secondary">Save to history</button><button type="button" id="print-btn" class="pr-btn pr-btn-primary">Print PR →</button></div></div>
+        <div class="pr-bottom-bar"><div><strong>Check the Grand Total against your quotation.</strong><p>The preview below uses your original print positioning.</p></div><div class="pr-inline"><button type="button" id="update-btn" class="pr-btn pr-btn-secondary">Refresh preview</button><button type="button" id="save-history-btn" class="pr-btn pr-btn-secondary">Save to history</button><button type="button" id="print-btn" class="pr-btn pr-btn-primary">Print PR →</button></div></div>
         <div id="pr-notice" class="pr-notice" role="status" hidden></div>
     </div>
-    <div class="pr-preview-caption"><span class="pr-eyebrow">PRINT PREVIEW</span><h2>Your original PR layout</h2><p>Field positions and spacing follow your existing template. Print using your usual printer settings.</p></div>
+    <div class="pr-preview-caption"><span class="pr-eyebrow">PRINT PREVIEW</span><h2>Your original PR layout</h2><p>Printed field positions and spacing remain unchanged.</p></div>
     <div class="a4-page-template" id="a4-printable-area">
         <img id="printable-form-image" src="PR Template to Edit (2).jpg" alt="Blank Purchase Requisition Form">
 
@@ -798,13 +889,15 @@ function renderRows(){
   const field=(name,attrs='')=>`data-index="${zero}" data-field="${name}" ${attrs}`;
   return `<tr id="item-group-${i}" class="${d?'pr-discount-row':''}">
    <td class="item-num-cell">${i}.</td>
-   <td class="item-desc-cell"><div class="pr-row-head"><select id="item-type-${i}" aria-label="Row ${i} type" ${field('type')}><option value="item"${!d?' selected':''}>Item / charge</option><option value="discount"${d?' selected':''}>Discount / deduction</option></select><span class="pr-row-label">${d?'Deducted from the PR':'Added to the PR'}</span></div><textarea class="item-description" id="item-description-${i}" aria-label="Row ${i} description" ${field('description')} rows="2">${escapeHtml(r.description)}</textarea>
-   ${d?`<div class="pr-discount-options"><label>Discount type<select ${field('discountMode')} aria-label="Row ${i} discount type"><option value="rm"${!percent?' selected':''}>Amount (RM)</option><option value="percent"${percent?' selected':''}>Percentage (%)</option></select></label>${percent?`<label>Discount (%)<input type="number" min="0" max="100" step="0.01" value="${escapeHtml(r.rate)}" ${field('rate')} aria-label="Row ${i} discount percentage"></label><label>Calculate from<select ${field('basis')} aria-label="Row ${i} discount basis"><option value="subtotal"${r.basis==='subtotal'?' selected':''}>Whole subtotal</option><option value="selected"${r.basis==='selected'?' selected':''}>Selected items</option></select></label>${r.basis==='selected'?`<label class="pr-selected-basis">Select items (Ctrl / Cmd + click for multiple)<select multiple size="3" ${field('basisIds')} aria-label="Row ${i} selected items">${basisOptions(r)}</select></label>`:''}`:`<span class="pr-help">Enter the discount under Total (RM).</span>`}</div>`:''}</td>
-   <td class="item-account-cell"><input type="text" class="item-input-field" id="item-account-${i}" value="${escapeHtml(r.account)}" ${field('account')} aria-label="Row ${i} account number"></td>
-   <td class="item-qty-cell"><input type="number" class="item-input-field" id="item-quantity-${i}" min="0" step="any" value="${escapeHtml(r.quantity)}" ${field('quantity')} ${d?'disabled':''} aria-label="Row ${i} quantity"></td>
+   <td class="item-desc-cell">${d?'<span class="pr-row-kind">DISCOUNT / DEDUCTION</span>':''}<textarea class="item-description" id="item-description-${i}" aria-label="Row ${i} description" ${field('description')} rows="2">${escapeHtml(r.description)}</textarea>
+    <details class="pr-row-settings"${d?' open':''}><summary>Row options${d?' · discount settings':''}</summary><div class="pr-row-settings-body"><div class="pr-row-head"><select id="item-type-${i}" aria-label="Row ${i} type" ${field('type')}><option value="item"${!d?' selected':''}>Item / charge</option><option value="discount"${d?' selected':''}>Discount / deduction</option></select><span class="pr-row-label">${d?'Deducted from the PR':'Added to the PR'}</span></div>
+    ${d?`<div class="pr-discount-options"><label>Discount type<select ${field('discountMode')} aria-label="Row ${i} discount type"><option value="rm"${!percent?' selected':''}>Amount (RM)</option><option value="percent"${percent?' selected':''}>Percentage (%)</option></select></label>${percent?`<label>Discount (%)<input type="number" min="0" max="100" step="0.01" value="${escapeHtml(r.rate)}" ${field('rate')} aria-label="Row ${i} discount percentage"></label><label>Calculate from<select ${field('basis')} aria-label="Row ${i} discount basis"><option value="subtotal"${r.basis==='subtotal'?' selected':''}>Whole subtotal</option><option value="selected"${r.basis==='selected'?' selected':''}>Selected items</option></select></label>${r.basis==='selected'?`<label class="pr-selected-basis">Select items (Ctrl / Cmd + click for multiple)<select multiple size="3" ${field('basisIds')} aria-label="Row ${i} selected items">${basisOptions(r)}</select></label>`:''}`:`<span class="pr-help">Enter the discount under Total Price (RM).</span>`}</div>`:''}
+    <div class="pr-row-actions"><button type="button" data-action="up" data-index="${zero}" ${zero===0?'disabled':''} aria-label="Move row ${i} up">↑</button><button type="button" data-action="down" data-index="${zero}" ${zero===rows.length-1?'disabled':''} aria-label="Move row ${i} down">↓</button><button type="button" class="pr-row-delete" data-action="delete" data-index="${zero}" ${rows.length===1?'disabled':''} aria-label="Delete row ${i}">Delete row</button></div></div></details>
+   </td>
+   <td class="item-account-cell"><input type="text" class="item-input-field" id="item-account-${i}" value="${escapeHtml(r.account)}" ${field('account')} aria-label="Row ${i} item code, if any"></td>
+   <td class="item-qty-cell"><input type="number" class="item-input-field" id="item-quantity-${i}" min="0" step="any" value="${escapeHtml(r.quantity)}" ${field('quantity')} ${d?'disabled':''} aria-label="Row ${i} requested quantity"></td>
    <td class="item-price-cell"><input type="number" class="item-input-field" id="item-unit-price-${i}" min="0" step="0.01" value="${escapeHtml(r.unitPrice)}" ${field('unitPrice')} ${d?'disabled':''} aria-label="Row ${i} unit price"></td>
-   <td class="item-total-cell">${!d?`<select class="pr-row-mode" ${field('totalMode')} aria-label="Row ${i} total mode"><option value="auto"${r.totalMode==='auto'?' selected':''}>Automatic: qty × price</option><option value="manual"${r.totalMode==='manual'?' selected':''}>Manual total</option></select>`:`<div class="pr-help" style="margin-bottom:8px">${percent?'Calculated discount':'Discount amount'}</div>`}<input type="number" class="item-input-field item-total-price-input" id="item-total-price-input-${i}" min="0" step="0.01" value="${escapeHtml(r.totalPrice)}" ${field('totalPrice')} ${percent||(!d&&r.totalMode==='auto')?'readonly':''} aria-label="Row ${i} total amount"><span class="pr-row-label">${d?'Prints with a minus sign':r.totalMode==='auto'?'Updates with qty / price':'Keeps your entered total'}</span></td>
-   <td class="pr-row-actions-cell"><div class="pr-row-actions"><button type="button" data-action="up" data-index="${zero}" ${zero===0?'disabled':''} aria-label="Move row ${i} up">↑</button><button type="button" data-action="down" data-index="${zero}" ${zero===rows.length-1?'disabled':''} aria-label="Move row ${i} down">↓</button><button type="button" class="pr-row-delete" data-action="delete" data-index="${zero}" ${rows.length===1?'disabled':''} aria-label="Delete row ${i}">Delete</button></div></td>
+   <td class="item-total-cell">${!d?`<select class="pr-row-mode" ${field('totalMode')} aria-label="Row ${i} total mode"><option value="auto"${r.totalMode==='auto'?' selected':''}>Automatic</option><option value="manual"${r.totalMode==='manual'?' selected':''}>Manual total</option></select>`:`<div class="pr-help" style="margin-bottom:8px">${percent?'Calculated discount':'Discount amount'}</div>`}<input type="number" class="item-input-field item-total-price-input" id="item-total-price-input-${i}" min="0" step="0.01" value="${escapeHtml(r.totalPrice)}" ${field('totalPrice')} ${percent||(!d&&r.totalMode==='auto')?'readonly':''} aria-label="Row ${i} total price"><span class="pr-row-label">${d?'Prints with a minus sign':r.totalMode==='auto'?'Qty × unit price':'Keeps your entered total'}</span></td>
   </tr>`;
  }).join('');
  setupAutoGrow();updateAddItemButtonState();
