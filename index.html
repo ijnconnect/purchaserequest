@@ -192,11 +192,11 @@
             cursor: not-allowed;
         }
 
-        .action-buttons button#save-history-btn {
+        .action-buttons button:nth-child(3) {
             background-color: #6f42c1;
         }
 
-        .action-buttons button#history-btn {
+        .action-buttons button:nth-child(4) {
             background-color: #17a2b8;
         }
 
@@ -502,6 +502,22 @@
             }
         }
     </style>
+    <style>
+        .input-form-area select, .input-form-area option,
+        .history-panel input, .history-panel select, .history-panel option {
+            font-family: 'Figtree', sans-serif !important;
+            font-weight: 400;
+            font-size: 9pt;
+        }
+        .input-form-area #item-input-table select { padding: 4px; border: 1px solid #ccc; border-radius: 3px; }
+        .input-form-area #save-history-btn { background-color: #6f42c1; }
+        .input-form-area #history-btn { background-color: #17a2b8; }
+        .input-form-area .pr-summary { display: flex; flex-wrap: wrap; gap: 20px; padding: 12px; background: white; border: 1px solid #c9deec; }
+        .input-form-area #pr-validation { flex-basis: 100%; color: #b42318; }
+        .history-panel .history-tools { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 20px; border-bottom: 1px solid #ddd; }
+        .history-panel .history-tools input[type="search"] { flex: 1; min-width: 200px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .history-panel .history-tools button { font-family: 'Figtree', sans-serif; padding: 8px 12px; cursor: pointer; }
+    </style>
 </head>
 <body>
 
@@ -548,6 +564,12 @@
             </div>
 
             <p style="margin:0;color:#0E4C8C;width:100%;">For a quotation discount, click Add Discount Row and enter the discount amount in Total Price (RM), e.g. 100. The PR will show -100.00 and deduct it automatically. Each discount uses one of the eight available rows.</p>
+            <div class="pr-summary" aria-live="polite" style="flex-basis:100%;">
+                <span>Subtotal: <strong id="summary-subtotal">RM 0.00</strong></span>
+                <span>Discount: <strong id="summary-discount">RM 0.00</strong></span>
+                <span>Net Total: <strong id="summary-net">RM 0.00</strong></span>
+                <span id="pr-validation" hidden></span>
+            </div>
             <div class="card-input-group" style="flex-basis: 100%;">
                 <div id="control-panel">
                     <input type="checkbox" id="show-item-numbers" checked>
@@ -600,6 +622,12 @@
                     <button type="button" id="clear-history-btn" class="history-danger-btn">Clear All</button>
                     <button type="button" id="close-history-btn">Close</button>
                 </div>
+            </div>
+            <div class="history-tools">
+                <input type="search" id="history-search" aria-label="Search history" placeholder="Search vendor, requestor, date or item description">
+                <button type="button" id="export-history-btn">Export History Backup</button>
+                <button type="button" id="import-history-btn">Import History Backup</button>
+                <input type="file" id="import-history-file" accept=".json,application/json" hidden>
             </div>
             <div id="history-list" class="history-list">
                 <p style="margin:0; color:#777;">No history yet.</p>
@@ -663,7 +691,7 @@
                 input.disabled = discount;
             }
             const total = document.getElementById(`item-total-price-input-${index}`);
-            total.value = Math.abs(parseFloat(total.value) || 0).toFixed(2);
+            if (discount) total.value = Math.abs(parseFloat(total.value) || 0).toFixed(2);
             total.title = discount ? 'Enter a positive discount amount. It will be deducted automatically.' : '';
             const description = document.getElementById(`item-description-${index}`);
             if (discount && !description.value.trim()) description.value = 'Less: Quotation discount';
@@ -902,9 +930,111 @@
                 }
             }
 
-            setFieldHtml('data-grand-total', formatCurrency(grandTotal / 100) || '0.00');
+            setFieldHtml('data-grand-total', formatCurrency(grandTotal / 100) || '');
+            updateSummary();
             setFieldHtml('data-remarks', document.getElementById('remarks').value.trim());
             updateAddItemButtonState();
+        }
+
+        function getSummary() {
+            let subtotalCents = 0;
+            let discountCents = 0;
+            let invalid = false;
+            for (let i = 1; i <= itemCount; i++) {
+                const raw = document.getElementById(`item-total-price-input-${i}`).value;
+                const amount = Number(raw || 0);
+                if (!Number.isFinite(amount) || amount < 0) invalid = true;
+                const cents = Math.round((Number.isFinite(amount) ? Math.abs(amount) : 0) * 100);
+                if (isDiscountRow(i)) discountCents += cents;
+                else subtotalCents += cents;
+            }
+            return { subtotal: subtotalCents / 100, discount: discountCents / 100,
+                net: (subtotalCents - discountCents) / 100, invalid };
+        }
+
+        function updateSummary() {
+            const summary = getSummary();
+            for (const [name, value] of Object.entries(summary)) {
+                const element = document.getElementById(`summary-${name}`);
+                if (element) element.textContent = `RM ${formatCurrency(value) || '0.00'}`;
+            }
+            const message = summary.invalid ? 'Please enter valid positive amounts. Discount rows subtract automatically.'
+                : summary.net < 0 ? 'The discount exceeds the subtotal. Please check the quotation before printing.' : '';
+            document.getElementById('pr-validation').textContent = message;
+            document.getElementById('pr-validation').hidden = !message;
+        }
+
+        function exportHistoryBackup() {
+            const history = getHistory();
+            if (!history.length) { alert('No history to export yet. Save your PR first.'); return; }
+            const backup = { system: 'ijn-pr-history', version: 2, exportedAt: new Date().toISOString(), history };
+            const url = URL.createObjectURL(new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' }));
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `IJN-PR-History-${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        function validateImportedHistory(data) {
+            const records = Array.isArray(data) ? data : data && data.system === 'ijn-pr-history' ? data.history : null;
+            if (!Array.isArray(records) || records.length > MAX_HISTORY_ITEMS) throw new Error('Use a valid IJN PR history backup with up to 100 records.');
+            const textFields = ['savedAt', 'requestor', 'designation', 'dept', 'reqDate', 'extension', 'vendor', 'address', 'telNo', 'email', 'contact', 'remarks', 'source'];
+            return records.map(record => {
+                if (!record || typeof record !== 'object' || !Number.isSafeInteger(Number(record.id)) || Number(record.id) <= 0 || !Array.isArray(record.items) || record.items.length < 1 || record.items.length > MAX_ITEM_ROWS) {
+                    throw new Error('The backup contains an invalid PR record. Nothing was imported.');
+                }
+                const clean = { id: Number(record.id), showItemNumbers: record.showItemNumbers !== false };
+                for (const field of textFields) {
+                    if (record[field] != null && typeof record[field] !== 'string') throw new Error(`Invalid ${field} in backup.`);
+                    clean[field] = record[field] || '';
+                }
+                clean.items = record.items.map(item => {
+                    if (!item || typeof item !== 'object') throw new Error('Invalid item in backup.');
+                    const result = { type: item.type === 'discount' ? 'discount' : 'item' };
+                    for (const field of ['description', 'account']) {
+                        if (item[field] != null && typeof item[field] !== 'string') throw new Error('Invalid item text in backup.');
+                        result[field] = item[field] || '';
+                    }
+                    for (const field of ['quantity', 'unitPrice', 'totalPrice']) {
+                        const value = item[field] == null ? '' : String(item[field]);
+                        if (!Number.isFinite(Number(value)) || Number(value) < 0) throw new Error('Invalid amount in backup.');
+                        result[field] = value;
+                    }
+                    return result;
+                });
+                clean.grandTotal = clean.items.reduce((sum, item) => sum + Math.round(Number(item.totalPrice || 0) * 100) * (item.type === 'discount' ? -1 : 1), 0) / 100;
+                return clean;
+            });
+        }
+
+        async function importHistoryBackup(event) {
+            const input = event.target;
+            const file = input.files[0];
+            if (!file) return;
+            try {
+                if (file.size > 5 * 1024 * 1024) throw new Error('Backup file is too large. Maximum 5 MB.');
+                const imported = validateImportedHistory(JSON.parse(await file.text()));
+                const existing = getHistory();
+                const seen = new Set(existing.map(record => String(record.id)));
+                const additions = imported.filter(record => {
+                    if (seen.has(String(record.id))) return false;
+                    seen.add(String(record.id));
+                    return true;
+                });
+                if (existing.length + additions.length > MAX_HISTORY_ITEMS) throw new Error('Import would exceed 100 records. Export your current history and remove unwanted records first.');
+                if (!additions.length) { alert('No new records to import. Matching saved records are already in your history.'); return; }
+                saveHistory([...additions, ...existing]);
+                document.getElementById('history-search').value = '';
+                renderHistoryList();
+                alert(`Imported ${additions.length} PR record(s). Your existing history was retained.`);
+            } catch (error) {
+                alert(`Could not import backup: ${error.message}`);
+            } finally {
+                input.value = '';
+            }
         }
 
         function getCurrentGrandTotal() {
@@ -962,7 +1092,8 @@
 
         function getHistory() {
             try {
-                return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+                const history = JSON.parse(localStorage.getItem(HISTORY_KEY));
+                return Array.isArray(history) ? history : [];
             } catch (error) {
                 return [];
             }
@@ -998,7 +1129,12 @@
             history.unshift(formData);
 
             const trimmedHistory = history.slice(0, MAX_HISTORY_ITEMS);
-            saveHistory(trimmedHistory);
+            try {
+                saveHistory(trimmedHistory);
+            } catch (error) {
+                alert('History could not be saved. Browser storage may be full or unavailable. Export a backup when possible.');
+                return;
+            }
             renderHistoryList();
 
             if (source === 'manual') {
@@ -1082,10 +1218,12 @@
 
         function renderHistoryList() {
             const historyList = document.getElementById('history-list');
-            const history = getHistory();
+            const query = document.getElementById('history-search').value.trim().toLowerCase();
+            const history = getHistory().filter(record => !query || [record.vendor, record.requestor, record.reqDate, record.remarks,
+                ...(record.items || []).map(item => item.description)].join(' ').toLowerCase().includes(query));
 
             if (!history.length) {
-                historyList.innerHTML = `<p style="margin:0; color:#777;">No history yet.</p>`;
+                historyList.innerHTML = `<p style="margin:0; color:#777;">${query ? 'No matching PR records.' : 'No history yet.'}</p>`;
                 return;
             }
 
@@ -1134,8 +1272,14 @@
             document.getElementById('history-panel').classList.remove('show');
         }
 
-        function printForm() {
+        async function printForm() {
             updateForm();
+            const summary = getSummary();
+            if (summary.invalid || summary.net < 0) {
+                alert('Please correct the amounts shown in the summary before printing.');
+                return;
+            }
+            if (document.fonts) await document.fonts.ready;
             saveCurrentToHistory('printed');
             window.print();
         }
@@ -1150,6 +1294,10 @@
             document.getElementById('print-btn').addEventListener('click', printForm);
             document.getElementById('close-history-btn').addEventListener('click', closeHistoryPanel);
             document.getElementById('clear-history-btn').addEventListener('click', clearAllHistory);
+            document.getElementById('history-search').addEventListener('input', renderHistoryList);
+            document.getElementById('export-history-btn').addEventListener('click', exportHistoryBackup);
+            document.getElementById('import-history-btn').addEventListener('click', () => document.getElementById('import-history-file').click());
+            document.getElementById('import-history-file').addEventListener('change', importHistoryBackup);
 
             document.getElementById('history-panel').addEventListener('click', function(event) {
                 if (event.target.id === 'history-panel') {
