@@ -192,11 +192,11 @@
             cursor: not-allowed;
         }
 
-        .action-buttons button:nth-child(3) {
+        .action-buttons button#save-history-btn {
             background-color: #6f42c1;
         }
 
-        .action-buttons button:nth-child(4) {
+        .action-buttons button#history-btn {
             background-color: #17a2b8;
         }
 
@@ -547,6 +547,7 @@
                 </table>
             </div>
 
+            <p style="margin:0;color:#0E4C8C;width:100%;">For a quotation discount, click Add Discount Row and enter the discount amount in Total Price (RM), e.g. 100. The PR will show -100.00 and deduct it automatically. Each discount uses one of the eight available rows.</p>
             <div class="card-input-group" style="flex-basis: 100%;">
                 <div id="control-panel">
                     <input type="checkbox" id="show-item-numbers" checked>
@@ -563,6 +564,7 @@
 
         <div class="action-buttons">
             <button type="button" class="add-item" id="add-item-btn">Add Item Row</button>
+            <button type="button" class="add-item" id="add-discount-btn">Add Discount Row</button>
             <button type="button" class="remove-item" id="remove-item-btn">Remove Last Row</button>
             <button type="button" id="save-history-btn">Save History</button>
             <button type="button" id="history-btn">Open History</button>
@@ -617,6 +619,7 @@
         const MAX_HISTORY_ITEMS = 100;
 
         function updateAddItemButtonState() {
+            document.getElementById('add-discount-btn').disabled = itemCount >= MAX_ITEM_ROWS && !findEmptyItemRow();
             const addButton = document.getElementById('add-item-btn');
             if (addButton) {
                 addButton.disabled = itemCount >= MAX_ITEM_ROWS;
@@ -641,7 +644,60 @@
             return num;
         }
 
+        function isDiscountRow(index) {
+            return document.getElementById(`item-type-${index}`)?.value === 'discount';
+        }
+
+        function getRowTotal(index) {
+            const amount = parseFloat(document.getElementById(`item-total-price-input-${index}`).value) || 0;
+            return isDiscountRow(index) ? -Math.abs(amount) : amount;
+        }
+
+        function setRowType(index, type) {
+            document.getElementById(`item-type-${index}`).value = type;
+            const discount = type === 'discount';
+            const row = document.getElementById(`item-group-${index}`);
+            row.style.backgroundColor = discount ? '#fff3cd' : '';
+            for (const field of ['quantity', 'unit-price']) {
+                const input = document.getElementById(`item-${field}-${index}`);
+                input.disabled = discount;
+            }
+            const total = document.getElementById(`item-total-price-input-${index}`);
+            total.value = Math.abs(parseFloat(total.value) || 0).toFixed(2);
+            total.title = discount ? 'Enter a positive discount amount. It will be deducted automatically.' : '';
+            const description = document.getElementById(`item-description-${index}`);
+            if (discount && !description.value.trim()) description.value = 'Less: Quotation discount';
+            updateForm();
+        }
+
+        function findEmptyItemRow() {
+            for (let i = itemCount; i >= 1; i--) {
+                if (!isDiscountRow(i) && ['description', 'account', 'quantity', 'unit-price', 'total-price-input'].every(field => {
+                    const value = document.getElementById(`item-${field}-${i}`).value.trim();
+                    return field === 'description' || field === 'account' ? !value : !(parseFloat(value) || 0);
+                })) return i;
+            }
+            return 0;
+        }
+
+        function addDiscountRow() {
+            let index = findEmptyItemRow();
+            if (!index) {
+                if (itemCount >= MAX_ITEM_ROWS) {
+                    alert('Maximum 8 rows including discounts. Free a row first.');
+                    return;
+                }
+                addItemRow();
+                index = itemCount;
+            }
+            setRowType(index, 'discount');
+            document.getElementById(`item-total-price-input-${index}`).focus();
+            document.getElementById(`item-total-price-input-${index}`).select();
+        }
+
         function calculateRowTotal(index) {
+            if (isDiscountRow(index)) { updateForm(); return; }
+
             const quantityElem = document.getElementById(`item-quantity-${index}`);
             const unitPriceElem = document.getElementById(`item-unit-price-${index}`);
             const totalInput = document.getElementById(`item-total-price-input-${index}`);
@@ -692,7 +748,7 @@
             row.id = `item-group-${index}`;
             row.innerHTML = `
                 <td class="item-num-cell">${index}.</td>
-                <td class="item-desc-cell"><textarea class="item-description" id="item-description-${index}" rows="1"></textarea></td>
+                <td class="item-desc-cell"><select id="item-type-${index}" aria-label="Row type" onchange="setRowType(${index}, this.value)" style="margin-bottom:4px;"><option value="item">Item / Charge</option><option value="discount">Discount / Deduction</option></select><textarea class="item-description" id="item-description-${index}" rows="1"></textarea></td>
                 <td class="item-account-cell"><input type="text" class="item-input-field" id="item-account-${index}"></td>
                 <td class="item-qty-cell"><input type="number" class="item-input-field" id="item-quantity-${index}" value="" min="0"></td>
                 <td class="item-price-cell"><input type="number" class="item-input-field" id="item-unit-price-${index}" value="" step="0.01" min="0"></td>
@@ -803,13 +859,14 @@
 
                 const description = descriptionElem.value.trim();
                 const account = accountElem.value.trim();
-                const quantity = parseFloat(quantityElem.value) || 0;
-                const unitPrice = parseFloat(unitPriceElem.value) || 0;
-                const totalPrice = parseFloat(totalInput.value) || 0;
+                const discount = isDiscountRow(i);
+                const quantity = discount ? 0 : parseFloat(quantityElem.value) || 0;
+                const unitPrice = discount ? 0 : parseFloat(unitPriceElem.value) || 0;
+                const totalPrice = getRowTotal(i);
 
                 if (!description && !account && quantity === 0 && unitPrice === 0 && totalPrice === 0) continue;
 
-                grandTotal += totalPrice;
+                grandTotal += Math.round(totalPrice * 100);
 
                 const currentTop = `${baseItemTop + (i - 1) * itemRowHeight}cm`;
                 const itemNoContent = showNumbers ? `${i}.` : '';
@@ -845,7 +902,7 @@
                 }
             }
 
-            setFieldHtml('data-grand-total', formatCurrency(grandTotal) || '');
+            setFieldHtml('data-grand-total', formatCurrency(grandTotal / 100) || '0.00');
             setFieldHtml('data-remarks', document.getElementById('remarks').value.trim());
             updateAddItemButtonState();
         }
@@ -855,10 +912,10 @@
             for (let i = 1; i <= itemCount; i++) {
                 const totalInput = document.getElementById(`item-total-price-input-${i}`);
                 if (totalInput) {
-                    grandTotal += parseFloat(totalInput.value) || 0;
+                    grandTotal += Math.round(getRowTotal(i) * 100);
                 }
             }
-            return grandTotal;
+            return grandTotal / 100;
         }
 
         function getCurrentFormData() {
@@ -874,6 +931,7 @@
                 if (!descriptionElem || !accountElem || !quantityElem || !unitPriceElem || !totalInput) continue;
 
                 items.push({
+                    type: isDiscountRow(i) ? 'discount' : 'item',
                     description: descriptionElem.value || '',
                     account: accountElem.value || '',
                     quantity: quantityElem.value || '',
@@ -998,6 +1056,7 @@
                 document.getElementById(`item-quantity-${i}`).value = item.quantity || '';
                 document.getElementById(`item-unit-price-${i}`).value = item.unitPrice || '';
                 document.getElementById(`item-total-price-input-${i}`).value = item.totalPrice || '0.00';
+                setRowType(i, item.type === 'discount' ? 'discount' : 'item');
             }
 
             updateForm();
@@ -1035,7 +1094,8 @@
                     .filter(item => item.description || item.account || item.totalPrice)
                     .slice(0, 3)
                     .map((item, index) => {
-                        const totalText = parseFloat(item.totalPrice || 0) ? formatCurrency(item.totalPrice) : '0.00';
+                        const amount = parseFloat(item.totalPrice || 0);
+                        const totalText = amount ? formatCurrency(item.type === 'discount' ? -Math.abs(amount) : amount) : '0.00';
                         return `${index + 1}. ${item.description || '-'} | ${item.account || '-'} | RM ${totalText}`;
                     })
                     .join('\n');
@@ -1046,11 +1106,11 @@
                     <div class="history-card">
                         <div class="history-card-top">
                             <div>
-                                <div class="history-title">${record.vendor || 'No Vendor'} - ${record.reqDate || 'No Date'}</div>
+                                <div class="history-title">${escapeHtml(record.vendor || 'No Vendor')} - ${escapeHtml(record.reqDate || 'No Date')}</div>
                                 <div class="history-meta">
-                                    <div><strong>Requestor:</strong> ${record.requestor || '-'}</div>
-                                    <div><strong>Saved:</strong> ${record.savedAt || '-'}</div>
-                                    <div><strong>Type:</strong> ${record.source || 'manual'}</div>
+                                    <div><strong>Requestor:</strong> ${escapeHtml(record.requestor || '-')}</div>
+                                    <div><strong>Saved:</strong> ${escapeHtml(record.savedAt || '-')}</div>
+                                    <div><strong>Type:</strong> ${escapeHtml(record.source || 'manual')}</div>
                                     <div><strong>Total:</strong> RM ${totalText}</div>
                                 </div>
                             </div>
@@ -1059,7 +1119,7 @@
                                 <button type="button" class="history-delete-btn" onclick="deleteHistoryRecord('${record.id}')">Delete</button>
                             </div>
                         </div>
-                        <div class="history-items-preview">${previewItems || 'No items preview.'}</div>
+                        <div class="history-items-preview">${escapeHtml(previewItems || 'No items preview.')}</div>
                     </div>
                 `;
             }).join('');
@@ -1082,6 +1142,7 @@
 
         function initializeForm() {
             document.getElementById('add-item-btn').addEventListener('click', addItemRow);
+            document.getElementById('add-discount-btn').addEventListener('click', addDiscountRow);
             document.getElementById('remove-item-btn').addEventListener('click', removeItemRow);
             document.getElementById('save-history-btn').addEventListener('click', () => saveCurrentToHistory('manual'));
             document.getElementById('history-btn').addEventListener('click', openHistoryPanel);
