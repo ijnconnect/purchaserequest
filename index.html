@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IJN Purchase Requisition (PR) Payment Request Template - Full Version with History</title>
+    <title>IJN Purchase Requisition Workspace</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
+<style>
         * {
             font-weight: 400;
         }
@@ -503,98 +503,173 @@
         }
     </style>
     <style>
-        .input-form-area select, .input-form-area option,
-        .history-panel input, .history-panel select, .history-panel option {
-            font-family: 'Figtree', sans-serif !important;
-            font-weight: 400;
-            font-size: 9pt;
-        }
-        .input-form-area #item-input-table select { padding: 4px; border: 1px solid #ccc; border-radius: 3px; }
-        .input-form-area #save-history-btn { background-color: #6f42c1; }
-        .input-form-area #history-btn { background-color: #17a2b8; }
-        .input-form-area .pr-summary { display: flex; flex-wrap: wrap; gap: 20px; padding: 12px; background: white; border: 1px solid #c9deec; }
-        .input-form-area #pr-validation { flex-basis: 100%; color: #b42318; }
-        .history-panel .history-tools { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px 20px; border-bottom: 1px solid #ddd; }
-        .history-panel .history-tools input[type="search"] { flex: 1; min-width: 200px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        .history-panel .history-tools button { font-family: 'Figtree', sans-serif; padding: 8px 12px; cursor: pointer; }
+/* Entry-screen styling only. The original printed-form CSS above is preserved. */
+@media screen {
+ body { margin:0; background:#F4FAFD; }
+ .pr-app { --navy:#0A1931;--premium:#034C80;--blue:#2D99C9;--border:#DDEAF2;--muted:#5B6675; box-sizing:border-box; width:min(1440px,calc(100% - 48px)); margin:28px auto 36px; padding:0; background:transparent; border:0; gap:22px; color:var(--navy); font-size:14px; }
+ .pr-app *, .history-panel * { box-sizing:border-box; }
+ .pr-app input,.pr-app textarea,.pr-app select,.pr-app option,.pr-app button,.history-panel input,.history-panel button { font-family:'Figtree',sans-serif!important; }
+ .pr-app h1,.pr-app h2,.pr-preview-caption h2,.history-header h3 { font-family:'Figtree',sans-serif; font-weight:600; }
+ .pr-app h1 { margin:9px 0 7px;font-size:30px;line-height:1.35; }
+ .pr-app h2 { margin:0;font-size:17px;line-height:1.4; }
+ .pr-eyebrow { font-family:'Figtree',sans-serif;font-size:11px;line-height:1.5;font-weight:700;letter-spacing:1.5px;color:#034C80; }
+ .pr-masthead { display:flex;justify-content:space-between;gap:24px;align-items:center;border-radius:20px;padding:30px 34px;background:var(--navy);color:white;box-shadow:0 10px 24px rgba(10,25,49,.06); }
+ .pr-masthead .pr-eyebrow { color:#94D9F5; }
+ .pr-masthead p { margin:0;color:#C7D9E6;line-height:1.6; }
+ .pr-masthead-actions { display:flex;flex-direction:column;align-items:flex-end;gap:12px; }
+ .pr-status { font-size:12px;color:#D5EDF8; }
+ .pr-topbar,.pr-item-footer,.pr-bottom-bar { display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap; }
+ .pr-topbar { padding:0 4px; }
+ .pr-note,.pr-help { font-size:12px;color:var(--muted);line-height:1.6; }
+ .pr-note { max-width:530px; }
+ .pr-inline { display:flex;align-items:center;gap:9px;flex-wrap:wrap; }
+ .pr-btn { border-radius:10px;border:1px solid transparent;padding:11px 16px;font-size:13px;font-weight:600;line-height:1.35;cursor:pointer;transition:background .15s,border-color .15s; }
+ .pr-btn-primary { background:var(--navy);color:white; }
+ .pr-btn-primary:hover { background:var(--blue); }
+ .pr-btn-secondary { background:white;border-color:var(--border);color:var(--premium); }
+ .pr-btn-secondary:hover { background:#EAF6FB;border-color:var(--blue); }
+ .pr-btn-light { background:white;color:var(--navy); }
+ .pr-btn-light:hover { background:#EAF6FB; }
+ .pr-text-btn { background:transparent;border:0;color:var(--premium);font-size:12px;font-weight:600;padding:5px 2px;cursor:pointer; }
+ .pr-text-btn:hover { color:var(--blue); }
+ .pr-danger-text { color:#B42318; }
+ .pr-app button:disabled { opacity:.45;cursor:not-allowed; }
+ .pr-details-grid { display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start; }
+ .pr-card { background:white;border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 10px 24px rgba(10,25,49,.035); }
+ .pr-card-title { display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px; }
+ .pr-card-title>div:first-child { display:flex;align-items:center;gap:10px; }
+ .pr-section-number { display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:#EAF6FB;color:var(--premium);font-size:12px;font-weight:700; }
+ .pr-field-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
+ .pr-span-2 { grid-column:1/-1; }
+ .pr-field { display:flex;flex-direction:column;gap:7px; }
+ .pr-field label { font-size:12px;font-weight:600;color:var(--navy); }
+ .pr-field label span { color:var(--muted);font-weight:400;font-size:11px;margin-left:4px; }
+ .pr-field input,.pr-field textarea,.pr-field select { width:100%;padding:11px 12px;background:#FBFDFE;border:1px solid var(--border);border-radius:9px;color:var(--navy);font-size:13px;line-height:1.5; }
+ .pr-field textarea { resize:vertical; }
+ .pr-app input:focus,.pr-app textarea:focus,.pr-app select:focus,.history-tools input:focus { outline:2px solid rgba(45,153,201,.25);outline-offset:1px;border-color:var(--blue); }
+ .pr-vendor-picker { padding:12px;background:#F4FAFD;border-radius:10px;margin-bottom:16px; }
+ .pr-pill { border-radius:20px;padding:6px 11px;background:#F4FAFD;color:var(--premium);font-size:12px; }
+ .pr-items-card .pr-help { margin:0 0 14px; }
+ .pr-app #item-input-table-container { border:1px solid var(--border);border-radius:10px; }
+ .pr-app #item-input-table { min-width:1040px; }
+ .pr-app #item-input-table th { background:#F4FAFD;position:static;color:var(--premium);font-size:11px;font-weight:600;white-space:nowrap; }
+ .pr-app #item-input-table th,.pr-app #item-input-table td { border:0;border-bottom:1px solid var(--border);padding:12px 9px;vertical-align:top; }
+ .pr-app #item-input-table tr:last-child td { border-bottom:0; }
+ .pr-app #item-input-table input.item-input-field,.pr-app #item-input-table textarea,.pr-app #item-input-table select { border:1px solid var(--border);border-radius:7px;background:#FBFDFE;color:var(--navy);padding:8px;font-size:12px;font-family:'Figtree',sans-serif!important;line-height:1.5;min-height:34px; }
+ .pr-app #item-input-table textarea { min-height:66px; }
+ .pr-app #item-input-table input.item-total-price-input { border-color:#C9DFEB;background:#F4FAFD;text-align:right; }
+ .pr-app #item-input-table input:read-only { background:#EEF4F7;color:#5B6675; }
+ .pr-app #item-input-table input:disabled { background:#F3F6FA;color:#98A2B3; }
+ .pr-app #item-input-table .item-desc-cell { width:35%; }
+ .pr-app #item-input-table .item-account-cell { width:13%; }
+ .pr-app #item-input-table .item-total-cell { width:16%; }
+ .pr-row-head { display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:7px; }
+ .pr-row-label { font-size:10px;color:var(--muted); }
+ .pr-row-mode { width:100%;margin-bottom:7px; }
+ .pr-discount-options { display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px; }
+ .pr-discount-options label { display:flex;flex-direction:column;gap:3px;font-size:11px;color:var(--muted); }
+ .pr-discount-options .pr-selected-basis { grid-column:1/-1; }
+ .pr-discount-options select[multiple] { width:100%;min-height:80px; }
+ .pr-discount-row td { background:#F4FAFD; }
+ .pr-row-actions-cell { width:90px; }
+ .pr-row-actions { display:flex;gap:5px;flex-wrap:wrap;width:74px; }
+ .pr-row-actions button { border:1px solid var(--border);background:white;border-radius:7px;width:33px;height:31px;color:var(--premium);cursor:pointer; }
+ .pr-row-actions .pr-row-delete { color:#B42318;width:71px;font-size:11px; }
+ .pr-item-footer { margin-top:16px; }
+ .pr-check { display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted); }
+ .pr-summary { display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px;margin-top:23px;padding:19px 22px;border-radius:12px;background:#F4FAFD;border:1px solid var(--border); }
+ .pr-summary>div { display:flex;flex-direction:column;gap:7px; }
+ .pr-summary span { font-size:12px;color:var(--muted); }
+ .pr-summary strong { font-size:20px;color:var(--premium); }
+ .pr-summary .pr-net { border-left:1px solid #CDDFEA;padding-left:22px; }
+ .pr-summary .pr-net strong { color:var(--navy);font-size:24px; }
+ .pr-validation { margin-top:12px;padding:12px;background:#FFF5F2;border:1px solid #F5D2C9;border-radius:9px;color:#B42318;font-size:12px;line-height:1.6;white-space:pre-line; }
+ .pr-bottom-bar { padding:6px 3px; }
+ .pr-bottom-bar strong { font-size:14px; }
+ .pr-bottom-bar p { margin:4px 0 0;color:var(--muted);font-size:12px; }
+ .pr-notice { padding:12px 16px;border:1px solid var(--border);background:#EAF6FB;border-radius:10px;color:var(--premium);font-size:13px; }
+ .pr-preview-caption { width:min(1440px,calc(100% - 48px));margin:36px auto 20px; }
+ .pr-preview-caption h2 { font-size:20px;margin:7px 0; }
+ .pr-preview-caption p { color:#5B6675;font-size:13px; }
+ .history-panel-content { border-radius:16px;border:1px solid #DDEAF2; }
+ .history-header { background:#F4FAFD;padding:20px;border-color:#DDEAF2; }
+ .history-header h3 { color:#0A1931;margin-top:6px; }
+ .history-header-actions button { background:#0A1931;border-radius:10px; }
+ .history-header-actions .history-danger-btn { color:#B42318;background:#FFF5F2; }
+ .history-tools { display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #DDEAF2; }
+ .history-tools input { flex:1;min-width:0;border:1px solid #DDEAF2;border-radius:9px;padding:10px;font-size:13px; }
+ .history-card { border-color:#DDEAF2;border-radius:12px; }
+ .history-title { font-weight:700;color:#034C80;font-size:14px; }
+ .history-actions button { border-radius:8px; }
+ .history-duplicate-btn { background:#EAF6FB;color:#034C80; }
+ .history-meta { font-size:12px; }
+ .history-items-preview { font-size:12px;background:#F4FAFD; }
+ .pr-app [hidden],.history-panel [hidden] { display:none!important; }
+}
+@media screen and (max-width:800px) {
+ .pr-app { width:calc(100% - 24px);margin:12px auto;gap:16px; }
+ .pr-masthead { padding:22px;align-items:flex-start;flex-direction:column; }
+ .pr-masthead h1 { font-size:25px; }
+ .pr-masthead-actions { width:100%;flex-direction:row;justify-content:space-between;align-items:center; }
+ .pr-details-grid { grid-template-columns:1fr;gap:16px; }
+ .pr-card { padding:18px; }
+ .pr-summary { gap:12px;padding:15px; }
+ .pr-summary strong { font-size:16px; }
+ .pr-summary .pr-net strong { font-size:19px; }
+ .pr-summary .pr-net { padding-left:12px; }
+ .pr-preview-caption { width:calc(100% - 24px); }
+ .history-card-top { flex-direction:column; }
+}
+@media screen and (max-width:440px) {
+ .pr-field-grid { grid-template-columns:1fr; }
+ .pr-summary { grid-template-columns:1fr 1fr; }
+ .pr-summary .pr-net { grid-column:1/-1;border-left:0;border-top:1px solid #CDDFEA;padding:12px 0 0; }
+}
+@media print { .pr-preview-caption { display:none!important; } }
+
     </style>
 </head>
 <body>
-
-    <div class="input-form-area">
-        <h2 style="color: #0E4C8C;">IJN Payment Request Data Entry - Full Version with History</h2>
-        <p style="font-weight: 400; color: #d9534f;">Ensure you save the blank PR image as <code>PR Template to Edit (2).jpg</code> in the same folder as this HTML file.</p>
-
-        <div class="header-input-grid">
-            <div class="header-column">
-                <h3 style="margin-top: 0; color: #0E4C8C;">Requestor Details (Left Column)</h3>
-                <div class="input-group"><label for="requestor">Requestor Name:</label><input type="text" id="requestor" value=""></div>
-                <div class="input-group"><label for="designation">Designation:</label><input type="text" id="designation" value=""></div>
-                <div class="input-group"><label for="dept">Dept/Centre:</label><input type="text" id="dept" value=""></div>
-                <div class="input-group"><label for="req-date">Date (DD/MM/YYYY):</label><input type="text" id="req-date" value="8/4/2026"></div>
-                <div class="input-group"><label for="extension">Extension:</label><input type="text" id="extension" value="6218"></div>
-            </div>
-
-            <div class="header-column">
-                <h3 style="margin-top: 0; color: #0E4C8C;">Vendor Details (Right Column)</h3>
-                <div class="input-group"><label for="vendor">Vendor Name:</label><input type="text" id="vendor" value="INFINITY CREATIVE SOLUTIONS SDN BHD"></div>
-                <div class="input-group"><label for="address">Address:</label><input type="text" id="address" value=""></div>
-                <div class="input-group"><label for="tel-no">Tel No:</label><input type="text" id="tel-no" value=""></div>
-                <div class="input-group"><label for="email">E-mail Address:</label><input type="text" id="email" value=""></div>
-                <div class="input-group"><label for="contact">Contact Person:</label><input type="text" id="contact" value=""></div>
-            </div>
-        </div>
-
-        <div class="input-sections">
-            <h3 style="color: #0E4C8C; width: 100%; margin-bottom: 0;">Item Details (Enter in Table Below)</h3>
-            <div id="item-input-table-container">
-                <table id="item-input-table">
-                    <thead>
-                        <tr>
-                            <th class="item-num-cell">No.</th>
-                            <th class="item-desc-cell">Description of Goods/Services</th>
-                            <th class="item-account-cell">Account No.</th>
-                            <th class="item-qty-cell">Quantity</th>
-                            <th class="item-price-cell">Unit Price (RM)</th>
-                            <th class="item-total-cell">Total Price (RM)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="item-input-container"></tbody>
-                </table>
-            </div>
-
-            <p style="margin:0;color:#0E4C8C;width:100%;">For a quotation discount, click Add Discount Row and enter the discount amount in Total Price (RM), e.g. 100. The PR will show -100.00 and deduct it automatically. Each discount uses one of the eight available rows.</p>
-            <div class="pr-summary" aria-live="polite" style="flex-basis:100%;">
-                <span>Subtotal: <strong id="summary-subtotal">RM 0.00</strong></span>
-                <span>Discount: <strong id="summary-discount">RM 0.00</strong></span>
-                <span>Net Total: <strong id="summary-net">RM 0.00</strong></span>
-                <span id="pr-validation" hidden></span>
-            </div>
-            <div class="card-input-group" style="flex-basis: 100%;">
-                <div id="control-panel">
-                    <input type="checkbox" id="show-item-numbers" checked>
-                    <label for="show-item-numbers">Show Item Numbers (1., 2., 3., etc.) on Form</label>
+    <div class="input-form-area pr-app" id="pr-app">
+        <header class="pr-masthead">
+            <div><div class="pr-eyebrow">INSTITUT JANTUNG NEGARA · WORKSPACE</div><h1>Purchase Requisition</h1><p>Prepare your request, match the quotation, and keep a clear record.</p></div>
+            <div class="pr-masthead-actions"><span id="draft-status" class="pr-status" role="status">Ready</span><button type="button" id="new-pr-btn" class="pr-btn pr-btn-light">＋ New PR</button></div>
+        </header>
+        <div class="pr-topbar"><span class="pr-note">Drafts save automatically in this browser. Export a backup to keep a separate copy.</span><div class="pr-inline"><button type="button" id="history-btn" class="pr-btn pr-btn-secondary">History</button><button type="button" id="export-history-btn" class="pr-btn pr-btn-secondary">Export Backup</button><button type="button" id="import-history-btn" class="pr-btn pr-btn-secondary">Import Backup</button><input type="file" id="import-history-file" accept=".json,application/json" hidden></div></div>
+        <div class="pr-details-grid">
+            <section class="pr-card"><div class="pr-card-title"><div><span class="pr-section-number">01</span><h2>Requestor details</h2></div><div class="pr-inline"><button type="button" id="apply-requestor-btn" class="pr-text-btn">Use saved details</button><button type="button" id="save-requestor-btn" class="pr-text-btn">Save details</button></div></div>
+                <div class="pr-field-grid">
+                    <div class="pr-field pr-span-2"><label for="requestor">Requestor name</label><input type="text" id="requestor" autocomplete="name"></div>
+                    <div class="pr-field"><label for="designation">Designation</label><input type="text" id="designation"></div>
+                    <div class="pr-field"><label for="dept">Department / centre</label><input type="text" id="dept"></div>
+                    <div class="pr-field"><label for="req-date">Date <span>DD/MM/YYYY</span></label><input type="text" id="req-date" placeholder="DD/MM/YYYY"></div>
+                    <div class="pr-field"><label for="extension">Extension</label><input type="text" id="extension" value="6218"></div>
                 </div>
-
-                <h3 style="margin-top: 15px;">Reason for Request & Other Remarks</h3>
-                <div class="input-group">
-                    <label for="remarks" style="width: 100%; margin-bottom: 5px;">Remarks:</label>
-                    <textarea id="remarks" style="width: 100%; height: 80px;"></textarea>
+            </section>
+            <section class="pr-card"><div class="pr-card-title"><div><span class="pr-section-number">02</span><h2>Vendor details</h2></div><div class="pr-inline"><button type="button" id="save-vendor-btn" class="pr-text-btn">Save vendor</button><button type="button" id="delete-vendor-btn" class="pr-text-btn pr-danger-text">Delete saved vendor</button></div></div>
+                <div class="pr-field pr-vendor-picker"><label for="vendor-select">Choose a saved vendor</label><select id="vendor-select"><option value="">Enter vendor details below</option></select></div>
+                <div class="pr-field-grid">
+                    <div class="pr-field pr-span-2"><label for="vendor">Vendor name</label><input type="text" id="vendor" value="INFINITY CREATIVE SOLUTIONS SDN BHD"></div>
+                    <div class="pr-field pr-span-2"><label for="address">Address</label><input type="text" id="address"></div>
+                    <div class="pr-field"><label for="tel-no">Telephone</label><input type="text" id="tel-no"></div>
+                    <div class="pr-field"><label for="email">Email</label><input type="text" id="email"></div>
+                    <div class="pr-field pr-span-2"><label for="contact">Contact person</label><input type="text" id="contact"></div>
                 </div>
-            </div>
+            </section>
         </div>
-
-        <div class="action-buttons">
-            <button type="button" class="add-item" id="add-item-btn">Add Item Row</button>
-            <button type="button" class="add-item" id="add-discount-btn">Add Discount Row</button>
-            <button type="button" class="remove-item" id="remove-item-btn">Remove Last Row</button>
-            <button type="button" id="save-history-btn">Save History</button>
-            <button type="button" id="history-btn">Open History</button>
-            <button type="button" id="update-btn">Update Text Placement</button>
-            <button type="button" id="print-btn">Print Form</button>
-        </div>
+        <section class="pr-card pr-items-card">
+            <div class="pr-card-title"><div><span class="pr-section-number">03</span><h2>Items & quotation discounts</h2></div><span id="row-count" class="pr-pill">0 / 8 rows</span></div>
+            <p class="pr-help">Enter positive amounts. Discount rows deduct automatically. Use <strong>Manual</strong> when the quotation gives a total you need to enter directly.</p>
+            <div id="item-input-table-container"><table id="item-input-table"><thead><tr><th class="item-num-cell">No.</th><th class="item-desc-cell">Description / row type</th><th class="item-account-cell">Account no.</th><th class="item-qty-cell">Quantity</th><th class="item-price-cell">Unit price (RM)</th><th class="item-total-cell">Total (RM)</th><th class="pr-row-actions-cell">Arrange</th></tr></thead><tbody id="item-input-container"></tbody></table></div>
+            <div class="pr-item-footer"><div class="pr-inline"><button type="button" id="add-item-btn" class="pr-btn pr-btn-secondary">＋ Add item</button><button type="button" id="add-discount-btn" class="pr-btn pr-btn-secondary">− Add discount</button><button type="button" id="remove-item-btn" class="pr-text-btn pr-danger-text">Remove last row</button></div><label class="pr-check"><input type="checkbox" id="show-item-numbers" checked> Show item numbers on PR</label></div>
+            <div class="pr-summary" aria-live="polite"><div><span>Subtotal</span><strong id="summary-subtotal">RM 0.00</strong></div><div><span>Total discount</span><strong id="summary-discount">RM 0.00</strong></div><div class="pr-net"><span>Net total</span><strong id="summary-net">RM 0.00</strong></div></div>
+            <div id="pr-validation" class="pr-validation" role="status" hidden></div>
+        </section>
+        <section class="pr-card"><div class="pr-card-title"><div><span class="pr-section-number">04</span><h2>Reason for request & remarks</h2></div></div><div class="pr-field"><label for="remarks">Remarks</label><textarea id="remarks" rows="3"></textarea><span class="pr-help">Use **double asterisks** around text to print it in bold.</span></div></section>
+        <div class="pr-bottom-bar"><div><strong>Ready for review?</strong><p>Check the net total against your quotation.</p></div><div class="pr-inline"><button type="button" id="update-btn" class="pr-btn pr-btn-secondary">Refresh preview</button><button type="button" id="save-history-btn" class="pr-btn pr-btn-secondary">Save to history</button><button type="button" id="print-btn" class="pr-btn pr-btn-primary">Print PR →</button></div></div>
+        <div id="pr-notice" class="pr-notice" role="status" hidden></div>
     </div>
-
+    <div class="pr-preview-caption"><span class="pr-eyebrow">PRINT PREVIEW</span><h2>Your original PR layout</h2><p>Field positions and spacing follow your existing template. Print using your usual printer settings.</p></div>
     <div class="a4-page-template" id="a4-printable-area">
         <img id="printable-form-image" src="PR Template to Edit (2).jpg" alt="Blank Purchase Requisition Form">
 
@@ -614,250 +689,254 @@
         <div id="dynamic-item-data-fields"></div>
     </div>
 
-    <div id="history-panel" class="history-panel">
+    <div id="history-panel" class="history-panel" role="dialog" aria-modal="true" aria-labelledby="history-title">
         <div class="history-panel-content">
-            <div class="history-header">
-                <h3>PR History</h3>
-                <div class="history-header-actions">
-                    <button type="button" id="clear-history-btn" class="history-danger-btn">Clear All</button>
-                    <button type="button" id="close-history-btn">Close</button>
-                </div>
-            </div>
-            <div class="history-tools">
-                <input type="search" id="history-search" aria-label="Search history" placeholder="Search vendor, requestor, date or item description">
-                <button type="button" id="export-history-btn">Export History Backup</button>
-                <button type="button" id="import-history-btn">Import History Backup</button>
-                <input type="file" id="import-history-file" accept=".json,application/json" hidden>
-            </div>
-            <div id="history-list" class="history-list">
-                <p style="margin:0; color:#777;">No history yet.</p>
-            </div>
+            <div class="history-header"><div><span class="pr-eyebrow">SAVED REQUESTS</span><h3 id="history-title">PR history</h3></div><div class="history-header-actions"><button type="button" id="clear-history-btn" class="history-danger-btn">Clear history</button><button type="button" id="close-history-btn">Close</button></div></div>
+            <div class="history-tools"><input type="search" id="history-search" aria-label="Search history" placeholder="Search vendor, requestor, date or item…"><span id="history-count" class="pr-help"></span></div>
+            <div id="history-list" class="history-list"></div>
         </div>
     </div>
 
-    <script>
-        let itemCount = 0;
-        const inputContainer = document.getElementById('item-input-container');
+<script>
+'use strict';
+// These placement settings are the original settings. Do not change them.
+const itemRowHeight = 0.7;
+const baseItemTop = 9.15;
+const MAX_ITEM_ROWS = 8;
+const MAX_HISTORY_ITEMS = 100;
+const HISTORY_KEY = 'ijn_pr_form_history_v1';
+const DRAFT_KEY = 'ijn_pr_form_draft_v2';
+const VENDORS_KEY = 'ijn_pr_saved_vendors_v1';
+const REQUESTOR_KEY = 'ijn_pr_saved_requestor_v1';
+const HEADER_FIELDS = { requestor:'requestor',designation:'designation',dept:'dept',reqDate:'req-date',extension:'extension',vendor:'vendor',address:'address',telNo:'tel-no',email:'email',contact:'contact',remarks:'remarks' };
+const REQUESTOR_FIELDS = ['requestor','designation','dept','extension'];
+const VENDOR_FIELDS = ['vendor','address','telNo','email','contact'];
+let rows = [];
+let itemCount = 0;
+let ready = false;
+let autosaveTimer;
+let noticeTimer;
+let historyOpener;
+let idCounter = 0;
+const $ = id => document.getElementById(id);
+const uid = () => `row-${Date.now()}-${++idCounter}-${Math.random().toString(36).slice(2,8)}`;
+const today = () => new Date().toLocaleDateString('en-GB');
+function escapeHtml(value) { return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
+function renderBoldText(value) { return escapeHtml(value).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>'); }
+function setFieldHtml(id,value) { $(id).innerHTML = renderBoldText(value); }
+function formatCurrency(amount) { const num = Number(amount); return !num || !Number.isFinite(num) ? '' : num.toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function formatNumber(value) { const num = Number(value); return num && Number.isFinite(num) ? num : ''; }
+const money = amount => `RM ${formatCurrency(amount) || '0.00'}`;
+const numeric = value => Number.isFinite(Number(value)) ? Number(value || 0) : 0;
+const cents = value => Math.round((numeric(value) + Number.EPSILON) * 100);
+function blankRow(type='item') { return {uid:uid(),type,description:type==='discount'?'Less: Quotation discount':'',account:'',quantity:'',unitPrice:'',totalPrice:'0.00',totalMode:'auto',discountMode:'rm',rate:'',basis:'subtotal',basisIds:[]}; }
+function readStore(key,fallback) { try { const raw=localStorage.getItem(key);return raw===null?fallback:JSON.parse(raw); } catch { return fallback; } }
+function getHistory() { const data=readStore(HISTORY_KEY,[]);return Array.isArray(data)?data:[]; }
+function getVendors() { const data=readStore(VENDORS_KEY,[]);return Array.isArray(data)?data:[]; }
+function writeStore(key,value) { localStorage.setItem(key,JSON.stringify(value)); }
+function notify(message,error=false) { clearTimeout(noticeTimer);$('pr-notice').textContent=message;$('pr-notice').hidden=false;$('pr-notice').style.color=error?'#B42318':'';noticeTimer=setTimeout(()=>{$('pr-notice').hidden=true;},7000); }
+function storeSafely(key,value) { try { writeStore(key,value);return true; } catch { notify('Could not save in this browser. Storage may be full or unavailable. Export a backup to keep a copy.',true);return false; } }
+function normalizeRecord(record,strict=false) {
+ if(!record || typeof record!=='object' || !Array.isArray(record.items) || !record.items.length || record.items.length>MAX_ITEM_ROWS)throw new Error('A PR must have between 1 and 8 rows.');
+ const result={showItemNumbers:record.showItemNumbers!==false};
+ for(const field of [...Object.keys(HEADER_FIELDS),'savedAt','source']) { if(strict && record[field]!=null && typeof record[field]!=='string')throw new Error(`Invalid ${field} in backup.`);result[field]=String(record[field]??''); }
+ if(record.id!=null){ if(!/^[A-Za-z0-9_-]{1,100}$/.test(String(record.id)))throw new Error('Invalid record ID.');result.id=record.id; }
+ const seen=new Set();
+ result.items=record.items.map(item=>{
+  if(!item || typeof item!=='object')throw new Error('Invalid item in backup.');
+  if(strict && item.type!=null && !['item','discount'].includes(item.type))throw new Error('Invalid row type.');
+  const r=blankRow(item.type==='discount'?'discount':'item');
+  if(typeof item.uid==='string' && /^[A-Za-z0-9_-]{1,100}$/.test(item.uid) && !seen.has(item.uid))r.uid=item.uid;
+  seen.add(r.uid);
+  for(const field of ['description','account']){if(strict && item[field]!=null && typeof item[field]!=='string')throw new Error('Invalid item text.');r[field]=String(item[field]??'');}
+  for(const field of ['quantity','unitPrice','totalPrice','rate']) { const value=String(item[field]??(field==='totalPrice'?'0.00':''));if(!Number.isFinite(Number(value)) || numeric(value)<0 || numeric(value)>1000000000)throw new Error('Amounts must be positive numbers within the supported range.');r[field]=value; }
+  // Older versions allow manually overridden totals; keep those totals intact.
+  r.totalMode=item.totalMode==='auto'?'auto':'manual';
+  r.discountMode=item.discountMode==='percent'?'percent':'rm';
+  r.basis=item.basis==='selected'?'selected':'subtotal';
+  r.basisIds=Array.isArray(item.basisIds)?[...new Set(item.basisIds.filter(v=>typeof v==='string'))]:[];
+  if(r.discountMode==='percent' && numeric(r.rate)>100)throw new Error('Percentage discounts cannot exceed 100%.');
+  return r;
+ });
+ const summary=calculateRows(result.items);result.grandTotal=summary.net;return result;
+}
+function calculateRows(items=rows) {
+ let subtotalCents=0,discountCents=0;
+ for(const r of items){if(r.type!=='item')continue;if(r.totalMode==='auto'){const q=numeric(r.quantity),p=numeric(r.unitPrice);r.totalPrice=(cents(q===0?p:q*p)/100).toFixed(2);}subtotalCents+=cents(r.totalPrice);}
+ const chargeAmounts=new Map(items.filter(r=>r.type==='item').map(r=>[r.uid,cents(r.totalPrice)]));
+ for(const r of items){if(r.type!=='discount')continue;if(r.discountMode==='percent'){const base=r.basis==='selected'?r.basisIds.reduce((sum,id)=>sum+(chargeAmounts.get(id)||0),0):subtotalCents;r.totalPrice=(Math.round(base*numeric(r.rate)/100)/100).toFixed(2);}discountCents+=cents(r.totalPrice);}
+ return {subtotal:subtotalCents/100,discount:discountCents/100,net:(subtotalCents-discountCents)/100};
+}
+function getRowTotal(index){const r=rows[index-1];return (r.type==='discount'?-1:1)*cents(r.totalPrice)/100;}
+function isDiscountRow(index){return rows[index-1]?.type==='discount';}
+function collectIssues() {
+ const issues=[];const summary=calculateRows();
+ rows.forEach((r,i)=>{
+  const fields=r.type==='item'?['quantity','unitPrice','totalPrice']:r.discountMode==='percent'?['rate']:['totalPrice'];
+  if(fields.some(f=>!Number.isFinite(Number(r[f])) || numeric(r[f])<0 || numeric(r[f])>1000000000))issues.push(`Row ${i+1}: enter valid positive amounts.`);
+  if(r.type==='discount' && r.discountMode==='percent'){
+   if(!String(r.rate).trim() || numeric(r.rate)>100)issues.push(`Row ${i+1}: enter a discount percentage from 0 to 100.`);
+   if(r.basis==='selected' && !r.basisIds.some(id=>rows.some(x=>x.uid===id && x.type==='item')))issues.push(`Row ${i+1}: select the items used to calculate this discount.`);
+  }
+ });
+ if(summary.net<0)issues.push('The discounts exceed the subtotal. Check your quotation.');
+ if([...document.querySelectorAll('#pr-app input[type="number"]')].some(input=>input.validity && input.validity.badInput))issues.push('Complete or correct the numeric input before printing.');
+ return [...new Set(issues)];
+}
+function captureForm() {
+ const result={showItemNumbers:$('show-item-numbers').checked,items:rows.map(r=>({...r,basisIds:[...r.basisIds]})),grandTotal:calculateRows().net};
+ for(const [name,id]of Object.entries(HEADER_FIELDS))result[name]=$(id).value||'';
+ return result;
+}
+function flushDraft() { clearTimeout(autosaveTimer);if(!ready)return;const draft={...captureForm(),draftSavedAt:new Date().toISOString()};try{writeStore(DRAFT_KEY,draft);$('draft-status').textContent=`Draft saved · ${new Date().toLocaleTimeString('en-MY',{hour:'2-digit',minute:'2-digit'})}`;}catch{$('draft-status').textContent='Draft not saved — export a backup';notify('Autosave is unavailable in this browser. Export a backup before closing.',true);} }
+function scheduleDraft(){if(!ready)return;clearTimeout(autosaveTimer);$('draft-status').textContent='Saving draft…';autosaveTimer=setTimeout(flushDraft,450);}
+function basisOptions(r){return rows.map((charge,i)=>charge.type==='item'?`<option value="${escapeHtml(charge.uid)}"${r.basisIds.includes(charge.uid)?' selected':''}>${i+1}. ${escapeHtml(charge.description.trim()||'Unnamed item')}</option>`:'').join('');}
+function renderRows(){
+ itemCount=rows.length;
+ $('item-input-container').innerHTML=rows.map((r,zero)=>{
+  const i=zero+1,d=r.type==='discount',percent=d&&r.discountMode==='percent';
+  const field=(name,attrs='')=>`data-index="${zero}" data-field="${name}" ${attrs}`;
+  return `<tr id="item-group-${i}" class="${d?'pr-discount-row':''}">
+   <td class="item-num-cell">${i}.</td>
+   <td class="item-desc-cell"><div class="pr-row-head"><select id="item-type-${i}" aria-label="Row ${i} type" ${field('type')}><option value="item"${!d?' selected':''}>Item / charge</option><option value="discount"${d?' selected':''}>Discount / deduction</option></select><span class="pr-row-label">${d?'Deducted from the PR':'Added to the PR'}</span></div><textarea class="item-description" id="item-description-${i}" aria-label="Row ${i} description" ${field('description')} rows="2">${escapeHtml(r.description)}</textarea>
+   ${d?`<div class="pr-discount-options"><label>Discount type<select ${field('discountMode')} aria-label="Row ${i} discount type"><option value="rm"${!percent?' selected':''}>Amount (RM)</option><option value="percent"${percent?' selected':''}>Percentage (%)</option></select></label>${percent?`<label>Discount (%)<input type="number" min="0" max="100" step="0.01" value="${escapeHtml(r.rate)}" ${field('rate')} aria-label="Row ${i} discount percentage"></label><label>Calculate from<select ${field('basis')} aria-label="Row ${i} discount basis"><option value="subtotal"${r.basis==='subtotal'?' selected':''}>Whole subtotal</option><option value="selected"${r.basis==='selected'?' selected':''}>Selected items</option></select></label>${r.basis==='selected'?`<label class="pr-selected-basis">Select items (Ctrl / Cmd + click for multiple)<select multiple size="3" ${field('basisIds')} aria-label="Row ${i} selected items">${basisOptions(r)}</select></label>`:''}`:`<span class="pr-help">Enter the discount under Total (RM).</span>`}</div>`:''}</td>
+   <td class="item-account-cell"><input type="text" class="item-input-field" id="item-account-${i}" value="${escapeHtml(r.account)}" ${field('account')} aria-label="Row ${i} account number"></td>
+   <td class="item-qty-cell"><input type="number" class="item-input-field" id="item-quantity-${i}" min="0" step="any" value="${escapeHtml(r.quantity)}" ${field('quantity')} ${d?'disabled':''} aria-label="Row ${i} quantity"></td>
+   <td class="item-price-cell"><input type="number" class="item-input-field" id="item-unit-price-${i}" min="0" step="0.01" value="${escapeHtml(r.unitPrice)}" ${field('unitPrice')} ${d?'disabled':''} aria-label="Row ${i} unit price"></td>
+   <td class="item-total-cell">${!d?`<select class="pr-row-mode" ${field('totalMode')} aria-label="Row ${i} total mode"><option value="auto"${r.totalMode==='auto'?' selected':''}>Automatic: qty × price</option><option value="manual"${r.totalMode==='manual'?' selected':''}>Manual total</option></select>`:`<div class="pr-help" style="margin-bottom:8px">${percent?'Calculated discount':'Discount amount'}</div>`}<input type="number" class="item-input-field item-total-price-input" id="item-total-price-input-${i}" min="0" step="0.01" value="${escapeHtml(r.totalPrice)}" ${field('totalPrice')} ${percent||(!d&&r.totalMode==='auto')?'readonly':''} aria-label="Row ${i} total amount"><span class="pr-row-label">${d?'Prints with a minus sign':r.totalMode==='auto'?'Updates with qty / price':'Keeps your entered total'}</span></td>
+   <td class="pr-row-actions-cell"><div class="pr-row-actions"><button type="button" data-action="up" data-index="${zero}" ${zero===0?'disabled':''} aria-label="Move row ${i} up">↑</button><button type="button" data-action="down" data-index="${zero}" ${zero===rows.length-1?'disabled':''} aria-label="Move row ${i} down">↓</button><button type="button" class="pr-row-delete" data-action="delete" data-index="${zero}" ${rows.length===1?'disabled':''} aria-label="Delete row ${i}">Delete</button></div></td>
+  </tr>`;
+ }).join('');
+ setupAutoGrow();updateAddItemButtonState();
+}
+function setupAutoGrow(){document.querySelectorAll('#item-input-container textarea').forEach(autoGrowTextarea);}
+function autoGrowTextarea(textarea){if(textarea){textarea.style.height='auto';textarea.style.height=`${Math.max(textarea.scrollHeight,66)}px`;}}
+function updateAddItemButtonState(){const full=rows.length>=MAX_ITEM_ROWS;$('add-item-btn').disabled=full;$('add-discount-btn').disabled=full&&!findEmptyItemRow();$('remove-item-btn').disabled=rows.length<=1;$('row-count').textContent=`${rows.length} / ${MAX_ITEM_ROWS} rows`;}
+function findEmptyItemRow(){for(let i=rows.length-1;i>=0;i--){const r=rows[i];if(r.type==='item'&&!r.description.trim()&&!r.account.trim()&&!numeric(r.quantity)&&!numeric(r.unitPrice)&&!numeric(r.totalPrice))return i+1;}return 0;}
+function addItemRow(){if(rows.length>=MAX_ITEM_ROWS){notify('The printed form has room for 8 rows, including discounts.',true);return;}rows.push(blankRow());renderRows();updateForm();scheduleDraft();}
+function addDiscountRow(){let index=findEmptyItemRow();if(index){const oldId=rows[index-1].uid;rows[index-1]=blankRow('discount');rows.forEach(r=>r.basisIds=r.basisIds.filter(id=>id!==oldId));}else if(rows.length<MAX_ITEM_ROWS){rows.push(blankRow('discount'));index=rows.length;}else{notify('Free one of the 8 available rows before adding a discount.',true);return;}renderRows();updateForm();scheduleDraft();$(`item-total-price-input-${index}`).focus();$(`item-total-price-input-${index}`).select();}
+function removeRow(index){if(rows.length<=1)return;const r=rows[index];if((r.description.trim()||r.account.trim()||numeric(r.totalPrice))&&!confirm(`Delete row ${index+1}: ${r.description||'this item'}?`))return;const removed=rows.splice(index,1)[0];rows.forEach(x=>x.basisIds=x.basisIds.filter(id=>id!==removed.uid));renderRows();updateForm();scheduleDraft();}
+function removeItemRow(){removeRow(rows.length-1);}
+function moveRow(index,direction){const target=index+direction;if(target<0||target>=rows.length)return;[rows[index],rows[target]]=[rows[target],rows[index]];renderRows();updateForm();scheduleDraft();}
+function handleRowInput(event){
+ const input=event.target,field=input.dataset.field;if(!field)return;const index=Number(input.dataset.index),r=rows[index];if(!r)return;
+ r[field]=field==='basisIds'?[...input.selectedOptions].map(o=>o.value):input.value;
+ if(field==='type'){
+  if(r.type==='discount'&&!r.description.trim())r.description='Less: Quotation discount';
+  if(r.type==='discount'){rows.forEach(x=>{x.basisIds=x.basisIds.filter(id=>id!==r.uid);});}
+ }
+ if(['type','totalMode','discountMode','basis','basisIds'].includes(field))renderRows();
+ if(field==='description'){autoGrowTextarea(input);document.querySelectorAll('select[data-field="basisIds"] option').forEach(option=>{const idx=rows.findIndex(x=>x.uid===option.value);if(idx>=0)option.textContent=`${idx+1}. ${rows[idx].description.trim()||'Unnamed item'}`;});}
+ updateForm();scheduleDraft();
+}
+function updateForm(){
+ const summary=calculateRows();
+ rows.forEach((r,i)=>{const total=$(`item-total-price-input-${i+1}`);if(total&&document.activeElement!==total)total.value=r.totalPrice;});
+ $('summary-subtotal').textContent=money(summary.subtotal);$('summary-discount').textContent=money(summary.discount);$('summary-net').textContent=money(summary.net);
+ const issues=collectIssues();$('pr-validation').textContent=issues.join('\n');$('pr-validation').hidden=!issues.length;
+ updatePrint();updateAddItemButtonState();
+}
+function applyRecord(record,{duplicate=false,restore=false}={}){
+ const clean=normalizeRecord(record);
+ for(const [field,id]of Object.entries(HEADER_FIELDS))$(id).value=clean[field]||'';
+ if(duplicate)$('req-date').value=today();
+ $('show-item-numbers').checked=clean.showItemNumbers;
+ rows=clean.items;
+ $('vendor-select').value='';$('delete-vendor-btn').disabled=true;
+ renderRows();updateForm();
+ if(!restore)flushDraft();
+}
+function savedRequestor(){const profile=readStore(REQUESTOR_KEY,null);return profile&&typeof profile==='object'&&!Array.isArray(profile)?profile:null;}
+function saveRequestor(){const profile={};REQUESTOR_FIELDS.forEach(f=>profile[f]=$(HEADER_FIELDS[f]).value||'');if(!profile.requestor.trim()){notify('Enter a requestor name before saving your details.',true);return;}if(storeSafely(REQUESTOR_KEY,profile))notify('Requestor details saved. They will fill in when you start a new PR.');}
+function applySavedRequestor(silent=false){const profile=savedRequestor();if(!profile){if(!silent)notify('No requestor details saved yet. Fill in your details and click Save details.');return;}REQUESTOR_FIELDS.forEach(f=>$(HEADER_FIELDS[f]).value=String(profile[f]||''));updateForm();scheduleDraft();if(!silent)notify('Saved requestor details applied.');}
+function renderVendorList(selected=''){
+ const vendors=getVendors();$('vendor-select').innerHTML='<option value="">Enter vendor details below</option>'+vendors.map(v=>`<option value="${escapeHtml(v.id)}">${escapeHtml(v.vendor)}</option>`).join('');$('vendor-select').value=selected;$('delete-vendor-btn').disabled=!selected;
+}
+function saveVendor(){const profile={};VENDOR_FIELDS.forEach(f=>profile[f]=$(HEADER_FIELDS[f]).value||'');if(!profile.vendor.trim()){notify('Enter a vendor name before saving.',true);return;}const vendors=getVendors();const selected=$('vendor-select').value;let index=vendors.findIndex(v=>String(v.id)===selected);if(index<0)index=vendors.findIndex(v=>v.vendor.trim().toLowerCase()===profile.vendor.trim().toLowerCase());
+ if(index>=0){if(!confirm('Update the saved details for this vendor?'))return;profile.id=vendors[index].id;vendors[index]=profile;}else{profile.id=uid();vendors.push(profile);}
+ if(storeSafely(VENDORS_KEY,vendors)){renderVendorList(String(profile.id));notify('Vendor saved. Choose it from the list next time.');}
+}
+function applyVendor(){const id=$('vendor-select').value;const vendor=getVendors().find(v=>String(v.id)===id);$('delete-vendor-btn').disabled=!vendor;if(!vendor)return;VENDOR_FIELDS.forEach(f=>$(HEADER_FIELDS[f]).value=String(vendor[f]||''));updateForm();scheduleDraft();notify('Vendor details filled in.');}
+function deleteVendor(){const id=$('vendor-select').value;if(!id)return;if(!confirm('Delete this saved vendor? Your current PR details and history will stay.'))return;if(storeSafely(VENDORS_KEY,getVendors().filter(v=>String(v.id)!==id))){renderVendorList();notify('Saved vendor removed.');}}
+function newPR(){if(!confirm('Start a new PR? The current draft will be replaced. Save it to history first if you need to keep it.'))return;
+ for(const id of Object.values(HEADER_FIELDS))$(id).value='';$('req-date').value=today();$('extension').value='6218';$('remarks').value='A/C 6010010 Agency Fees';$('show-item-numbers').checked=true;$('vendor-select').value='';$('delete-vendor-btn').disabled=true;rows=Array.from({length:4},()=>blankRow());renderRows();applySavedRequestor(true);updateForm();flushDraft();notify('New PR started. Saved vendors, requestor details and history are retained.');$('requestor').focus();
+}
+function saveCurrentToHistory(source='manual'){
+ updateForm();const form=captureForm();const hasContent=form.requestor.trim()||form.vendor.trim()||form.remarks.trim()||form.items.some(r=>r.description.trim()||numeric(r.totalPrice));if(!hasContent){notify('Nothing to save yet.',true);return false;}
+ const history=getHistory();if(history.length>=MAX_HISTORY_ITEMS){notify('History has reached 100 records. Export a backup and delete unwanted records before saving more.',true);return false;}
+ let id=Date.now();while(history.some(r=>String(r.id)===String(id)))id++;
+ const record={...form,id,savedAt:new Date().toLocaleString('en-MY'),source};
+ if(!storeSafely(HISTORY_KEY,[record,...history]))return false;
+ renderHistoryList();flushDraft();if(source==='manual')notify('PR saved to history.');return true;
+}
+function loadHistoryRecord(recordId,duplicate=false){const record=getHistory().find(r=>String(r.id)===String(recordId));if(!record){notify('History record not found.',true);return;}
+ if(!confirm(`${duplicate?'Duplicate this PR with today’s date':'Load this saved PR'}? This replaces the current draft; your saved history stays.`))return;
+ try{applyRecord(record,{duplicate});closeHistoryPanel();notify(duplicate?'PR duplicated. Today’s date is filled in; review the quotation before printing.':'Saved PR loaded.');}catch(error){notify(`Could not load this PR: ${error.message}`,true);}
+}
+function deleteHistoryRecord(recordId){if(!confirm('Delete this saved PR from history?'))return;const history=getHistory().filter(r=>String(r.id)!==String(recordId));if(storeSafely(HISTORY_KEY,history))renderHistoryList();}
+function clearAllHistory(){if(!confirm('Clear all saved PR history? Export a backup first if you need to keep it. Your current draft and saved details will stay.'))return;if(storeSafely(HISTORY_KEY,[]))renderHistoryList();}
+function renderHistoryList(){
+ const all=getHistory();const query=$('history-search').value.trim().toLowerCase();const history=all.filter(r=>!query||[r.vendor,r.requestor,r.reqDate,r.remarks,...(Array.isArray(r.items)?r.items:[]).map(i=>i.description)].join(' ').toLowerCase().includes(query));$('history-count').textContent=`${history.length} / ${all.length} records`;
+ if(!history.length){$('history-list').innerHTML=`<p style="color:#5B6675;margin:0">${query?'No matching PR records.':'No history yet. Save a PR to see it here.'}</p>`;return;}
+ $('history-list').innerHTML=history.map(record=>{
+  let total=record.grandTotal;try{total=normalizeRecord(record).grandTotal;}catch{}
+  const preview=(record.items||[]).filter(r=>r.description||numeric(r.totalPrice)).map((r,i)=>`${i+1}. ${r.description||'Unnamed item'} · ${r.type==='discount'?'− ':''}${money(numeric(r.totalPrice))}`).join('\n');
+  return `<div class="history-card"><div class="history-card-top"><div><div class="history-title">${escapeHtml(record.vendor||'No vendor')} · ${escapeHtml(record.reqDate||'No date')}</div><div class="history-meta"><div><strong>Requestor:</strong> ${escapeHtml(record.requestor||'—')}</div><div><strong>Saved:</strong> ${escapeHtml(record.savedAt||'—')}</div><div><strong>Type:</strong> ${escapeHtml(record.source||'manual')} · <strong>Net total:</strong> ${money(total)}</div></div></div><div class="history-actions"><button type="button" class="history-load-btn" data-history-action="load" data-record-id="${escapeHtml(record.id)}">Load</button><button type="button" class="history-duplicate-btn" data-history-action="duplicate" data-record-id="${escapeHtml(record.id)}">Duplicate</button><button type="button" class="history-delete-btn" data-history-action="delete" data-record-id="${escapeHtml(record.id)}">Delete</button></div></div><div class="history-items-preview">${escapeHtml(preview||'No items.')}</div></div>`;
+ }).join('');
+}
+function openHistoryPanel(){renderHistoryList();historyOpener=document.activeElement;$('history-panel').classList.add('show');$('history-search').focus();}
+function closeHistoryPanel(){$('history-panel').classList.remove('show');if(historyOpener?.focus)historyOpener.focus();}
+function exportHistoryBackup(){clearTimeout(autosaveTimer);flushDraft();const backup={system:'ijn-pr-history',version:3,exportedAt:new Date().toISOString(),history:getHistory(),vendors:getVendors(),requestor:savedRequestor(),draft:captureForm()};const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));const link=document.createElement('a');link.href=url;link.download=`IJN-PR-Backup-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('Backup exported: history, saved details and the current draft.');}
+function validateImportedHistory(data){const records=Array.isArray(data)?data:data&&data.system==='ijn-pr-history'?data.history:null;if(!Array.isArray(records)||records.length>MAX_HISTORY_ITEMS)throw new Error('Choose an IJN PR backup with up to 100 records.');return records.map(r=>{const clean=normalizeRecord(r,true);if(clean.id==null)throw new Error('A history record is missing its ID.');return clean;});}
+function validateProfile(profile,fields){if(!profile||typeof profile!=='object'||Array.isArray(profile))throw new Error('Invalid saved profile.');const clean={};for(const f of fields){if(profile[f]!=null&&typeof profile[f]!=='string')throw new Error('Invalid saved profile field.');clean[f]=String(profile[f]??'');}return clean;}
+async function importHistoryBackup(event){
+ const input=event.target;const file=input.files[0];if(!file)return;
+ try{
+  if(file.size>5*1024*1024)throw new Error('Maximum backup size is 5 MB.');
+  const data=JSON.parse(await file.text());const imported=validateImportedHistory(data);const existing=getHistory();const seen=new Set(existing.map(r=>String(r.id)));const additions=imported.filter(r=>{if(seen.has(String(r.id)))return false;seen.add(String(r.id));return true;});
+  if(existing.length+additions.length>MAX_HISTORY_ITEMS)throw new Error('Import would exceed 100 records. Export your current history and delete unwanted records first.');
+  const vendors=getVendors();const vendorNames=new Set(vendors.map(v=>v.vendor.trim().toLowerCase()));let vendorAdditions=[];
+  if(!Array.isArray(data)&&data.vendors!=null){if(!Array.isArray(data.vendors)||data.vendors.length>500)throw new Error('Invalid saved vendor list.');for(const v of data.vendors){const clean=validateProfile(v,VENDOR_FIELDS);if(!clean.vendor.trim())throw new Error('A saved vendor has no name.');const name=clean.vendor.trim().toLowerCase();if(!vendorNames.has(name)){clean.id=uid();vendorAdditions.push(clean);vendorNames.add(name);}}}
+  const profile=!Array.isArray(data)&&data.requestor?validateProfile(data.requestor,REQUESTOR_FIELDS):null;
+  const draft=!Array.isArray(data)&&data.draft?normalizeRecord(data.draft,true):null;
+  // Validate the complete backup before changing any saved data.
+  const restoreDraft=draft&&confirm('This backup contains a draft. Restore it as the current PR? Choose Cancel to keep your current draft and import only the saved records and profiles.');
+  const writes=[[HISTORY_KEY,[...additions,...existing]],[VENDORS_KEY,[...vendors,...vendorAdditions]]];
+  if(profile&&!savedRequestor())writes.push([REQUESTOR_KEY,profile]);
+  if(restoreDraft)writes.push([DRAFT_KEY,{...draft,draftSavedAt:new Date().toISOString()}]);
+  const originals=writes.map(([key])=>[key,localStorage.getItem(key)]);
+  try{for(const[key,value]of writes)writeStore(key,value);}catch(error){for(const[key,value]of originals){try{if(value===null)localStorage.removeItem(key);else localStorage.setItem(key,value);}catch{}}throw new Error('Import could not be completed. Browser storage is unavailable or full.');}
+  renderVendorList();$('history-search').value='';renderHistoryList();if(restoreDraft)applyRecord(draft,{restore:true});
+  notify(`Imported ${additions.length} PR record(s) and ${vendorAdditions.length} vendor(s). Existing saved data was retained.${restoreDraft?' Backup draft restored.':''}`);
+ }catch(error){notify(`Could not import backup: ${error.message}`,true);}finally{input.value='';}
+}
+async function printForm(){
+ updateForm();const issues=collectIssues();if(issues.length){notify('Please resolve the checks shown below the totals before printing.',true);$('pr-validation').scrollIntoView({block:'center',behavior:'smooth'});return;}
+ if(document.fonts)await document.fonts.ready;
+ updatePrint();flushDraft();saveCurrentToHistory('printed');window.print();
+}
+function initializeForm(){
+ renderVendorList();
+ const listeners={'add-item-btn':addItemRow,'add-discount-btn':addDiscountRow,'remove-item-btn':removeItemRow,'new-pr-btn':newPR,'save-history-btn':()=>saveCurrentToHistory('manual'),'history-btn':openHistoryPanel,'update-btn':()=>{updateForm();notify('Preview refreshed. Original print positioning is retained.');},'print-btn':printForm,'close-history-btn':closeHistoryPanel,'clear-history-btn':clearAllHistory,'save-requestor-btn':saveRequestor,'apply-requestor-btn':()=>applySavedRequestor(),'save-vendor-btn':saveVendor,'delete-vendor-btn':deleteVendor,'export-history-btn':exportHistoryBackup,'import-history-btn':()=>$('import-history-file').click()};
+ for(const[id,handler]of Object.entries(listeners))$(id).addEventListener('click',handler);
+ $('vendor-select').addEventListener('change',applyVendor);$('history-search').addEventListener('input',renderHistoryList);$('import-history-file').addEventListener('change',importHistoryBackup);
+ $('item-input-container').addEventListener('input',event=>{if(event.target.tagName!=='SELECT')handleRowInput(event);});
+ $('item-input-container').addEventListener('change',event=>{if(event.target.tagName==='SELECT')handleRowInput(event);});
+ $('item-input-container').addEventListener('click',event=>{const button=event.target.closest('button[data-action]');if(!button)return;const index=Number(button.dataset.index);if(button.dataset.action==='delete')removeRow(index);else moveRow(index,button.dataset.action==='up'?-1:1);});
+ for(const id of Object.values(HEADER_FIELDS))$(id).addEventListener('input',()=>{updateForm();scheduleDraft();});
+ $('show-item-numbers').addEventListener('change',()=>{updateForm();scheduleDraft();});
+ $('history-list').addEventListener('click',event=>{const button=event.target.closest('button[data-history-action]');if(!button)return;const id=button.dataset.recordId;if(button.dataset.historyAction==='delete')deleteHistoryRecord(id);else loadHistoryRecord(id,button.dataset.historyAction==='duplicate');});
+ $('history-panel').addEventListener('click',event=>{if(event.target===$('history-panel'))closeHistoryPanel();});
+ document.addEventListener('keydown',event=>{if(!$('history-panel').classList.contains('show'))return;if(event.key==='Escape')closeHistoryPanel();if(event.key==='Tab'){const controls=[...$('history-panel').querySelectorAll('button:not(:disabled),input')];const first=controls[0],last=controls[controls.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}});
+ window.addEventListener('pagehide',flushDraft);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flushDraft();});
+ const draft=readStore(DRAFT_KEY,null);let restored=false;
+ if(draft){try{applyRecord(draft,{restore:true});restored=true;$('draft-status').textContent='Saved draft restored';}catch{notify('The saved draft could not be restored. Your history is still available.',true);}}
+ if(!restored){rows=Array.from({length:4},()=>blankRow());$('req-date').value=today();$('remarks').value='A/C 6010010 Agency Fees';renderRows();applySavedRequestor(true);updateForm();}
+ ready=true;renderHistoryList();
+}
+document.addEventListener('DOMContentLoaded',initializeForm);
 
-        const itemRowHeight = 0.7;
-        const baseItemTop = 9.15;
-        const MAX_ITEM_ROWS = 8;
-
-        const HISTORY_KEY = 'ijn_pr_form_history_v1';
-        const MAX_HISTORY_ITEMS = 100;
-
-        function updateAddItemButtonState() {
-            document.getElementById('add-discount-btn').disabled = itemCount >= MAX_ITEM_ROWS && !findEmptyItemRow();
-            const addButton = document.getElementById('add-item-btn');
-            if (addButton) {
-                addButton.disabled = itemCount >= MAX_ITEM_ROWS;
-                addButton.textContent = itemCount >= MAX_ITEM_ROWS ? 'Maximum 8 Rows Reached' : 'Add Item Row';
-            }
-        }
-
-        function formatCurrency(amount) {
-            if (!amount || isNaN(parseFloat(amount))) return '';
-            const num = parseFloat(amount);
-            if (num === 0) return '';
-            return num.toLocaleString('en-MY', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            });
-        }
-
-        function formatNumber(value) {
-            if (!value || isNaN(parseFloat(value))) return '';
-            const num = parseFloat(value);
-            if (num === 0) return '';
-            return num;
-        }
-
-        function isDiscountRow(index) {
-            return document.getElementById(`item-type-${index}`)?.value === 'discount';
-        }
-
-        function getRowTotal(index) {
-            const amount = parseFloat(document.getElementById(`item-total-price-input-${index}`).value) || 0;
-            return isDiscountRow(index) ? -Math.abs(amount) : amount;
-        }
-
-        function setRowType(index, type) {
-            document.getElementById(`item-type-${index}`).value = type;
-            const discount = type === 'discount';
-            const row = document.getElementById(`item-group-${index}`);
-            row.style.backgroundColor = discount ? '#fff3cd' : '';
-            for (const field of ['quantity', 'unit-price']) {
-                const input = document.getElementById(`item-${field}-${index}`);
-                input.disabled = discount;
-            }
-            const total = document.getElementById(`item-total-price-input-${index}`);
-            if (discount) total.value = Math.abs(parseFloat(total.value) || 0).toFixed(2);
-            total.title = discount ? 'Enter a positive discount amount. It will be deducted automatically.' : '';
-            const description = document.getElementById(`item-description-${index}`);
-            if (discount && !description.value.trim()) description.value = 'Less: Quotation discount';
-            updateForm();
-        }
-
-        function findEmptyItemRow() {
-            for (let i = itemCount; i >= 1; i--) {
-                if (!isDiscountRow(i) && ['description', 'account', 'quantity', 'unit-price', 'total-price-input'].every(field => {
-                    const value = document.getElementById(`item-${field}-${i}`).value.trim();
-                    return field === 'description' || field === 'account' ? !value : !(parseFloat(value) || 0);
-                })) return i;
-            }
-            return 0;
-        }
-
-        function addDiscountRow() {
-            let index = findEmptyItemRow();
-            if (!index) {
-                if (itemCount >= MAX_ITEM_ROWS) {
-                    alert('Maximum 8 rows including discounts. Free a row first.');
-                    return;
-                }
-                addItemRow();
-                index = itemCount;
-            }
-            setRowType(index, 'discount');
-            document.getElementById(`item-total-price-input-${index}`).focus();
-            document.getElementById(`item-total-price-input-${index}`).select();
-        }
-
-        function calculateRowTotal(index) {
-            if (isDiscountRow(index)) { updateForm(); return; }
-
-            const quantityElem = document.getElementById(`item-quantity-${index}`);
-            const unitPriceElem = document.getElementById(`item-unit-price-${index}`);
-            const totalInput = document.getElementById(`item-total-price-input-${index}`);
-
-            const quantity = parseFloat(quantityElem.value) || 0;
-            const unitPrice = parseFloat(unitPriceElem.value) || 0;
-
-            let calculatedTotal;
-
-            if (quantity === 0 && unitPrice !== 0) {
-                calculatedTotal = unitPrice;
-            } else {
-                calculatedTotal = quantity * unitPrice;
-            }
-
-            if (totalInput) {
-                totalInput.value = calculatedTotal.toFixed(2);
-            }
-
-            updateForm();
-        }
-
-        function setupInputListeners() {
-            const inputs = document.querySelectorAll('.input-form-area input, .input-form-area textarea');
-
-            inputs.forEach(input => {
-                if (!input.dataset.listenerAttached) {
-                    const index = input.id.split('-').pop();
-
-                    if (input.id.startsWith('item-quantity-') || input.id.startsWith('item-unit-price-')) {
-                        input.addEventListener('input', () => calculateRowTotal(index));
-                    }
-
-                    input.addEventListener('input', updateForm);
-                    input.dataset.listenerAttached = 'true';
-                }
-            });
-
-            const showItemNumbers = document.getElementById('show-item-numbers');
-            if (showItemNumbers && !showItemNumbers.dataset.listenerAttached) {
-                showItemNumbers.addEventListener('change', updateForm);
-                showItemNumbers.dataset.listenerAttached = 'true';
-            }
-        }
-
-        function createItemInputRow(index) {
-            const row = document.createElement('tr');
-            row.id = `item-group-${index}`;
-            row.innerHTML = `
-                <td class="item-num-cell">${index}.</td>
-                <td class="item-desc-cell"><select id="item-type-${index}" aria-label="Row type" onchange="setRowType(${index}, this.value)" style="margin-bottom:4px;"><option value="item">Item / Charge</option><option value="discount">Discount / Deduction</option></select><textarea class="item-description" id="item-description-${index}" rows="1"></textarea></td>
-                <td class="item-account-cell"><input type="text" class="item-input-field" id="item-account-${index}"></td>
-                <td class="item-qty-cell"><input type="number" class="item-input-field" id="item-quantity-${index}" value="" min="0"></td>
-                <td class="item-price-cell"><input type="number" class="item-input-field" id="item-unit-price-${index}" value="" step="0.01" min="0"></td>
-                <td class="item-total-cell">
-                    <input type="number" class="item-input-field item-total-price-input"
-                        id="item-total-price-input-${index}"
-                        value="0.00"
-                        step="0.01"
-                        min="0">
-                </td>
-            `;
-            return row;
-        }
-
-        function addItemRow() {
-            if (itemCount >= MAX_ITEM_ROWS) {
-                alert('Maximum 8 item rows only. The 9th row is reserved for Grand Total.');
-                updateAddItemButtonState();
-                return;
-            }
-
-            itemCount++;
-            inputContainer.appendChild(createItemInputRow(itemCount));
-            setupInputListeners();
-            autoGrowTextarea(document.getElementById(`item-description-${itemCount}`));
-            calculateRowTotal(itemCount);
-            updateForm();
-            updateAddItemButtonState();
-        }
-
-        function removeItemRow() {
-            if (itemCount > 1) {
-                const lastItem = document.getElementById(`item-group-${itemCount}`);
-                if (lastItem) {
-                    inputContainer.removeChild(lastItem);
-                    itemCount--;
-                    updateForm();
-                    updateAddItemButtonState();
-                }
-            } else if (itemCount === 1) {
-                alert("Cannot remove the last item row. Must have at least one.");
-            }
-        }
-
-        function autoGrowTextarea(textarea) {
-            if (textarea) {
-                textarea.style.height = 'auto';
-                textarea.style.height = textarea.scrollHeight + 'px';
-            }
-        }
-
-        function setupAutoGrow() {
-            const textareas = document.querySelectorAll('#item-input-container textarea');
-            textareas.forEach(textarea => {
-                if (!textarea.dataset.autogrowSetup) {
-                    textarea.addEventListener('input', () => autoGrowTextarea(textarea));
-                    textarea.dataset.autogrowSetup = 'true';
-                    autoGrowTextarea(textarea);
-                }
-            });
-        }
-
-        function escapeHtml(value) {
-            return String(value || '')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
-        }
-
-        function renderBoldText(value) {
-            return escapeHtml(value).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-        }
-
-        function setFieldHtml(elementId, value) {
-            document.getElementById(elementId).innerHTML = renderBoldText(value);
-        }
-
-        function updateForm() {
-            setupAutoGrow();
+        function updatePrint() {
 
             setFieldHtml('data-requestor', document.getElementById('requestor').value);
             setFieldHtml('data-designation', document.getElementById('designation').value);
@@ -887,9 +966,8 @@
 
                 const description = descriptionElem.value.trim();
                 const account = accountElem.value.trim();
-                const discount = isDiscountRow(i);
-                const quantity = discount ? 0 : parseFloat(quantityElem.value) || 0;
-                const unitPrice = discount ? 0 : parseFloat(unitPriceElem.value) || 0;
+                const quantity = isDiscountRow(i) ? 0 : parseFloat(quantityElem.value) || 0;
+                const unitPrice = isDiscountRow(i) ? 0 : parseFloat(unitPriceElem.value) || 0;
                 const totalPrice = getRowTotal(i);
 
                 if (!description && !account && quantity === 0 && unitPrice === 0 && totalPrice === 0) continue;
@@ -931,393 +1009,10 @@
             }
 
             setFieldHtml('data-grand-total', formatCurrency(grandTotal / 100) || '');
-            updateSummary();
             setFieldHtml('data-remarks', document.getElementById('remarks').value.trim());
-            updateAddItemButtonState();
         }
 
-        function getSummary() {
-            let subtotalCents = 0;
-            let discountCents = 0;
-            let invalid = false;
-            for (let i = 1; i <= itemCount; i++) {
-                const raw = document.getElementById(`item-total-price-input-${i}`).value;
-                const amount = Number(raw || 0);
-                if (!Number.isFinite(amount) || amount < 0) invalid = true;
-                const cents = Math.round((Number.isFinite(amount) ? Math.abs(amount) : 0) * 100);
-                if (isDiscountRow(i)) discountCents += cents;
-                else subtotalCents += cents;
-            }
-            return { subtotal: subtotalCents / 100, discount: discountCents / 100,
-                net: (subtotalCents - discountCents) / 100, invalid };
-        }
 
-        function updateSummary() {
-            const summary = getSummary();
-            for (const [name, value] of Object.entries(summary)) {
-                const element = document.getElementById(`summary-${name}`);
-                if (element) element.textContent = `RM ${formatCurrency(value) || '0.00'}`;
-            }
-            const message = summary.invalid ? 'Please enter valid positive amounts. Discount rows subtract automatically.'
-                : summary.net < 0 ? 'The discount exceeds the subtotal. Please check the quotation before printing.' : '';
-            document.getElementById('pr-validation').textContent = message;
-            document.getElementById('pr-validation').hidden = !message;
-        }
-
-        function exportHistoryBackup() {
-            const history = getHistory();
-            if (!history.length) { alert('No history to export yet. Save your PR first.'); return; }
-            const backup = { system: 'ijn-pr-history', version: 2, exportedAt: new Date().toISOString(), history };
-            const url = URL.createObjectURL(new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' }));
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `IJN-PR-History-${new Date().toISOString().slice(0, 10)}.json`;
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-            setTimeout(() => URL.revokeObjectURL(url), 1000);
-        }
-
-        function validateImportedHistory(data) {
-            const records = Array.isArray(data) ? data : data && data.system === 'ijn-pr-history' ? data.history : null;
-            if (!Array.isArray(records) || records.length > MAX_HISTORY_ITEMS) throw new Error('Use a valid IJN PR history backup with up to 100 records.');
-            const textFields = ['savedAt', 'requestor', 'designation', 'dept', 'reqDate', 'extension', 'vendor', 'address', 'telNo', 'email', 'contact', 'remarks', 'source'];
-            return records.map(record => {
-                if (!record || typeof record !== 'object' || !Number.isSafeInteger(Number(record.id)) || Number(record.id) <= 0 || !Array.isArray(record.items) || record.items.length < 1 || record.items.length > MAX_ITEM_ROWS) {
-                    throw new Error('The backup contains an invalid PR record. Nothing was imported.');
-                }
-                const clean = { id: Number(record.id), showItemNumbers: record.showItemNumbers !== false };
-                for (const field of textFields) {
-                    if (record[field] != null && typeof record[field] !== 'string') throw new Error(`Invalid ${field} in backup.`);
-                    clean[field] = record[field] || '';
-                }
-                clean.items = record.items.map(item => {
-                    if (!item || typeof item !== 'object') throw new Error('Invalid item in backup.');
-                    const result = { type: item.type === 'discount' ? 'discount' : 'item' };
-                    for (const field of ['description', 'account']) {
-                        if (item[field] != null && typeof item[field] !== 'string') throw new Error('Invalid item text in backup.');
-                        result[field] = item[field] || '';
-                    }
-                    for (const field of ['quantity', 'unitPrice', 'totalPrice']) {
-                        const value = item[field] == null ? '' : String(item[field]);
-                        if (!Number.isFinite(Number(value)) || Number(value) < 0) throw new Error('Invalid amount in backup.');
-                        result[field] = value;
-                    }
-                    return result;
-                });
-                clean.grandTotal = clean.items.reduce((sum, item) => sum + Math.round(Number(item.totalPrice || 0) * 100) * (item.type === 'discount' ? -1 : 1), 0) / 100;
-                return clean;
-            });
-        }
-
-        async function importHistoryBackup(event) {
-            const input = event.target;
-            const file = input.files[0];
-            if (!file) return;
-            try {
-                if (file.size > 5 * 1024 * 1024) throw new Error('Backup file is too large. Maximum 5 MB.');
-                const imported = validateImportedHistory(JSON.parse(await file.text()));
-                const existing = getHistory();
-                const seen = new Set(existing.map(record => String(record.id)));
-                const additions = imported.filter(record => {
-                    if (seen.has(String(record.id))) return false;
-                    seen.add(String(record.id));
-                    return true;
-                });
-                if (existing.length + additions.length > MAX_HISTORY_ITEMS) throw new Error('Import would exceed 100 records. Export your current history and remove unwanted records first.');
-                if (!additions.length) { alert('No new records to import. Matching saved records are already in your history.'); return; }
-                saveHistory([...additions, ...existing]);
-                document.getElementById('history-search').value = '';
-                renderHistoryList();
-                alert(`Imported ${additions.length} PR record(s). Your existing history was retained.`);
-            } catch (error) {
-                alert(`Could not import backup: ${error.message}`);
-            } finally {
-                input.value = '';
-            }
-        }
-
-        function getCurrentGrandTotal() {
-            let grandTotal = 0;
-            for (let i = 1; i <= itemCount; i++) {
-                const totalInput = document.getElementById(`item-total-price-input-${i}`);
-                if (totalInput) {
-                    grandTotal += Math.round(getRowTotal(i) * 100);
-                }
-            }
-            return grandTotal / 100;
-        }
-
-        function getCurrentFormData() {
-            const items = [];
-
-            for (let i = 1; i <= itemCount; i++) {
-                const descriptionElem = document.getElementById(`item-description-${i}`);
-                const accountElem = document.getElementById(`item-account-${i}`);
-                const quantityElem = document.getElementById(`item-quantity-${i}`);
-                const unitPriceElem = document.getElementById(`item-unit-price-${i}`);
-                const totalInput = document.getElementById(`item-total-price-input-${i}`);
-
-                if (!descriptionElem || !accountElem || !quantityElem || !unitPriceElem || !totalInput) continue;
-
-                items.push({
-                    type: isDiscountRow(i) ? 'discount' : 'item',
-                    description: descriptionElem.value || '',
-                    account: accountElem.value || '',
-                    quantity: quantityElem.value || '',
-                    unitPrice: unitPriceElem.value || '',
-                    totalPrice: totalInput.value || ''
-                });
-            }
-
-            return {
-                id: Date.now(),
-                savedAt: new Date().toLocaleString('en-MY'),
-                requestor: document.getElementById('requestor').value || '',
-                designation: document.getElementById('designation').value || '',
-                dept: document.getElementById('dept').value || '',
-                reqDate: document.getElementById('req-date').value || '',
-                extension: document.getElementById('extension').value || '',
-                vendor: document.getElementById('vendor').value || '',
-                address: document.getElementById('address').value || '',
-                telNo: document.getElementById('tel-no').value || '',
-                email: document.getElementById('email').value || '',
-                contact: document.getElementById('contact').value || '',
-                remarks: document.getElementById('remarks').value || '',
-                showItemNumbers: document.getElementById('show-item-numbers').checked,
-                items: items,
-                grandTotal: getCurrentGrandTotal()
-            };
-        }
-
-        function getHistory() {
-            try {
-                const history = JSON.parse(localStorage.getItem(HISTORY_KEY));
-                return Array.isArray(history) ? history : [];
-            } catch (error) {
-                return [];
-            }
-        }
-
-        function saveHistory(historyArray) {
-            localStorage.setItem(HISTORY_KEY, JSON.stringify(historyArray));
-        }
-
-        function saveCurrentToHistory(source = 'manual') {
-            const formData = getCurrentFormData();
-
-            const hasContent =
-                formData.requestor.trim() ||
-                formData.vendor.trim() ||
-                formData.remarks.trim() ||
-                formData.items.some(item =>
-                    item.description.trim() ||
-                    item.account.trim() ||
-                    item.quantity ||
-                    item.unitPrice ||
-                    parseFloat(item.totalPrice || 0) > 0
-                );
-
-            if (!hasContent) {
-                alert('Nothing to save yet.');
-                return;
-            }
-
-            formData.source = source;
-
-            const history = getHistory();
-            history.unshift(formData);
-
-            const trimmedHistory = history.slice(0, MAX_HISTORY_ITEMS);
-            try {
-                saveHistory(trimmedHistory);
-            } catch (error) {
-                alert('History could not be saved. Browser storage may be full or unavailable. Export a backup when possible.');
-                return;
-            }
-            renderHistoryList();
-
-            if (source === 'manual') {
-                alert('Saved to history.');
-            }
-        }
-
-        function ensureRowCount(requiredCount) {
-            const safeRequiredCount = Math.min(Math.max(requiredCount, 1), MAX_ITEM_ROWS);
-
-            while (itemCount < safeRequiredCount) {
-                addItemRow();
-            }
-
-            while (itemCount > safeRequiredCount && itemCount > 1) {
-                const lastItem = document.getElementById(`item-group-${itemCount}`);
-                if (lastItem) {
-                    inputContainer.removeChild(lastItem);
-                    itemCount--;
-                }
-            }
-
-            updateAddItemButtonState();
-        }
-
-        function loadHistoryRecord(recordId) {
-            const history = getHistory();
-            const record = history.find(item => String(item.id) === String(recordId));
-
-            if (!record) {
-                alert('History record not found.');
-                return;
-            }
-
-            document.getElementById('requestor').value = record.requestor || '';
-            document.getElementById('designation').value = record.designation || '';
-            document.getElementById('dept').value = record.dept || '';
-            document.getElementById('req-date').value = record.reqDate || '';
-            document.getElementById('extension').value = record.extension || '';
-            document.getElementById('vendor').value = record.vendor || '';
-            document.getElementById('address').value = record.address || '';
-            document.getElementById('tel-no').value = record.telNo || '';
-            document.getElementById('email').value = record.email || '';
-            document.getElementById('contact').value = record.contact || '';
-            document.getElementById('remarks').value = record.remarks || '';
-            document.getElementById('show-item-numbers').checked = !!record.showItemNumbers;
-
-            const items = Array.isArray(record.items) && record.items.length ? record.items.slice(0, MAX_ITEM_ROWS) : [{}];
-            ensureRowCount(items.length);
-
-            for (let i = 1; i <= itemCount; i++) {
-                const item = items[i - 1] || {};
-                document.getElementById(`item-description-${i}`).value = item.description || '';
-                document.getElementById(`item-account-${i}`).value = item.account || '';
-                document.getElementById(`item-quantity-${i}`).value = item.quantity || '';
-                document.getElementById(`item-unit-price-${i}`).value = item.unitPrice || '';
-                document.getElementById(`item-total-price-input-${i}`).value = item.totalPrice || '0.00';
-                setRowType(i, item.type === 'discount' ? 'discount' : 'item');
-            }
-
-            updateForm();
-            closeHistoryPanel();
-        }
-
-        function deleteHistoryRecord(recordId) {
-            const confirmed = confirm('Delete this history record?');
-            if (!confirmed) return;
-
-            const history = getHistory().filter(item => String(item.id) !== String(recordId));
-            saveHistory(history);
-            renderHistoryList();
-        }
-
-        function clearAllHistory() {
-            const confirmed = confirm('Clear all saved history?');
-            if (!confirmed) return;
-
-            localStorage.removeItem(HISTORY_KEY);
-            renderHistoryList();
-        }
-
-        function renderHistoryList() {
-            const historyList = document.getElementById('history-list');
-            const query = document.getElementById('history-search').value.trim().toLowerCase();
-            const history = getHistory().filter(record => !query || [record.vendor, record.requestor, record.reqDate, record.remarks,
-                ...(record.items || []).map(item => item.description)].join(' ').toLowerCase().includes(query));
-
-            if (!history.length) {
-                historyList.innerHTML = `<p style="margin:0; color:#777;">${query ? 'No matching PR records.' : 'No history yet.'}</p>`;
-                return;
-            }
-
-            historyList.innerHTML = history.map(record => {
-                const previewItems = (record.items || [])
-                    .filter(item => item.description || item.account || item.totalPrice)
-                    .slice(0, 3)
-                    .map((item, index) => {
-                        const amount = parseFloat(item.totalPrice || 0);
-                        const totalText = amount ? formatCurrency(item.type === 'discount' ? -Math.abs(amount) : amount) : '0.00';
-                        return `${index + 1}. ${item.description || '-'} | ${item.account || '-'} | RM ${totalText}`;
-                    })
-                    .join('\n');
-
-                const totalText = record.grandTotal ? formatCurrency(record.grandTotal) : '0.00';
-
-                return `
-                    <div class="history-card">
-                        <div class="history-card-top">
-                            <div>
-                                <div class="history-title">${escapeHtml(record.vendor || 'No Vendor')} - ${escapeHtml(record.reqDate || 'No Date')}</div>
-                                <div class="history-meta">
-                                    <div><strong>Requestor:</strong> ${escapeHtml(record.requestor || '-')}</div>
-                                    <div><strong>Saved:</strong> ${escapeHtml(record.savedAt || '-')}</div>
-                                    <div><strong>Type:</strong> ${escapeHtml(record.source || 'manual')}</div>
-                                    <div><strong>Total:</strong> RM ${totalText}</div>
-                                </div>
-                            </div>
-                            <div class="history-actions">
-                                <button type="button" class="history-load-btn" onclick="loadHistoryRecord('${record.id}')">Load</button>
-                                <button type="button" class="history-delete-btn" onclick="deleteHistoryRecord('${record.id}')">Delete</button>
-                            </div>
-                        </div>
-                        <div class="history-items-preview">${escapeHtml(previewItems || 'No items preview.')}</div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        function openHistoryPanel() {
-            renderHistoryList();
-            document.getElementById('history-panel').classList.add('show');
-        }
-
-        function closeHistoryPanel() {
-            document.getElementById('history-panel').classList.remove('show');
-        }
-
-        async function printForm() {
-            updateForm();
-            const summary = getSummary();
-            if (summary.invalid || summary.net < 0) {
-                alert('Please correct the amounts shown in the summary before printing.');
-                return;
-            }
-            if (document.fonts) await document.fonts.ready;
-            saveCurrentToHistory('printed');
-            window.print();
-        }
-
-        function initializeForm() {
-            document.getElementById('add-item-btn').addEventListener('click', addItemRow);
-            document.getElementById('add-discount-btn').addEventListener('click', addDiscountRow);
-            document.getElementById('remove-item-btn').addEventListener('click', removeItemRow);
-            document.getElementById('save-history-btn').addEventListener('click', () => saveCurrentToHistory('manual'));
-            document.getElementById('history-btn').addEventListener('click', openHistoryPanel);
-            document.getElementById('update-btn').addEventListener('click', updateForm);
-            document.getElementById('print-btn').addEventListener('click', printForm);
-            document.getElementById('close-history-btn').addEventListener('click', closeHistoryPanel);
-            document.getElementById('clear-history-btn').addEventListener('click', clearAllHistory);
-            document.getElementById('history-search').addEventListener('input', renderHistoryList);
-            document.getElementById('export-history-btn').addEventListener('click', exportHistoryBackup);
-            document.getElementById('import-history-btn').addEventListener('click', () => document.getElementById('import-history-file').click());
-            document.getElementById('import-history-file').addEventListener('change', importHistoryBackup);
-
-            document.getElementById('history-panel').addEventListener('click', function(event) {
-                if (event.target.id === 'history-panel') {
-                    closeHistoryPanel();
-                }
-            });
-
-            addItemRow();
-            addItemRow();
-            addItemRow();
-            addItemRow();
-
-            document.getElementById('remarks').value = `A/C 6010010 Agency Fees`;
-
-            updateForm();
-            renderHistoryList();
-            updateAddItemButtonState();
-        }
-
-        document.addEventListener('DOMContentLoaded', initializeForm);
-    </script>
+</script>
 </body>
 </html>
