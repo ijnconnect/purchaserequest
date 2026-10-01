@@ -724,12 +724,116 @@
 }
 
 </style>
+<style>
+@media screen {
+ .pr-app { width:min(1540px,calc(100% - 28px));margin:14px auto;gap:10px;font-size:12px; }
+ .pr-compact-heading { display:flex;align-items:center;justify-content:space-between;gap:15px;padding:1px 3px; }
+ .pr-compact-heading>div { display:flex;align-items:baseline;gap:16px; }
+ .pr-compact-heading h1 { font-size:21px;margin:0; }
+ .pr-compact-heading .pr-eyebrow { font-size:10px;letter-spacing:1px; }
+ .pr-compact-heading .pr-status { color:#5B6675;font-size:11px; }
+ .pr-toolbar { display:flex;align-items:center;gap:7px;padding:9px 11px;border:1px solid #DDEAF2;border-radius:11px;background:white;flex-wrap:wrap; }
+ .pr-toolbar .pr-btn,.pr-toolbar summary,.pr-mode-btn { min-height:32px;padding:7px 10px;font-size:12px;border-radius:7px; }
+ .pr-tool-divider { height:21px;border-left:1px solid #DDEAF2;margin:0 2px; }
+ .pr-icon-btn { height:32px;width:34px;border:1px solid #DDEAF2;background:#EAF6FB;color:#034C80;font-size:21px;border-radius:7px;cursor:pointer; }
+ .pr-mode-btn { border:1px solid #034C80;background:#034C80;color:white;font-weight:600;cursor:pointer;min-width:76px; }
+ .pr-mode-btn[aria-pressed="false"] { background:white;color:#034C80; }
+ .pr-number-toggle { display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:12px;border:1px solid #DDEAF2;border-radius:7px;padding:7px 9px;background:#F4FAFD;min-height:32px;user-select:none; }
+ .pr-number-toggle input { width:16px;height:16px;accent-color:#034C80;margin:0;cursor:pointer; }
+ .pr-tool-menu { position:relative; }
+ .pr-tool-menu>summary { cursor:pointer;list-style:none;border:1px solid #DDEAF2;color:#034C80;background:white; }
+ .pr-tool-menu>summary::-webkit-details-marker { display:none; }
+ .pr-tool-popover { position:absolute;top:calc(100% + 7px);left:0;z-index:50;width:280px;border:1px solid #C9DFEB;border-radius:10px;padding:14px;background:white;box-shadow:0 8px 24px rgba(10,25,49,.12);display:flex;flex-direction:column;gap:9px; }
+ .pr-tool-popover>label,.pr-tool-popover>strong { font-weight:600;color:#0A1931;font-size:12px; }
+ .pr-tool-popover select { width:100%;font-size:12px;border:1px solid #2D99C9;border-radius:6px;padding:8px;background:#EAF6FB; }
+ .pr-tool-popover label { margin-top:5px; }
+ .pr-backup-menu { width:165px; }
+ .pr-toolbar #row-count { font-size:10px;margin-left:auto; }
+ .pr-paper { border-radius:10px; }
+ .pr-paper-heading { padding:10px 16px; }
+ .pr-paper-heading .pr-eyebrow { font-size:10px; }
+ .pr-paper-heading strong { font-size:13px; }
+ .pr-paper-heading>div:last-child>span,.pr-paper-subtitle { display:none; }
+ .pr-template-header-grid { margin:12px 12px 0; }
+ .pr-template-box-title { padding:6px 10px;font-size:11px; }
+ .pr-template-fields { padding:9px 10px;gap:5px; }
+ .pr-template-field { grid-template-columns:88px 5px minmax(0,1fr); }
+ .pr-template-field input { padding:5px 7px;font-size:12px;line-height:1.4;height:28px;border-radius:5px;background:white; }
+ .pr-office-note { padding:8px 11px 2px;font-size:10px; }
+ .pr-office-line { padding:8px 11px;font-size:10px; }
+ .pr-template-items-heading { padding:9px 12px 6px; }
+ .pr-template-items-heading>strong { font-size:11px; }
+ .pr-template-items-heading .pr-help { font-size:10px; }
+ .pr-app .pr-paper #item-input-table-container { width:calc(100% - 24px);margin:0 12px; }
+ .pr-app .pr-paper #item-input-table { min-width:780px; }
+ .pr-app .pr-paper #item-input-table th { padding:7px 5px;font-size:10px; }
+ .pr-app .pr-paper #item-input-table td { padding:6px;vertical-align:middle; }
+ .pr-app .pr-paper #item-input-table .item-desc-cell { width:38%; }
+ .pr-app .pr-paper #item-input-table .item-account-cell { width:15%; }
+ .pr-app .pr-paper #item-input-table .item-qty-cell { width:10%; }
+ .pr-app .pr-paper #item-input-table .item-price-cell { width:16%; }
+ .pr-app .pr-paper #item-input-table .item-total-cell { width:18%; }
+ .pr-app .pr-paper #item-input-table input.item-input-field,.pr-app .pr-paper #item-input-table textarea { padding:5px 7px;font-size:12px;line-height:1.4;border-radius:5px;min-height:30px;background:white; }
+ .pr-app .pr-paper #item-input-table textarea { height:30px;max-height:75px;resize:vertical; }
+ .pr-app .pr-paper #item-input-table input.item-total-price-input { background:white;border-color:#DDEAF2; }
+ .pr-app .pr-paper #item-input-table input:read-only { background:#F0F4F7;color:#034C80; }
+ .pr-app .pr-paper #item-input-table input:disabled { background:#F3F6FA; }
+ .pr-app .pr-paper #item-input-table select { background:#EAF6FB;border-color:#A9D1E5;color:#034C80;padding:4px 6px;font-size:11px;border-radius:5px;min-height:28px; }
+ .pr-description-line { display:flex;align-items:center;gap:7px; }
+ .pr-description-line textarea { flex:1;min-width:0; }
+ .pr-description-line .pr-row-actions { width:auto;flex-wrap:nowrap;gap:3px; }
+ .pr-description-line .pr-row-actions button { width:24px;height:26px;border-radius:5px;font-size:12px; }
+ .pr-description-line .pr-row-actions .pr-row-delete { width:26px;border:1px solid #DC3545;background:#DC3545;color:white;display:inline-flex;align-items:center;justify-content:center;padding:0; }
+ .pr-row-delete svg { width:13px;height:13px; }
+ .pr-discount-inline { display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:5px; }
+ .pr-discount-inline>input { width:65px!important; }
+ .pr-discount-inline select { max-width:150px; }
+ .pr-discount-inline .pr-basis-picker { flex-basis:100%;font-size:10px; }
+ .pr-basis-picker summary { cursor:pointer;color:#034C80; }
+ .pr-basis-picker select[multiple] { max-width:none;width:100%;height:52px;min-height:52px!important;margin-top:4px; }
+ .pr-discount-row td { background:#F4FAFD; }
+ .pr-template-bottom-grid { margin-top:10px;grid-template-columns:32% 68%; }
+ .pr-remarks-body { padding:8px 10px;gap:5px; }
+ .pr-remarks-body textarea { min-height:65px;height:65px;padding:7px;font-size:12px;border-radius:5px; }
+ .pr-remarks-body .pr-help { font-size:10px; }
+ .pr-template-total-label { padding:6px 11px;font-size:10px; }
+ .pr-template-bottom-right .pr-summary { padding:10px 14px;gap:10px; }
+ .pr-summary span { font-size:10px; }
+ .pr-summary strong { font-size:16px; }
+ .pr-summary .pr-net strong { font-size:19px; }
+ .pr-summary>div { gap:4px; }
+ .pr-summary .pr-net { padding-left:14px; }
+ .pr-approval-signatures { padding:8px 12px 6px;font-size:10px; }
+ .pr-approval-signatures span { gap:8px; }
+ .pr-approval-box p { padding:0 10px 7px;font-size:9px; }
+ .pr-template-bottom-right .pr-validation { padding:7px;margin:6px 10px;font-size:11px; }
+ body:not(.pr-show-preview) .a4-page-template,body:not(.pr-show-preview) .pr-preview-caption { display:none; }
+ .pr-notice { padding:8px 12px;font-size:12px; }
+}
+@media screen and (max-width:800px) { .pr-compact-heading>div { align-items:flex-start;flex-direction:column;gap:3px; }.pr-toolbar #row-count { margin-left:0; }.pr-template-bottom-grid { grid-template-columns:1fr; }.pr-tool-popover { max-width:calc(100vw - 40px); } }
+
+</style>
 </head>
 <body>
     <div class="input-form-area pr-app" id="pr-app">
-        <header class="pr-masthead"><div><div class="pr-eyebrow">INSTITUT JANTUNG NEGARA · WORKSPACE</div><h1>Purchase Requisition</h1><p>Fill in the fields in the same order as your printed PR.</p></div><div class="pr-masthead-actions"><span id="draft-status" class="pr-status" role="status">Ready</span><button type="button" id="new-pr-btn" class="pr-btn pr-btn-light">＋ New PR</button></div></header>
-        <div class="pr-topbar"><span class="pr-note">Your draft saves automatically in this browser.</span><div class="pr-inline"><button type="button" id="history-btn" class="pr-btn pr-btn-secondary">History</button><button type="button" id="export-history-btn" class="pr-btn pr-btn-secondary">Export Backup</button><button type="button" id="import-history-btn" class="pr-btn pr-btn-secondary">Import Backup</button><input type="file" id="import-history-file" accept=".json,application/json" hidden></div></div>
-        <details class="pr-presets"><summary>Saved details <span>Autofill requestor and vendor information</span></summary><div class="pr-presets-grid"><div><strong>Requestor shortcuts</strong><div class="pr-inline"><button type="button" id="apply-requestor-btn" class="pr-btn pr-btn-secondary">Use saved details</button><button type="button" id="save-requestor-btn" class="pr-text-btn">Save current details</button></div></div><div><label for="vendor-select"><strong>Saved vendors</strong></label><div class="pr-inline"><select id="vendor-select" aria-label="Choose a saved vendor"><option value="">Choose a saved vendor</option></select><button type="button" id="save-vendor-btn" class="pr-text-btn">Save vendor</button><button type="button" id="delete-vendor-btn" class="pr-text-btn pr-danger-text">Delete saved vendor</button></div></div></div></details>
+        <header class="pr-compact-heading"><div><span class="pr-eyebrow">INSTITUT JANTUNG NEGARA</span><h1>Purchase Requisition</h1></div><span id="draft-status" class="pr-status" role="status">Ready</span></header>
+        <div class="pr-toolbar" aria-label="PR tools">
+            <button type="button" id="new-pr-btn" class="pr-btn pr-btn-secondary" title="Start a new PR">New</button>
+            <span class="pr-tool-divider"></span>
+            <button type="button" id="add-item-btn" class="pr-icon-btn" title="Add item row" aria-label="Add item row">＋</button>
+            <button type="button" id="add-discount-btn" class="pr-btn pr-btn-secondary" title="Add discount row">− Discount</button>
+            <button type="button" id="calc-mode-btn" class="pr-mode-btn" aria-pressed="true" title="Toggle calculation mode for all item totals">Auto</button>
+            <label class="pr-number-toggle" title="Show or hide item numbers on the printed PR"><input type="checkbox" id="show-item-numbers" checked><span>Show numbers</span></label>
+            <span class="pr-tool-divider"></span>
+            <details class="pr-tool-menu"><summary>Saved details ▾</summary><div class="pr-tool-popover"><strong>Requestor</strong><div class="pr-inline"><button type="button" id="apply-requestor-btn" class="pr-btn pr-btn-secondary">Use saved</button><button type="button" id="save-requestor-btn" class="pr-text-btn">Save current</button></div><label for="vendor-select">Vendor</label><select id="vendor-select"><option value="">Choose saved vendor</option></select><div class="pr-inline"><button type="button" id="save-vendor-btn" class="pr-text-btn">Save vendor</button><button type="button" id="delete-vendor-btn" class="pr-text-btn pr-danger-text">Delete saved vendor</button></div></div></details>
+            <button type="button" id="history-btn" class="pr-btn pr-btn-secondary">History</button>
+            <details class="pr-tool-menu"><summary>Backup ▾</summary><div class="pr-tool-popover pr-backup-menu"><button type="button" id="export-history-btn" class="pr-btn pr-btn-secondary">Export backup</button><button type="button" id="import-history-btn" class="pr-btn pr-btn-secondary">Import backup</button></div></details>
+            <input type="file" id="import-history-file" accept=".json,application/json" hidden>
+            <button type="button" id="update-btn" class="pr-btn pr-btn-secondary" title="Show or hide the original print preview" aria-expanded="false">Preview</button>
+            <span id="row-count" class="pr-pill">0 / 8</span>
+            <button type="button" id="save-history-btn" class="pr-btn pr-btn-secondary">Save</button>
+            <button type="button" id="print-btn" class="pr-btn pr-btn-primary">Print</button>
+        </div>
         <div class="pr-paper">
             <div class="pr-paper-heading"><div><span class="pr-eyebrow">INSTITUT JANTUNG NEGARA</span><span class="pr-paper-subtitle">National Heart Institute</span></div><div><strong>PURCHASE REQUISITION</strong><span>Data entry · follows the printed form</span></div></div>
             <div class="pr-template-header-grid">
@@ -749,15 +853,13 @@
                 </div></section>
                 <section class="pr-template-box pr-office-box" aria-label="Procurement section, not editable"><div class="pr-template-box-title">For Procurement Management Dept use only</div><div class="pr-office-note">Completed by Procurement on the printed form.</div><div class="pr-office-line"><span>Received by</span><i></i></div><div class="pr-office-line"><span>PO No.</span><i></i></div><div class="pr-office-line"><span>PO Date Issued</span><i></i></div><div class="pr-office-line"><span>Checked by & Date</span><i></i></div></section>
             </div>
-            <div class="pr-template-items-heading"><strong>Goods / services</strong><div class="pr-inline"><label class="pr-check"><input type="checkbox" id="show-item-numbers" checked> Show item numbers</label><span id="row-count" class="pr-pill">0 / 8 rows</span></div></div>
+            <div class="pr-template-items-heading"><strong>Goods / services</strong><span class="pr-help">White fields: enter values · Blue controls: choose options</span></div>
             <div id="item-input-table-container"><table id="item-input-table"><thead><tr><th class="item-num-cell">No.</th><th class="item-desc-cell">Description</th><th class="item-account-cell">Item Code<br><span>(if any)</span></th><th class="item-qty-cell">Requested<br>Quantity</th><th class="item-price-cell">Unit Price<br><span>(RM)</span></th><th class="item-total-cell">Total Price<br><span>(RM)</span></th></tr></thead><tbody id="item-input-container"></tbody></table></div>
-            <div class="pr-template-item-tools"><div class="pr-inline"><button type="button" id="add-item-btn" class="pr-btn pr-btn-secondary">＋ Add item</button><button type="button" id="add-discount-btn" class="pr-btn pr-btn-secondary">− Add discount</button><button type="button" id="remove-item-btn" class="pr-text-btn pr-danger-text">Remove last row</button></div><span class="pr-help">Discounts deduct automatically. Use Row options to arrange or remove a row.</span></div>
             <div class="pr-template-bottom-grid">
                 <section class="pr-template-remarks"><div class="pr-template-box-title">Reason for Request & Other Remarks</div><div class="pr-remarks-body"><label for="remarks" class="pr-help">Include the request reason and GL account details here.</label><textarea id="remarks" rows="7" aria-label="Reason for Request and Other Remarks"></textarea><span class="pr-help">Use **double asterisks** to print text in bold.</span></div></section>
                 <div class="pr-template-bottom-right"><div class="pr-template-total-label">GL Account No. <span>Include in remarks on the left</span></div><div class="pr-summary" aria-live="polite"><div><span>Subtotal</span><strong id="summary-subtotal">RM 0.00</strong></div><div><span>Total discount</span><strong id="summary-discount">RM 0.00</strong></div><div class="pr-net"><span>Grand Total</span><strong id="summary-net">RM 0.00</strong></div></div><div id="pr-validation" class="pr-validation" role="status" hidden></div><section class="pr-approval-box" aria-label="Approval section, not editable"><div class="pr-template-box-title">Approval</div><div class="pr-approval-signatures"><span>HOD</span><span>GM</span><span>DCEO / COO</span><span>CEO</span></div><p>For authorised sign-off on the printed form.</p></section></div>
             </div>
         </div>
-        <div class="pr-bottom-bar"><div><strong>Check the Grand Total against your quotation.</strong><p>The preview below uses your original print positioning.</p></div><div class="pr-inline"><button type="button" id="update-btn" class="pr-btn pr-btn-secondary">Refresh preview</button><button type="button" id="save-history-btn" class="pr-btn pr-btn-secondary">Save to history</button><button type="button" id="print-btn" class="pr-btn pr-btn-primary">Print PR →</button></div></div>
         <div id="pr-notice" class="pr-notice" role="status" hidden></div>
     </div>
     <div class="pr-preview-caption"><span class="pr-eyebrow">PRINT PREVIEW</span><h2>Your original PR layout</h2><p>Printed field positions and spacing remain unchanged.</p></div>
@@ -805,6 +907,7 @@ const VENDOR_FIELDS = ['vendor','address','telNo','email','contact'];
 let rows = [];
 let itemCount = 0;
 let ready = false;
+let calculationMode = 'auto';
 let autosaveTimer;
 let noticeTimer;
 let historyOpener;
@@ -820,7 +923,7 @@ function formatNumber(value) { const num = Number(value); return num && Number.i
 const money = amount => `RM ${formatCurrency(amount) || '0.00'}`;
 const numeric = value => Number.isFinite(Number(value)) ? Number(value || 0) : 0;
 const cents = value => Math.round((numeric(value) + Number.EPSILON) * 100);
-function blankRow(type='item') { return {uid:uid(),type,description:type==='discount'?'Less: Quotation discount':'',account:'',quantity:'',unitPrice:'',totalPrice:'0.00',totalMode:'auto',discountMode:'rm',rate:'',basis:'subtotal',basisIds:[]}; }
+function blankRow(type='item') { return {uid:uid(),type,description:type==='discount'?'Less: Quotation discount':'',account:'',quantity:'',unitPrice:'',totalPrice:'0.00',totalMode:calculationMode,discountMode:'rm',rate:'',basis:'subtotal',basisIds:[]}; }
 function readStore(key,fallback) { try { const raw=localStorage.getItem(key);return raw===null?fallback:JSON.parse(raw); } catch { return fallback; } }
 function getHistory() { const data=readStore(HISTORY_KEY,[]);return Array.isArray(data)?data:[]; }
 function getVendors() { const data=readStore(VENDORS_KEY,[]);return Array.isArray(data)?data:[]; }
@@ -849,6 +952,9 @@ function normalizeRecord(record,strict=false) {
   if(r.discountMode==='percent' && numeric(r.rate)>100)throw new Error('Percentage discounts cannot exceed 100%.');
   return r;
  });
+ const charges=result.items.filter(r=>r.type==='item');
+ result.calculationMode=['auto','manual'].includes(record.calculationMode)?record.calculationMode:(charges.length&&charges.every(r=>r.totalMode==='auto')?'auto':'manual');
+ result.items.forEach(r=>r.totalMode=result.calculationMode);
  const summary=calculateRows(result.items);result.grandTotal=summary.net;return result;
 }
 function calculateRows(items=rows) {
@@ -875,7 +981,7 @@ function collectIssues() {
  return [...new Set(issues)];
 }
 function captureForm() {
- const result={showItemNumbers:$('show-item-numbers').checked,items:rows.map(r=>({...r,basisIds:[...r.basisIds]})),grandTotal:calculateRows().net};
+ const result={calculationMode,showItemNumbers:$('show-item-numbers').checked,items:rows.map(r=>({...r,basisIds:[...r.basisIds]})),grandTotal:calculateRows().net};
  for(const [name,id]of Object.entries(HEADER_FIELDS))result[name]=$(id).value||'';
  return result;
 }
@@ -884,27 +990,26 @@ function scheduleDraft(){if(!ready)return;clearTimeout(autosaveTimer);$('draft-s
 function basisOptions(r){return rows.map((charge,i)=>charge.type==='item'?`<option value="${escapeHtml(charge.uid)}"${r.basisIds.includes(charge.uid)?' selected':''}>${i+1}. ${escapeHtml(charge.description.trim()||'Unnamed item')}</option>`:'').join('');}
 function renderRows(){
  itemCount=rows.length;
+ const trash='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 10v7M14 10v7"/></svg>';
  $('item-input-container').innerHTML=rows.map((r,zero)=>{
   const i=zero+1,d=r.type==='discount',percent=d&&r.discountMode==='percent';
-  const field=(name,attrs='')=>`data-index="${zero}" data-field="${name}" ${attrs}`;
+  const field=name=>`data-index="${zero}" data-field="${name}"`;
   return `<tr id="item-group-${i}" class="${d?'pr-discount-row':''}">
    <td class="item-num-cell">${i}.</td>
-   <td class="item-desc-cell">${d?'<span class="pr-row-kind">DISCOUNT / DEDUCTION</span>':''}<textarea class="item-description" id="item-description-${i}" aria-label="Row ${i} description" ${field('description')} rows="2">${escapeHtml(r.description)}</textarea>
-    <details class="pr-row-settings"${d?' open':''}><summary>Row options${d?' · discount settings':''}</summary><div class="pr-row-settings-body"><div class="pr-row-head"><select id="item-type-${i}" aria-label="Row ${i} type" ${field('type')}><option value="item"${!d?' selected':''}>Item / charge</option><option value="discount"${d?' selected':''}>Discount / deduction</option></select><span class="pr-row-label">${d?'Deducted from the PR':'Added to the PR'}</span></div>
-    ${d?`<div class="pr-discount-options"><label>Discount type<select ${field('discountMode')} aria-label="Row ${i} discount type"><option value="rm"${!percent?' selected':''}>Amount (RM)</option><option value="percent"${percent?' selected':''}>Percentage (%)</option></select></label>${percent?`<label>Discount (%)<input type="number" min="0" max="100" step="0.01" value="${escapeHtml(r.rate)}" ${field('rate')} aria-label="Row ${i} discount percentage"></label><label>Calculate from<select ${field('basis')} aria-label="Row ${i} discount basis"><option value="subtotal"${r.basis==='subtotal'?' selected':''}>Whole subtotal</option><option value="selected"${r.basis==='selected'?' selected':''}>Selected items</option></select></label>${r.basis==='selected'?`<label class="pr-selected-basis">Select items (Ctrl / Cmd + click for multiple)<select multiple size="3" ${field('basisIds')} aria-label="Row ${i} selected items">${basisOptions(r)}</select></label>`:''}`:`<span class="pr-help">Enter the discount under Total Price (RM).</span>`}</div>`:''}
-    <div class="pr-row-actions"><button type="button" data-action="up" data-index="${zero}" ${zero===0?'disabled':''} aria-label="Move row ${i} up">↑</button><button type="button" data-action="down" data-index="${zero}" ${zero===rows.length-1?'disabled':''} aria-label="Move row ${i} down">↓</button><button type="button" class="pr-row-delete" data-action="delete" data-index="${zero}" ${rows.length===1?'disabled':''} aria-label="Delete row ${i}">Delete row</button></div></div></details>
-   </td>
+   <td class="item-desc-cell"><div class="pr-description-line"><textarea class="item-description" id="item-description-${i}" aria-label="Row ${i} description" ${field('description')} rows="1">${escapeHtml(r.description)}</textarea><div class="pr-row-actions"><button type="button" data-action="up" data-index="${zero}" ${zero===0?'disabled':''} title="Move row up" aria-label="Move row ${i} up">↑</button><button type="button" data-action="down" data-index="${zero}" ${zero===rows.length-1?'disabled':''} title="Move row down" aria-label="Move row ${i} down">↓</button><button type="button" class="pr-row-delete" data-action="delete" data-index="${zero}" ${rows.length===1?'disabled':''} title="Delete row" aria-label="Delete row ${i}">${trash}</button></div></div>
+   ${d?`<div class="pr-discount-inline"><select ${field('discountMode')} aria-label="Row ${i} discount type"><option value="rm"${!percent?' selected':''}>RM discount</option><option value="percent"${percent?' selected':''}>% discount</option></select>${percent?`<input type="number" min="0" max="100" step="0.01" value="${escapeHtml(r.rate)}" ${field('rate')} aria-label="Row ${i} discount percentage" placeholder="%"><select ${field('basis')} aria-label="Row ${i} discount basis"><option value="subtotal"${r.basis==='subtotal'?' selected':''}>Whole subtotal</option><option value="selected"${r.basis==='selected'?' selected':''}>Selected items</option></select>${r.basis==='selected'?`<details class="pr-basis-picker"><summary>Choose items (${r.basisIds.length} selected)</summary><select multiple size="2" ${field('basisIds')} aria-label="Row ${i} selected items">${basisOptions(r)}</select></details>`:''}`:''}</div>`:''}</td>
    <td class="item-account-cell"><input type="text" class="item-input-field" id="item-account-${i}" value="${escapeHtml(r.account)}" ${field('account')} aria-label="Row ${i} item code, if any"></td>
    <td class="item-qty-cell"><input type="number" class="item-input-field" id="item-quantity-${i}" min="0" step="any" value="${escapeHtml(r.quantity)}" ${field('quantity')} ${d?'disabled':''} aria-label="Row ${i} requested quantity"></td>
    <td class="item-price-cell"><input type="number" class="item-input-field" id="item-unit-price-${i}" min="0" step="0.01" value="${escapeHtml(r.unitPrice)}" ${field('unitPrice')} ${d?'disabled':''} aria-label="Row ${i} unit price"></td>
-   <td class="item-total-cell">${!d?`<select class="pr-row-mode" ${field('totalMode')} aria-label="Row ${i} total mode"><option value="auto"${r.totalMode==='auto'?' selected':''}>Automatic</option><option value="manual"${r.totalMode==='manual'?' selected':''}>Manual total</option></select>`:`<div class="pr-help" style="margin-bottom:8px">${percent?'Calculated discount':'Discount amount'}</div>`}<input type="number" class="item-input-field item-total-price-input" id="item-total-price-input-${i}" min="0" step="0.01" value="${escapeHtml(r.totalPrice)}" ${field('totalPrice')} ${percent||(!d&&r.totalMode==='auto')?'readonly':''} aria-label="Row ${i} total price"><span class="pr-row-label">${d?'Prints with a minus sign':r.totalMode==='auto'?'Qty × unit price':'Keeps your entered total'}</span></td>
+   <td class="item-total-cell"><input type="number" class="item-input-field item-total-price-input" id="item-total-price-input-${i}" min="0" step="0.01" value="${escapeHtml(r.totalPrice)}" ${field('totalPrice')} ${percent||(!d&&calculationMode==='auto')?'readonly':''} aria-label="Row ${i} total price" title="${d?'Enter a positive discount; it prints with a minus sign':calculationMode==='auto'?'Calculated from quantity and unit price':'Enter the quoted total'}"></td>
   </tr>`;
  }).join('');
  setupAutoGrow();updateAddItemButtonState();
 }
+function setCalculationMode(mode){calculationMode=mode==='manual'?'manual':'auto';rows.forEach(r=>r.totalMode=calculationMode);calculateRows();renderRows();updateForm();scheduleDraft();}
 function setupAutoGrow(){document.querySelectorAll('#item-input-container textarea').forEach(autoGrowTextarea);}
-function autoGrowTextarea(textarea){if(textarea){textarea.style.height='auto';textarea.style.height=`${Math.max(textarea.scrollHeight,66)}px`;}}
-function updateAddItemButtonState(){const full=rows.length>=MAX_ITEM_ROWS;$('add-item-btn').disabled=full;$('add-discount-btn').disabled=full&&!findEmptyItemRow();$('remove-item-btn').disabled=rows.length<=1;$('row-count').textContent=`${rows.length} / ${MAX_ITEM_ROWS} rows`;}
+function autoGrowTextarea(textarea){if(textarea){textarea.style.height='auto';textarea.style.height=`${Math.min(Math.max(textarea.scrollHeight,30),75)}px`;}}
+function updateAddItemButtonState(){const full=rows.length>=MAX_ITEM_ROWS;$('add-item-btn').disabled=full;$('add-discount-btn').disabled=full&&!findEmptyItemRow();$('calc-mode-btn').textContent=calculationMode==='auto'?'Auto ⇄':'Manual ⇄';$('calc-mode-btn').setAttribute('aria-pressed',String(calculationMode==='auto'));$('calc-mode-btn').title=calculationMode==='auto'?'All item totals use quantity × unit price. Click for manual entry.':'All item totals are entered manually. Click for automatic calculation.';$('row-count').textContent=`${rows.length} / ${MAX_ITEM_ROWS}`;}
 function findEmptyItemRow(){for(let i=rows.length-1;i>=0;i--){const r=rows[i];if(r.type==='item'&&!r.description.trim()&&!r.account.trim()&&!numeric(r.quantity)&&!numeric(r.unitPrice)&&!numeric(r.totalPrice))return i+1;}return 0;}
 function addItemRow(){if(rows.length>=MAX_ITEM_ROWS){notify('The printed form has room for 8 rows, including discounts.',true);return;}rows.push(blankRow());renderRows();updateForm();scheduleDraft();}
 function addDiscountRow(){let index=findEmptyItemRow();if(index){const oldId=rows[index-1].uid;rows[index-1]=blankRow('discount');rows.forEach(r=>r.basisIds=r.basisIds.filter(id=>id!==oldId));}else if(rows.length<MAX_ITEM_ROWS){rows.push(blankRow('discount'));index=rows.length;}else{notify('Free one of the 8 available rows before adding a discount.',true);return;}renderRows();updateForm();scheduleDraft();$(`item-total-price-input-${index}`).focus();$(`item-total-price-input-${index}`).select();}
@@ -934,7 +1039,7 @@ function applyRecord(record,{duplicate=false,restore=false}={}){
  for(const [field,id]of Object.entries(HEADER_FIELDS))$(id).value=clean[field]||'';
  if(duplicate)$('req-date').value=today();
  $('show-item-numbers').checked=clean.showItemNumbers;
- rows=clean.items;
+ calculationMode=clean.calculationMode;rows=clean.items;
  $('vendor-select').value='';$('delete-vendor-btn').disabled=true;
  renderRows();updateForm();
  if(!restore)flushDraft();
@@ -952,7 +1057,7 @@ function saveVendor(){const profile={};VENDOR_FIELDS.forEach(f=>profile[f]=$(HEA
 function applyVendor(){const id=$('vendor-select').value;const vendor=getVendors().find(v=>String(v.id)===id);$('delete-vendor-btn').disabled=!vendor;if(!vendor)return;VENDOR_FIELDS.forEach(f=>$(HEADER_FIELDS[f]).value=String(vendor[f]||''));updateForm();scheduleDraft();notify('Vendor details filled in.');}
 function deleteVendor(){const id=$('vendor-select').value;if(!id)return;if(!confirm('Delete this saved vendor? Your current PR details and history will stay.'))return;if(storeSafely(VENDORS_KEY,getVendors().filter(v=>String(v.id)!==id))){renderVendorList();notify('Saved vendor removed.');}}
 function newPR(){if(!confirm('Start a new PR? The current draft will be replaced. Save it to history first if you need to keep it.'))return;
- for(const id of Object.values(HEADER_FIELDS))$(id).value='';$('req-date').value=today();$('extension').value='6218';$('remarks').value='A/C 6010010 Agency Fees';$('show-item-numbers').checked=true;$('vendor-select').value='';$('delete-vendor-btn').disabled=true;rows=Array.from({length:4},()=>blankRow());renderRows();applySavedRequestor(true);updateForm();flushDraft();notify('New PR started. Saved vendors, requestor details and history are retained.');$('requestor').focus();
+ for(const id of Object.values(HEADER_FIELDS))$(id).value='';$('req-date').value=today();$('extension').value='6218';$('remarks').value='A/C 6010010 Agency Fees';$('show-item-numbers').checked=true;calculationMode='auto';$('vendor-select').value='';$('delete-vendor-btn').disabled=true;rows=Array.from({length:4},()=>blankRow());renderRows();applySavedRequestor(true);updateForm();flushDraft();notify('New PR started. Saved vendors, requestor details and history are retained.');$('requestor').focus();
 }
 function saveCurrentToHistory(source='manual'){
  updateForm();const form=captureForm();const hasContent=form.requestor.trim()||form.vendor.trim()||form.remarks.trim()||form.items.some(r=>r.description.trim()||numeric(r.totalPrice));if(!hasContent){notify('Nothing to save yet.',true);return false;}
@@ -1010,7 +1115,7 @@ async function printForm(){
 }
 function initializeForm(){
  renderVendorList();
- const listeners={'add-item-btn':addItemRow,'add-discount-btn':addDiscountRow,'remove-item-btn':removeItemRow,'new-pr-btn':newPR,'save-history-btn':()=>saveCurrentToHistory('manual'),'history-btn':openHistoryPanel,'update-btn':()=>{updateForm();notify('Preview refreshed. Original print positioning is retained.');},'print-btn':printForm,'close-history-btn':closeHistoryPanel,'clear-history-btn':clearAllHistory,'save-requestor-btn':saveRequestor,'apply-requestor-btn':()=>applySavedRequestor(),'save-vendor-btn':saveVendor,'delete-vendor-btn':deleteVendor,'export-history-btn':exportHistoryBackup,'import-history-btn':()=>$('import-history-file').click()};
+ const listeners={'add-item-btn':addItemRow,'add-discount-btn':addDiscountRow,'calc-mode-btn':()=>setCalculationMode(calculationMode==='auto'?'manual':'auto'),'new-pr-btn':newPR,'save-history-btn':()=>saveCurrentToHistory('manual'),'history-btn':openHistoryPanel,'update-btn':()=>{updateForm();document.body.classList.toggle('pr-show-preview');$('update-btn').setAttribute('aria-expanded',String(document.body.classList.contains('pr-show-preview')));},'print-btn':printForm,'close-history-btn':closeHistoryPanel,'clear-history-btn':clearAllHistory,'save-requestor-btn':saveRequestor,'apply-requestor-btn':()=>applySavedRequestor(),'save-vendor-btn':saveVendor,'delete-vendor-btn':deleteVendor,'export-history-btn':exportHistoryBackup,'import-history-btn':()=>$('import-history-file').click()};
  for(const[id,handler]of Object.entries(listeners))$(id).addEventListener('click',handler);
  $('vendor-select').addEventListener('change',applyVendor);$('history-search').addEventListener('input',renderHistoryList);$('import-history-file').addEventListener('change',importHistoryBackup);
  $('item-input-container').addEventListener('input',event=>{if(event.target.tagName!=='SELECT')handleRowInput(event);});
@@ -1020,6 +1125,7 @@ function initializeForm(){
  $('show-item-numbers').addEventListener('change',()=>{updateForm();scheduleDraft();});
  $('history-list').addEventListener('click',event=>{const button=event.target.closest('button[data-history-action]');if(!button)return;const id=button.dataset.recordId;if(button.dataset.historyAction==='delete')deleteHistoryRecord(id);else loadHistoryRecord(id,button.dataset.historyAction==='duplicate');});
  $('history-panel').addEventListener('click',event=>{if(event.target===$('history-panel'))closeHistoryPanel();});
+ document.addEventListener('click',event=>{document.querySelectorAll('.pr-tool-menu[open]').forEach(menu=>{if(!menu.contains(event.target))menu.open=false;});});
  document.addEventListener('keydown',event=>{if(!$('history-panel').classList.contains('show'))return;if(event.key==='Escape')closeHistoryPanel();if(event.key==='Tab'){const controls=[...$('history-panel').querySelectorAll('button:not(:disabled),input')];const first=controls[0],last=controls[controls.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}});
  window.addEventListener('pagehide',flushDraft);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flushDraft();});
  const draft=readStore(DRAFT_KEY,null);let restored=false;
